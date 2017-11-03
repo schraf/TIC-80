@@ -118,6 +118,7 @@ typedef enum
 	TIC_DIALOG_MODE,
 	TIC_MENU_MODE,
 	TIC_SURF_MODE,
+	TIC_PROFILE_MODE,
 } EditorMode;
 
 SDL_Event* pollEvent();

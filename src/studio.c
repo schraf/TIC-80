@@ -37,6 +37,7 @@
 #include "dialog.h"
 #include "menu.h"
 #include "surf.h"
+#include "profiler.h"
 
 #include "fs.h"
 
@@ -177,6 +178,7 @@ static struct
 		Dialog dialog;
 		Menu menu;
 		Surf surf;
+		Profiler profiler;
 	};
 
 	FileSystem* fs;
@@ -401,6 +403,7 @@ static const EditorMode Modes[] =
 	TIC_MAP_MODE,
 	TIC_SFX_MODE,
 	TIC_MUSIC_MODE,
+        TIC_PROFILE_MODE,
 };
 
 void drawExtrabar(tic_mem* tic)
@@ -560,11 +563,20 @@ void drawToolbar(tic_mem* tic, u8 color, bool bg)
 		0b01101100,
 		0b00000000,
 		0b00000000,
+
+		0b00000000,
+		0b01000000,
+		0b01001000,
+		0b01010100,
+		0b01100000,
+		0b01111100,
+		0b00000000,
+		0b00000000,
 	};
 
 	enum {Size = 7};
 
-	static const char* Tips[] = {"CODE EDITOR [f1]", "SPRITE EDITOR [f2]", "MAP EDITOR [f3]", "SFX EDITOR [f4]", "MUSIC EDITOR [f5]",};
+	static const char* Tips[] = {"CODE EDITOR [f1]", "SPRITE EDITOR [f2]", "MAP EDITOR [f3]", "SFX EDITOR [f4]", "MUSIC EDITOR [f5]", "PROFILER [f6]",};
 
 	s32 mode = -1;
 
@@ -603,6 +615,7 @@ void drawToolbar(tic_mem* tic, u8 color, bool bg)
 		"MAP EDITOR",
 		"SFX EDITOR",
 		"MUSIC EDITOR",
+		"PROFILER",
 	};
 
 	if(mode >= 0)
@@ -624,8 +637,8 @@ void setStudioEvent(StudioEvent event)
 	{
 	case TIC_CODE_MODE: 	studio.code.event(&studio.code, event); break;
 	case TIC_SPRITE_MODE:	studio.sprite.event(&studio.sprite, event); break;
-	case TIC_MAP_MODE:		studio.map.event(&studio.map, event); break;
-	case TIC_SFX_MODE:		studio.sfx.event(&studio.sfx, event); break;
+	case TIC_MAP_MODE:	studio.map.event(&studio.map, event); break;
+	case TIC_SFX_MODE:	studio.sfx.event(&studio.sfx, event); break;
 	case TIC_MUSIC_MODE:	studio.music.event(&studio.music, event); break;
 	default: break;
 	}
@@ -905,6 +918,7 @@ static void initModules()
 	initWorldMap();
 	initSfx(&studio.sfx, studio.tic);
 	initMusic(&studio.music, studio.tic);
+        initProfiler(&studio.profiler, studio.tic);
 }
 
 static void updateHash()
@@ -1614,6 +1628,7 @@ static bool processShortcuts(SDL_KeyboardEvent* event)
 		case SDLK_F3: setStudioMode(TIC_MAP_MODE); return true;
 		case SDLK_F4: setStudioMode(TIC_SFX_MODE); return true;
 		case SDLK_F5: setStudioMode(TIC_MUSIC_MODE); return true;
+		case SDLK_F6: setStudioMode(TIC_PROFILE_MODE); return true;
 		case SDLK_F7: setCoverImage(); return true;
 		case SDLK_F8: takeScreenshot(); return true;
 #if !defined(__EMSCRIPTEN__)
@@ -2044,17 +2059,18 @@ static void renderStudio()
 	{
 	case TIC_START_MODE:	studio.start.tick(&studio.start); break;
 	case TIC_CONSOLE_MODE: 	studio.console.tick(&studio.console); break;
-	case TIC_RUN_MODE: 		studio.run.tick(&studio.run); break;
+	case TIC_RUN_MODE: 	studio.run.tick(&studio.run); break;
 	case TIC_CODE_MODE: 	studio.code.tick(&studio.code); break;
 	case TIC_SPRITE_MODE:	studio.sprite.tick(&studio.sprite); break;
-	case TIC_MAP_MODE:		studio.map.tick(&studio.map); break;
+	case TIC_MAP_MODE:	studio.map.tick(&studio.map); break;
 	case TIC_WORLD_MODE:	studio.world.tick(&studio.world); break;
-	case TIC_SFX_MODE:		studio.sfx.tick(&studio.sfx); break;
+	case TIC_SFX_MODE:	studio.sfx.tick(&studio.sfx); break;
 	case TIC_MUSIC_MODE:	studio.music.tick(&studio.music); break;
 	case TIC_KEYMAP_MODE:	studio.keymap.tick(&studio.keymap); break;
 	case TIC_DIALOG_MODE:	studio.dialog.tick(&studio.dialog); break;
-	case TIC_MENU_MODE:		studio.menu.tick(&studio.menu); break;
-	case TIC_SURF_MODE:		studio.surf.tick(&studio.surf); break;
+	case TIC_MENU_MODE:	studio.menu.tick(&studio.menu); break;
+	case TIC_SURF_MODE:	studio.surf.tick(&studio.surf); break;
+	case TIC_PROFILE_MODE:	studio.profiler.tick(&studio.profiler); break;
 	default: break;
 	}
 
