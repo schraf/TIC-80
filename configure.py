@@ -25,6 +25,7 @@
 from optparse import OptionParser
 import sys
 import os
+import subprocess
 import ninja_syntax
 
 def get_files(path, ext, excludes=[]):
@@ -126,12 +127,14 @@ if options.no_file_dialog:
 
 if platform.is_linux():
     cflags += ['-D_GNU_SOURCE']
+    cflags += subprocess.getoutput('pkg-config --cflags gtk+-3.0').split(' ')
 
 writer.variable('cflags', ' '.join(cflags))
 
 libs = []
 
 if platform.is_linux():
+    libs += subprocess.getoutput('pkg-config --libs gtk+-3.0').split(' ')
     libs += ['-lSDL2', '-lm', '-lpthread']
 
 writer.variable('libs', ' '.join(libs))

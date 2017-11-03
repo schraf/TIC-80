@@ -13,7 +13,7 @@ mingw:
 	${NINJA}
 
 linux: 
-	./configure.py --platform=linux --no_file_dialog
+	./configure.py --platform=linux
 	${NINJA}
 
 macosx:
