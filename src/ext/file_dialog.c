@@ -24,7 +24,12 @@
 
 #include <SDL.h>
 
-#if defined(__WINDOWS__)
+#if defined(NO_FILE_DIALOG)
+
+void file_dialog_load(file_dialog_load_callback callback, void* data) {}
+void file_dialog_save(file_dialog_save_callback callback, const char* name, const u8* buffer, size_t size, void* data, u32 mode) {}
+
+#elif defined(__WINDOWS__)
 
 #include <windows.h>
 #include <commdlg.h>
