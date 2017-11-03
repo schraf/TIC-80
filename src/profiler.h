@@ -24,13 +24,58 @@
 
 #include "studio.h"
 
+typedef struct ProfileMarker ProfileMarker;
+
+struct ProfilerMarker
+{
+	u32 hash;
+	u32 color;
+	u32 ref;
+	u16 len;
+	char* name;
+};
+
+typedef struct ProfileScope ProfileScope;
+
+struct ProfileScope
+{
+	ProfileMarker* marker;
+	float start;
+	float end;
+	ProfileScope* parent;
+};
+
+typedef struct ProfileFrame ProfileFrame;
+
+struct ProfileFrame
+{
+	float start;
+	float end;
+};
+
+typedef struct ProfileData ProfileData;
+
+struct ProfileData
+{
+	u32 frame;
+        ProfileFrame frames[PROFILE_FRAMES];
+        ProfileScope* scopePool;
+};
+
 typedef struct Profiler Profiler;
 
 struct Profiler
 {
 	tic_mem* tic;
 
+	ProfileData data;
+
 	void(*tick)(Profiler* profiler);
+	void(*beginFrame)(Profiler* profiler);
+	void(*endFrame)(Profiler* profiler);
+	void(*beginScope)(Profiler* profiler, char* name);
+	void(*endScope)(Profiler* profiler);
 };
 
 void initProfiler(Profiler* profiler, tic_mem* tic);
+

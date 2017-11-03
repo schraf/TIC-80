@@ -2445,6 +2445,7 @@ s32 main(s32 argc, char **argv)
 
 	while (!studio.quitFlag)
 	{
+                studio.profiler.beginFrame(&studio.profiler);
 		nextTick += Delta;
 		tick();
 
@@ -2453,6 +2454,7 @@ s32 main(s32 argc, char **argv)
 		if(delay > 0)
 			SDL_Delay((u32)(delay * 1000 / SDL_GetPerformanceFrequency()));
 		else nextTick -= delay;
+                studio.profiler.endFrame(&studio.profiler);
 	}
 
 

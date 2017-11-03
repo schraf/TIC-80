@@ -22,8 +22,34 @@
 
 #include "profiler.h"
 
-static void tick(Profiler* Profiler)
+#define SAMPLES_PER_FRAME 
+
+static void tick(Profiler* profiler)
 {
+}
+
+static void beginFrame(Profiler* profiler)
+{
+	if (getStudioMode() != TIC_RUN_MODE)
+		return;
+}
+
+static void endFrame(Profiler* profiler)
+{
+	if (getStudioMode() != TIC_RUN_MODE)
+		return;
+}
+
+static void beginScope(Profiler* profiler, const char* name)
+{
+	if (getStudioMode() != TIC_RUN_MODE)
+		return;
+}
+
+static void endScope(Profiler* profiler)
+{
+	if (getStudioMode() != TIC_RUN_MODE)
+		return;
 }
 
 void initProfiler(Profiler* profiler, tic_mem* tic)
@@ -32,5 +58,15 @@ void initProfiler(Profiler* profiler, tic_mem* tic)
 	{
 		.tic = tic,
 		.tick = tick,
+                .data =
+                {
+                    frame = 0,
+                    scopePool = NULL,
+                },
+		.beginFrame = beginFrame,
+		.endFrame = endFrame,
+		.beginScope = beginScope,
+		.endScope = endScope,
 	};
 }
+

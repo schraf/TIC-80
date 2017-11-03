@@ -99,6 +99,8 @@
 #define ENVELOPE_VALUE_BITS 4
 #define ENVELOPE_SIZE (ENVELOPE_VALUES * ENVELOPE_VALUE_BITS / BITS_IN_BYTE)
 
+#define PROFILE_FRAMES (10*60) // 10 seconds
+
 #define TIC_CODE_SIZE (0x10000)
 
 #define SFX_NOTES {"C-", "C#", "D-", "D#", "E-", "F-", "F#", "G-", "G#", "A-", "A#", "B-"}
