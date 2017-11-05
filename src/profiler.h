@@ -26,13 +26,14 @@
 
 typedef struct ProfileMarker ProfileMarker;
 
-struct ProfilerMarker
+struct ProfileMarker
 {
 	u32 hash;
 	u32 color;
 	u32 ref;
 	u16 len;
 	char* name;
+	ProfileMarker* next;
 };
 
 typedef struct ProfileScope ProfileScope;
@@ -40,17 +41,22 @@ typedef struct ProfileScope ProfileScope;
 struct ProfileScope
 {
 	ProfileMarker* marker;
-	float start;
-	float end;
+	u64 start;
+	u64 end;
 	ProfileScope* parent;
+	ProfileScope* child;
+	ProfileScope* sibling;
 };
 
 typedef struct ProfileFrame ProfileFrame;
 
 struct ProfileFrame
 {
-	float start;
-	float end;
+	u32 frame;
+	u64 start;
+	u64 end;
+	ProfileScope root;
+	ProfileScope* current;
 };
 
 typedef struct ProfileData ProfileData;
@@ -58,8 +64,13 @@ typedef struct ProfileData ProfileData;
 struct ProfileData
 {
 	u32 frame;
-        ProfileFrame frames[PROFILE_FRAMES];
-        ProfileScope* scopePool;
+	u32 idx;
+	u32 selectedFrame;
+	ProfileScope* selectedScope;
+	ProfileFrame frames[PROFILE_FRAMES];
+	ProfileMarker* markers;
+	ProfileScope* scopePool;
+	ProfileMarker* markerPool;
 };
 
 typedef struct Profiler Profiler;
@@ -73,7 +84,7 @@ struct Profiler
 	void(*tick)(Profiler* profiler);
 	void(*beginFrame)(Profiler* profiler);
 	void(*endFrame)(Profiler* profiler);
-	void(*beginScope)(Profiler* profiler, char* name);
+	void(*beginScope)(Profiler* profiler, const char* name, u8 color);
 	void(*endScope)(Profiler* profiler);
 };
 
