@@ -190,6 +190,7 @@ bool studioCartChanged();
 void playSystemSfx(s32 id);
 
 void runGameFromSurf();
+void gotoCode();
 void gotoSurf();
 void exitFromGameMenu();
 void runProject();

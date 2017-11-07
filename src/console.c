@@ -852,9 +852,23 @@ static void onConsoleSurfCommand(Console* console, const char* param)
 	commandDone(console);
 }
 
+static void onConsoleCodeCommand(Console* console, const char* param)
+{
+	gotoCode();
+	commandDone(console);
+}
+
+
 static void onConsoleKeymapCommand(Console* console, const char* param)
 {
 	setStudioMode(TIC_KEYMAP_MODE);
+	commandDone(console);
+}
+
+static void onConsoleVersionCommand(Console* console, const char* param)
+{
+	printBack(console, "\n");
+	consolePrint(console, TIC_VERSION_LABEL, CONSOLE_BACK_TEXT_COLOR);
 	commandDone(console);
 }
 
@@ -1768,7 +1782,7 @@ static void onConsoleRamCommand(Console* console, const char* param)
 		ADDR_RECORD(console->tic->ram.vram.screen, 					"SCREEN"),
 		ADDR_RECORD(console->tic->ram.vram.palette, 				"PALETTE"),
 		ADDR_RECORD(console->tic->ram.vram.mapping, 				"PALETTE MAP"),
-		ADDR_RECORD(console->tic->ram.vram.vars.border, 			"BORDER COLOR"),
+		ADDR_RECORD(console->tic->ram.vram.vars.colors, 			"BORDER/BG COLOR"),
 		ADDR_RECORD(console->tic->ram.vram.vars.offset, 			"SCREEN OFFSET"),
 		ADDR_RECORD(console->tic->ram.vram.vars.mask, 				"GAMEPAD MASK"),
 		ADDR_RECORD(console->tic->ram.vram.input.gamepad, 			"GAMEPAD"),
@@ -1832,6 +1846,8 @@ static const struct
 	{"demo",	NULL, "install demo carts",			onConsoleInstallDemosCommand},
 	{"config",	NULL, "edit TIC config",			onConsoleConfigCommand},
 	{"keymap",	NULL, "configure keyboard mapping",	onConsoleKeymapCommand},
+	{"version",	NULL, "show the current version",	onConsoleVersionCommand},
+	{"edit",	NULL, "open cart editor",			onConsoleCodeCommand},
 	{"surf",	NULL, "open carts browser",			onConsoleSurfCommand},
 };
 
@@ -2291,9 +2307,6 @@ static bool loadFileIntoBuffer(Console* console, char* buffer, const char* fileN
 
 		memcpy(buffer, contents, SDL_min(size, TIC_CODE_SIZE-1));
 		SDL_free(contents);
-
-		embed.yes = true;
-		embed.fast = true;
 
 		return true;
 	}
