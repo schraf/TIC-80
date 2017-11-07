@@ -708,6 +708,16 @@ static duk_ret_t duk_sync(duk_context* duk)
 	return 0;
 }
 
+static duk_ret_t duk_perfbegin(duk_context* duk)
+{
+    return 0;
+}
+
+static duk_ret_t duk_perfend(duk_context* duk)
+{
+    return 0;
+}
+
 static duk_ret_t duk_dofile(duk_context* duk)
 {
 	return 0;
@@ -750,6 +760,8 @@ static const struct{duk_c_function func; s32 params;} ApiFunc[] =
 	{duk_clip, 4},
 	{duk_music, 4},
 	{duk_sync, 0},
+	{duk_perfbegin, 1},
+	{duk_perfend, 0},
 };
 
 static void initDuktape(tic_machine* machine)

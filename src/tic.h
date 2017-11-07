@@ -99,7 +99,12 @@
 #define ENVELOPE_VALUE_BITS 4
 #define ENVELOPE_SIZE (ENVELOPE_VALUES * ENVELOPE_VALUE_BITS / BITS_IN_BYTE)
 
-#define PROFILE_FRAMES (10*60) // 10 seconds
+#define TIC_PERF_FRAMES 40
+#define TIC_PERF_MARKERS 64
+#define TIC_PERF_MARKER_LEN 32
+#define TIC_PERF_SCOPES 1024
+#define TIC_PERF_ROOT_SCOPE ((u32)-1)
+#define TIC_PERF_INVALID_SCOPE ((u32)-2)
 
 #define TIC_CODE_SIZE (0x10000)
 
@@ -108,7 +113,7 @@
 #define API_KEYWORDS {"TIC", "scanline", "print", "cls", "pix", "line", "rect", "rectb", \
 	"spr", "btn", "btnp", "sfx", "map", "mget", "mset", "peek", "poke", "peek4", "poke4", \
 	"memcpy", "memset", "trace", "pmem", "time", "exit", "font", "mouse", "circ", "circb", "tri", "textri", \
-	"clip", "music", "sync"}
+	"clip", "music", "sync", "perfbegin", "perfend"}
 
 #define TIC_FONT_CHARS 128
 
@@ -414,3 +419,38 @@ typedef enum
 	tic_script_moon,
 	tic_script_js,
 } tic_script_lang;
+
+typedef struct
+{
+	char name[TIC_PERF_MARKER_LEN];
+	u32 crc;
+	u8 len;
+} tic_perf_marker;
+
+typedef struct
+{
+	tic_perf_marker* marker;
+	u64 start;
+	u64 end;
+	u32 parent;
+	u32 child;
+	u32 sibling;
+} tic_perf_scope;
+
+typedef struct
+{
+	tic_perf_scope scopes[TIC_PERF_SCOPES];
+	u64 start;
+	u64 end;
+	u32 scope_count;
+	u32 scope_current;
+} tic_perf_frame;
+
+typedef struct
+{
+	tic_perf_marker markers[TIC_PERF_MARKERS];
+	tic_perf_frame frames[TIC_PERF_FRAMES];
+	u32 frame;
+	u8 idx;
+} tic_perf;
+

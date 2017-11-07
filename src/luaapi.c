@@ -750,6 +750,16 @@ static s32 lua_sync(lua_State* lua)
 	return 0;
 }
 
+static s32 lua_perfbegin(lua_State* lua)
+{
+	return 0;
+}
+
+static s32 lua_perfend(lua_State* lua)
+{
+	return 0;
+}
+
 static s32 lua_memcpy(lua_State* lua)
 {
 	s32 top = lua_gettop(lua);
@@ -759,7 +769,7 @@ static s32 lua_memcpy(lua_State* lua)
 		s32 dest = getLuaNumber(lua, 1);
 		s32 src = getLuaNumber(lua, 2);
 		s32 size = getLuaNumber(lua, 3);
-                s32 bound = sizeof(tic_ram) - size;
+		s32 bound = sizeof(tic_ram) - size;
 
 		if(size >= 0 && size <= sizeof(tic_ram) && dest >= 0 && src >= 0 && dest <= bound && src <= bound)
 		{
@@ -1048,7 +1058,8 @@ static const lua_CFunction ApiFunc[] =
 	lua_rectb, lua_spr, lua_btn, lua_btnp, lua_sfx, lua_map, lua_mget, 
 	lua_mset, lua_peek, lua_poke, lua_peek4, lua_poke4, lua_memcpy, 
 	lua_memset, lua_trace, lua_pmem, lua_time, lua_exit, lua_font, lua_mouse, 
-	lua_circ, lua_circb, lua_tri, lua_textri, lua_clip, lua_music, lua_sync
+	lua_circ, lua_circb, lua_tri, lua_textri, lua_clip, lua_music, lua_sync,
+	lua_perfbegin, lua_perfend,
 };
 
 STATIC_ASSERT(api_func, COUNT_OF(ApiKeywords) == COUNT_OF(ApiFunc));

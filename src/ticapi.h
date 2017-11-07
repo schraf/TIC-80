@@ -75,19 +75,19 @@ typedef struct
 	void (*rect_border)			(tic_mem* memory, s32 x, s32 y, s32 width, s32 height, u8 color);
 	void (*sprite)				(tic_mem* memory, const tic_gfx* src, s32 index, s32 x, s32 y, u8* colors, s32 count);
 	void (*sprite_ex)			(tic_mem* memory, const tic_gfx* src, s32 index, s32 x, s32 y, s32 w, s32 h, u8* colors, s32 count, s32 scale, tic_flip flip, tic_rotate rotate);
-	void (*map)					(tic_mem* memory, const tic_gfx* src, s32 x, s32 y, s32 width, s32 height, s32 sx, s32 sy, u8 chromakey, s32 scale);
+	void (*map)				(tic_mem* memory, const tic_gfx* src, s32 x, s32 y, s32 width, s32 height, s32 sx, s32 sy, u8 chromakey, s32 scale);
 	void (*remap)				(tic_mem* memory, const tic_gfx* src, s32 x, s32 y, s32 width, s32 height, s32 sx, s32 sy, u8 chromakey, s32 scale, RemapFunc remap, void* data);
 	void (*map_set)				(tic_mem* memory, tic_gfx* src, s32 x, s32 y, u8 value);
 	u8   (*map_get)				(tic_mem* memory, const tic_gfx* src, s32 x, s32 y);
 	void (*circle)				(tic_mem* memory, s32 x, s32 y, u32 radius, u8 color);
-	void (*circle_border)		(tic_mem* memory, s32 x, s32 y, u32 radius, u8 color);
-	void (*tri)					(tic_mem* memory, s32 x1, s32 y1, s32 x2, s32 y2, s32 x3, s32 y3, u8 color);
+	void (*circle_border)			(tic_mem* memory, s32 x, s32 y, u32 radius, u8 color);
+	void (*tri)				(tic_mem* memory, s32 x1, s32 y1, s32 x2, s32 y2, s32 x3, s32 y3, u8 color);
 	void (*textri)				(tic_mem* memory, s32 x1, s32 y1, s32 x2, s32 y2, s32 x3, s32 y3, s32 u1, s32 v1, s32 u2, s32 v2, s32 u3, s32 v3 ,bool use_map,u8 chroma);
 	void (*clip)				(tic_mem* memory, s32 x, s32 y, s32 width, s32 height);
-	void (*sfx)					(tic_mem* memory, s32 index, s32 note, s32 octave, s32 duration, s32 channel);
+	void (*sfx)				(tic_mem* memory, s32 index, s32 note, s32 octave, s32 duration, s32 channel);
 	void (*sfx_stop)			(tic_mem* memory, s32 channel);
 	void (*sfx_ex)				(tic_mem* memory, s32 index, s32 note, s32 octave, s32 duration, s32 channel, s32 volume, s32 speed);
-	tic_sfx_pos (*sfx_pos)		(tic_mem* memory, s32 channel);
+	tic_sfx_pos (*sfx_pos)			(tic_mem* memory, s32 channel);
 	void (*music)				(tic_mem* memory, s32 track, s32 frame, s32 row, bool loop);
 	void (*music_frame)			(tic_mem* memory, s32 track, s32 frame, s32 row, bool loop);
 	double (*time)				(tic_mem* memory);
@@ -97,7 +97,9 @@ typedef struct
 	void (*pause)				(tic_mem* memory);
 	void (*resume)				(tic_mem* memory);
 	void (*sync)				(tic_mem* memory, bool toCart);
-	u32 (*btnp)					(tic_mem* memory, s32 id, s32 hold, s32 period);
+	u32 (*btnp)				(tic_mem* memory, s32 id, s32 hold, s32 period);
+	void (*perfbegin)			(tic_mem* memory, const char* name);
+	void (*perfend)				(tic_mem* memory);
 
 	void (*load)				(tic_cartridge* rom, const u8* buffer, s32 size, bool palette);
 	s32  (*save)				(const tic_cartridge* rom, u8* buffer);
@@ -110,13 +112,14 @@ typedef struct
 
 struct tic_mem
 {
-	tic_ram 			ram;
+	tic_ram 		ram;
 	tic_cartridge 		cart;
 	tic_cartridge 		config;
 	tic_input_method 	input;
 	tic_script_lang 	script;
-	tic_font 			font;
-	tic_api 			api;
+	tic_font 		font;
+	tic_api 		api;
+	tic_perf		perf;
 
 	char saveid[TIC_SAVEID_SIZE];
 

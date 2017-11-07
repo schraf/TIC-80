@@ -283,6 +283,31 @@ static void drawMap(tic_machine* machine, const tic_gfx* src, s32 x, s32 y, s32 
 		}
 }
 
+static tic_perf_marker* findPerfMarker(tic_mem* memory, const char* name)
+{
+	const u32 crc = tic_tool_crc(name);
+
+	for (int i = 0; i < TIC_PERF_MARKERS; ++i)
+	{
+		tic_perf_marker* marker = &memory->perf.markers[i];
+	
+		if (marker->crc == crc)
+		{
+			return marker;
+		}
+		else if(marker->crc == 0)
+		{
+			marker->crc = crc;
+			marker->len = 0;
+		
+			while (*name != '\0' && marker->len < 32)
+				marker->name[marker->len++] = *name++;
+		}
+	}
+
+	return NULL;
+}
+
 static void resetSfx(Channel* channel)
 {
 	memset(channel->pos.data, -1, sizeof(tic_sfx_pos));
@@ -1133,6 +1158,19 @@ static void api_tick_start(tic_mem* memory, const tic_sound* src)
 {
 	tic_machine* machine = (tic_machine*)memory;
 
+	// process perf
+	{
+		memory->perf.frame++;
+		memory->perf.idx = memory->perf.frame % TIC_PERF_FRAMES;
+
+		tic_perf_frame* frame = &memory->perf.frames[memory->perf.idx];
+
+		frame->start = machine->data->counter();
+		frame->end = 0;
+		frame->scope_count = 0;
+		frame->scope_current = TIC_PERF_ROOT_SCOPE;
+	}
+
 	machine->soundSrc = src;
 
 	for (s32 i = 0; i < TIC_SOUND_CHANNELS; ++i )
@@ -1182,6 +1220,12 @@ static void api_tick_end(tic_mem* memory)
 	
 	blip_end_frame(machine->blip, EndTime);
 	blip_read_samples(machine->blip, machine->memory.samples.buffer, machine->samplerate / TIC_FRAMERATE);
+
+	// process perf
+	{
+		tic_perf_frame* frame = &memory->perf.frames[memory->perf.idx];
+		frame->end = machine->data->counter();
+	}
 }
 
 
@@ -1530,6 +1574,48 @@ static u32 api_btnp(tic_mem* tic, s32 index, s32 hold, s32 period)
 	return ((~previous.data) & machine->memory.ram.vram.input.gamepad.data) & (1 << index);
 }
 
+static void api_perfbegin(tic_mem* tic, const char* name)
+{
+	tic_machine* machine = (tic_machine*)tic;
+	tic_perf_marker* marker = findPerfMarker(tic, name);
+
+	if (marker == NULL)
+	{
+		machine->data->error(machine->data->data, "perf markers overflow");
+		return;
+	}
+
+	tic_perf_frame* frame = &tic->perf.frames[tic->perf.idx];
+
+	if (frame->scope_count >= TIC_PERF_SCOPES)
+	{
+		machine->data->error(machine->data->data, "perf frame scopes overflow");
+		return;
+	}
+
+	const u32 scopeidx = frame->scope_count++;
+	tic_perf_scope* scope = &frame->scopes[scopeidx];
+
+	scope->marker = marker;
+	scope->start = machine->data->counter();
+	scope->end = 0;
+	scope->parent = frame->scope_current;
+	scope->child = TIC_PERF_INVALID_SCOPE;
+	scope->sibling = frame->scopes[scope->parent].child;
+	frame->scopes[scope->parent].child = scopeidx;
+
+	frame->scope_current = scopeidx;
+}
+
+static void api_perfend(tic_mem* tic)
+{
+	tic_machine* machine = (tic_machine*)tic;
+
+	tic_perf_scope* scope = &frame->scopes[frame->scope_current];
+	scope->end = machine->data->counter();
+	frame->scope_current = scope->parent;
+}
+
 static void api_load(tic_cartridge* cart, const u8* buffer, s32 size, bool palette)
 {
 	const u8* end = buffer + size;
@@ -1677,6 +1763,8 @@ static void initApi(tic_api* api)
 	INIT_API(get_script);
 	INIT_API(sync);
 	INIT_API(btnp);
+	INIT_API(perfbegin);
+	INIT_API(perfend);
 	INIT_API(load);
 	INIT_API(save);
 	INIT_API(tick_start);

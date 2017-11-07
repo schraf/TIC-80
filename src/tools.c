@@ -105,3 +105,15 @@ u32 tic_tool_find_closest_color(const tic_rgb* palette, const tic_rgb* color)
 
 	return closetColor;
 }
+
+// sdbm hash
+u32 tic_tool_crc(const char* string)
+{
+    u32 hash = 0;
+
+    while(*string != '\0')
+	hash = *string++ + (hash << 6) + (hash << 16) - hash;
+
+    return hash;
+}
+

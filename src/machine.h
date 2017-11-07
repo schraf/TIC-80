@@ -91,7 +91,6 @@ typedef struct
 typedef struct
 {
 	tic_mem memory; // it should be first
-	tic_api api;
 
 	struct
 	{
