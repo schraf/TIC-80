@@ -1172,6 +1172,8 @@ static void api_tick_start(tic_mem* memory, const tic_sound* src)
 		frame->end = 0;
 		frame->scope_count = 0;
 		frame->scope_current = TIC_PERF_ROOT_SCOPE;
+		frame->mem_usage = memory->perf.mem_usage;
+		frame->mem_allocs = memory->perf.mem_allocs;
 	}
 
 	machine->soundSrc = src;
@@ -1228,6 +1230,8 @@ static void api_tick_end(tic_mem* memory)
 	{
 		tic_perf_frame* frame = &memory->perf.frames[memory->perf.idx];
 		frame->end = machine->data->counter();
+		frame->mem_usage = memory->perf.mem_usage - frame->mem_usage;
+		frame->mem_allocs = memory->perf.mem_allocs - frame->mem_allocs;
 	}
 }
 
@@ -1605,6 +1609,8 @@ static void api_perfbegin(tic_mem* tic, const char* name)
 	scope->parent = frame->scope_current;
 	scope->child = TIC_PERF_INVALID_SCOPE;
 	scope->sibling = frame->scopes[scope->parent].child;
+	scope->mem_usage = tic->perf.mem_usage;
+	scope->mem_allocs = tic->perf.mem_allocs;
 	frame->scopes[scope->parent].child = scopeidx;
 
 	frame->scope_current = scopeidx;
@@ -1617,6 +1623,8 @@ static void api_perfend(tic_mem* tic)
 	tic_perf_frame* frame = &tic->perf.frames[tic->perf.idx];
 	tic_perf_scope* scope = &frame->scopes[frame->scope_current];
 	scope->end = machine->data->counter();
+	scope->mem_usage = tic->perf.mem_usage - scope->mem_usage;
+	scope->mem_allocs = tic->perf.mem_allocs - scope->mem_allocs;
 	frame->scope_current = scope->parent;
 }
 

@@ -444,6 +444,8 @@ typedef struct
 	u32 parent;
 	u32 child;
 	u32 sibling;
+	u32 mem_usage;
+	u32 mem_allocs;
 } tic_perf_scope;
 
 typedef struct
@@ -453,6 +455,8 @@ typedef struct
 	u64 end;
 	u32 scope_count;
 	u32 scope_current;
+	u32 mem_usage;
+	u32 mem_allocs;
 } tic_perf_frame;
 
 typedef struct
@@ -460,6 +464,8 @@ typedef struct
 	tic_perf_marker markers[TIC_PERF_MARKERS];
 	tic_perf_frame frames[TIC_PERF_FRAMES];
 	u32 frame;
+	u32 mem_usage;
+	u32 mem_allocs;
 	u8 idx;
 } tic_perf;
 

@@ -93,6 +93,11 @@ static void drawFrameGraph(Profiler* profiler)
 	SDL_snprintf(buffer, 32, "TIME: %u MS", (u32)dt);
 	profiler->tic->api.text(profiler->tic, buffer, x + 2, y + 2, tic_color_white);
 
+	SDL_snprintf(buffer, 32, "MEM: %u", frame->mem_usage);
+	profiler->tic->api.text(profiler->tic, buffer, x + 2, y + 2 + TIC_FONT_HEIGHT, tic_color_white);
+
+	SDL_snprintf(buffer, 32, "ALLOCS: %u", frame->mem_allocs);
+	profiler->tic->api.text(profiler->tic, buffer, x + 2, y + 2 + 2*TIC_FONT_HEIGHT, tic_color_white);
 }
 
 static void drawFrameScopes(Profiler* profiler)
@@ -161,6 +166,9 @@ static void drawFrameScopes(Profiler* profiler)
 
 static void drawMemoryUsage(Profiler* profiler)
 {
+	tic_machine* machine = (tic_machine*)profiler->tic;
+	tic_perf* perf = &profiler->tic->perf;
+
 	const u32 x = PADDING;
 	const u32 y = TOOLBAR_SIZE + PADDING + FRAME_GRAPH_HEIGHT + PADDING + SCOPE_GRAPH_HEIGHT + PADDING;
 	const u32 w = TIC80_WIDTH - (2 * PADDING);
@@ -168,6 +176,23 @@ static void drawMemoryUsage(Profiler* profiler)
 
 	profiler->tic->api.rect(profiler->tic, x, y, w, h, (tic_color_black));
 	profiler->tic->api.rect_border(profiler->tic, x, y, w, h, (tic_color_white));
+
+	for (u32 f = 1; f < TIC_PERF_FRAMES; ++f)
+	{
+		const u32 idx = (perf->idx + TIC_PERF_FRAMES - f) % TIC_PERF_FRAMES;
+		tic_perf_frame* frame = &perf->frames[idx];
+
+		if (frame->start == 0 || frame->end == 0)
+			continue;
+
+		const u64 dt = ((frame->end - frame->start) * 1000) / freq;
+		const u64 bh = SDL_max(SDL_min(dt, h), 3);
+		const u32 bx = x+w-(f*6)-1;
+		const u32 by = y+(h-bh)-1;
+
+		profiler->tic->api.rect(profiler->tic, bx, by, 6, bh, c1);
+		profiler->tic->api.rect_border(profiler->tic, bx, by, 6, bh, c2);
+	}
 }
 
 static void tick(Profiler* profiler)

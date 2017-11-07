@@ -45,6 +45,31 @@ static void registerLuaFunction(tic_machine* machine, lua_CFunction func, const 
 	lua_setglobal(machine->lua, name);
 }
 
+static void* lua_alloc(void* userdata, void* mem, size_t oldSize, size_t newSize)
+{
+    tic_machine* machine = (tic_machine*)mem;
+
+    if (newSize == 0)
+    {
+	machine->memory.perf.mem_usage -= oldSize;
+	free(mem);
+	return NULL;
+    }
+    else if (oldSize == 0)
+    {
+	machine->memory.perf.mem_usage += newSize;
+	machine->memory.perf.mem_allocs++;
+	return malloc(newSize);
+    }
+    else
+    {
+	machine->memory.perf.mem_usage += newSize;
+	machine->memory.perf.mem_usage -= oldSize;
+	machine->memory.perf.mem_allocs++;
+	return realloc(mem, newSize);
+    }
+}
+
 static tic_machine* getLuaMachine(lua_State* lua)
 {
 	lua_getglobal(lua, TicMachine);
@@ -1090,7 +1115,7 @@ bool initLua(tic_machine* machine, const char* code)
 {
 	closeLua(machine);
 
-	lua_State* lua = machine->lua = luaL_newstate();
+	lua_State* lua = machine->lua = lua_newstate(lua_alloc, machine);
 
 	static const luaL_Reg loadedlibs[] =
 	{
@@ -1148,7 +1173,7 @@ bool initMoonscript(tic_machine* machine, const char* code)
 {
 	closeLua(machine);
 
-	lua_State* lua = machine->lua = luaL_newstate();
+	lua_State* lua = machine->lua = lua_newstate(lua_alloc, machine);
 
 	static const luaL_Reg loadedlibs[] =
 	{
