@@ -1611,6 +1611,7 @@ static void api_perfend(tic_mem* tic)
 {
 	tic_machine* machine = (tic_machine*)tic;
 
+	tic_perf_frame* frame = &tic->perf.frames[tic->perf.idx];
 	tic_perf_scope* scope = &frame->scopes[frame->scope_current];
 	scope->end = machine->data->counter();
 	frame->scope_current = scope->parent;
