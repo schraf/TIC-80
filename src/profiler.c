@@ -68,7 +68,7 @@ static void drawFrameGraph(Profiler* profiler)
 			continue;
 
 		const u64 dt = ((frame->end - frame->start) * 1000) / freq;
-		const u64 bh = SDL_max(SDL_min(dt, h), 3);
+		const u64 bh = SDL_max(SDL_min(dt, h-2), 3);
 		const u32 bx = x+w-(f*6)-1;
 		const u32 by = y+(h-bh)-1;
 		const u8 c1 = dt <= 16 ? tic_color_light_green : tic_color_red;
@@ -86,18 +86,44 @@ static void drawFrameGraph(Profiler* profiler)
 	if (frame->start == 0 || frame->end == 0)
 		return;
 
-	const u64 dt = ((frame->end - frame->start) * 1000) / freq;
+	const u64 dt = ((frame->end - frame->start) * 1000000) / freq;
 
 	char buffer[32];
 
-	SDL_snprintf(buffer, 32, "TIME: %u MS", (u32)dt);
+	if (dt < 1000)
+		SDL_snprintf(buffer, 32, "TIME: %u uS", (u32)dt);
+	else
+		SDL_snprintf(buffer, 32, "TIME: %u MS", (u32)(dt / 1000));
+
 	profiler->tic->api.text(profiler->tic, buffer, x + 2, y + 2, tic_color_white);
 
-	SDL_snprintf(buffer, 32, "MEM: %u", frame->mem_usage);
+	if (frame->mem_usage < 1024)
+		SDL_snprintf(buffer, 32, "MEM: %u B", frame->mem_usage);
+	else if (frame->mem_usage < 1024*1024)
+		SDL_snprintf(buffer, 32, "MEM: %u KB", frame->mem_usage / 1024);
+	else
+		SDL_snprintf(buffer, 32, "MEM: %u MB", frame->mem_usage / 1024*1024);
+
 	profiler->tic->api.text(profiler->tic, buffer, x + 2, y + 2 + TIC_FONT_HEIGHT, tic_color_white);
 
 	SDL_snprintf(buffer, 32, "ALLOCS: %u", frame->mem_allocs);
 	profiler->tic->api.text(profiler->tic, buffer, x + 2, y + 2 + 2*TIC_FONT_HEIGHT, tic_color_white);
+}
+
+static u32 getScopeDepth(const tic_perf_frame* frame, const tic_perf_scope* scope)
+{
+	if (scope->parent == TIC_PERF_INVALID_SCOPE)
+		return 0;
+
+	u32 depth = 1;
+
+	while (scope->parent != TIC_PERF_ROOT_SCOPE)
+	{
+		depth++;
+		scope = &frame->scopes[scope->parent];
+	}
+
+	return depth;
 }
 
 static void drawFrameScopes(Profiler* profiler)
@@ -122,16 +148,13 @@ static void drawFrameScopes(Profiler* profiler)
 	const u64 frametime = frame->end - frame->start;
 	const double time2pixels = (double)frametime / (w - 2);
 	const u32 maxdepth = (h-2) / 6;
-	u32 depth = 0;
 
 	for (u32 i = 0; i < frame->scope_count; ++i)
 	{
 		const tic_perf_scope* scope = &frame->scopes[i];
+		const u32 depth = getScopeDepth(frame, scope);
 
-		if (scope->parent != TIC_PERF_ROOT_SCOPE)
-			continue;
-
-		if (depth < maxdepth && scope->start != 0 && scope->end != 0)
+		if (depth > 0 && depth < maxdepth && scope->start != 0 && scope->end != 0)
 		{
 			const u64 scopetime = scope->end - scope->start;
 			const u32 scopex = (u32)((scope->start - frame->start) / time2pixels) + x + 1;
@@ -139,6 +162,7 @@ static void drawFrameScopes(Profiler* profiler)
 			const u32 scopewidth = (u32)(scopetime / time2pixels);
 
 			profiler->tic->api.rect(profiler->tic, scopex, scopey, SDL_max(scopewidth, 1), 6, tic_color_blue);
+			profiler->tic->api.rect_border(profiler->tic, scopex, scopey, SDL_max(scopewidth, 1), 6, tic_color_dark_blue);
 
 			if (scopewidth > TIC_FONT_WIDTH+2)
 			{
@@ -166,9 +190,6 @@ static void drawFrameScopes(Profiler* profiler)
 
 static void drawMemoryUsage(Profiler* profiler)
 {
-	tic_machine* machine = (tic_machine*)profiler->tic;
-	tic_perf* perf = &profiler->tic->perf;
-
 	const u32 x = PADDING;
 	const u32 y = TOOLBAR_SIZE + PADDING + FRAME_GRAPH_HEIGHT + PADDING + SCOPE_GRAPH_HEIGHT + PADDING;
 	const u32 w = TIC80_WIDTH - (2 * PADDING);
@@ -176,7 +197,7 @@ static void drawMemoryUsage(Profiler* profiler)
 
 	profiler->tic->api.rect(profiler->tic, x, y, w, h, (tic_color_black));
 	profiler->tic->api.rect_border(profiler->tic, x, y, w, h, (tic_color_white));
-
+/*
 	for (u32 f = 1; f < TIC_PERF_FRAMES; ++f)
 	{
 		const u32 idx = (perf->idx + TIC_PERF_FRAMES - f) % TIC_PERF_FRAMES;
@@ -193,6 +214,7 @@ static void drawMemoryUsage(Profiler* profiler)
 		profiler->tic->api.rect(profiler->tic, bx, by, 6, bh, c1);
 		profiler->tic->api.rect_border(profiler->tic, bx, by, 6, bh, c2);
 	}
+	*/
 }
 
 static void tick(Profiler* profiler)

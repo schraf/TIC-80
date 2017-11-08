@@ -300,8 +300,12 @@ static tic_perf_marker* findPerfMarker(tic_mem* memory, const char* name)
 			marker->crc = crc;
 			marker->len = 0;
 		
-			while (*name != '\0' && marker->len < 32)
+			while (*name != '\0' && marker->len < TIC_PERF_MARKER_LEN - 1)
 				marker->name[marker->len++] = *name++;
+
+			marker->name[marker->len] = '\0';
+
+			return marker;
 		}
 	}
 
@@ -461,6 +465,7 @@ static void api_reset(tic_mem* memory)
 static void api_pause(tic_mem* memory)
 {
 	tic_machine* machine = (tic_machine*)memory;
+	memory->perf.enabled = false;
 	memcpy(&machine->pause.state, &machine->state, sizeof(MachineState));
 	memcpy(&machine->pause.registers, &memory->ram.registers, sizeof memory->ram.registers);
 	memcpy(&machine->pause.music_pos, &memory->ram.music_pos, sizeof memory->ram.music_pos);
@@ -470,6 +475,8 @@ static void api_pause(tic_mem* memory)
 static void api_resume(tic_mem* memory)
 {
 	api_reset(memory);
+
+	memory->perf.enabled = true;
 
 	tic_machine* machine = (tic_machine*)memory;
 	memcpy(&machine->state, &machine->pause.state, sizeof(MachineState));
@@ -1161,7 +1168,7 @@ static void api_tick_start(tic_mem* memory, const tic_sound* src)
 {
 	tic_machine* machine = (tic_machine*)memory;
 
-	// process perf
+	if (memory->perf.enabled)
 	{
 		memory->perf.frame++;
 		memory->perf.idx = memory->perf.frame % TIC_PERF_FRAMES;
@@ -1170,10 +1177,18 @@ static void api_tick_start(tic_mem* memory, const tic_sound* src)
 
 		frame->start = machine->data->counter();
 		frame->end = 0;
-		frame->scope_count = 0;
+		frame->scope_count = 1;
 		frame->scope_current = TIC_PERF_ROOT_SCOPE;
 		frame->mem_usage = memory->perf.mem_usage;
 		frame->mem_allocs = memory->perf.mem_allocs;
+
+		tic_perf_scope* scope = &frame->scopes[TIC_PERF_ROOT_SCOPE];
+		scope->marker = NULL;
+		scope->start = frame->start;
+		scope->end = 0;
+		scope->parent = TIC_PERF_INVALID_SCOPE;
+		scope->child = TIC_PERF_INVALID_SCOPE;
+		scope->sibling = TIC_PERF_INVALID_SCOPE;
 	}
 
 	machine->soundSrc = src;
@@ -1226,12 +1241,16 @@ static void api_tick_end(tic_mem* memory)
 	blip_end_frame(machine->blip, EndTime);
 	blip_read_samples(machine->blip, machine->memory.samples.buffer, machine->samplerate / TIC_FRAMERATE);
 
-	// process perf
+	if (memory->perf.enabled)
 	{
 		tic_perf_frame* frame = &memory->perf.frames[memory->perf.idx];
 		frame->end = machine->data->counter();
-		frame->mem_usage = memory->perf.mem_usage - frame->mem_usage;
 		frame->mem_allocs = memory->perf.mem_allocs - frame->mem_allocs;
+
+		if (memory->perf.mem_usage > frame->mem_usage)
+			frame->mem_usage = memory->perf.mem_usage - frame->mem_usage;
+		else
+			frame->mem_usage = 0;
 	}
 }
 
@@ -1495,6 +1514,8 @@ static void api_tick(tic_mem* memory, tic_tick_data* data)
 			if(memory->input == tic_mouse_input)
 				memory->ram.vram.vars.mask.data = 0;
 
+			memory->perf.enabled = true;
+
 			//////////////////////////
 
 			memory->script = tic_script_lua;
@@ -1583,6 +1604,9 @@ static u32 api_btnp(tic_mem* tic, s32 index, s32 hold, s32 period)
 
 static void api_perfbegin(tic_mem* tic, const char* name)
 {
+	if (!tic->perf.enabled)
+		return;
+
 	tic_machine* machine = (tic_machine*)tic;
 	tic_perf_marker* marker = findPerfMarker(tic, name);
 
@@ -1618,14 +1642,21 @@ static void api_perfbegin(tic_mem* tic, const char* name)
 
 static void api_perfend(tic_mem* tic)
 {
+	if (!tic->perf.enabled)
+		return;
+
 	tic_machine* machine = (tic_machine*)tic;
 
 	tic_perf_frame* frame = &tic->perf.frames[tic->perf.idx];
 	tic_perf_scope* scope = &frame->scopes[frame->scope_current];
 	scope->end = machine->data->counter();
-	scope->mem_usage = tic->perf.mem_usage - scope->mem_usage;
 	scope->mem_allocs = tic->perf.mem_allocs - scope->mem_allocs;
 	frame->scope_current = scope->parent;
+
+	if (tic->perf.mem_usage > scope->mem_usage)
+		scope->mem_usage = tic->perf.mem_usage - scope->mem_usage;
+	else
+		scope->mem_usage = 0;
 }
 
 static void api_load(tic_cartridge* cart, const u8* buffer, s32 size, bool palette)
@@ -1736,7 +1767,7 @@ static s32 api_save(const tic_cartridge* cart, u8* buffer)
 }
 
 // copied from SDL2
-inline void memset4(void *dst, u32 val, u32 dwords)
+void memset4(void *dst, u32 val, u32 dwords)
 {
 #if defined(__GNUC__) && defined(i386)
     s32 u0, u1, u2;

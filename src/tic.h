@@ -103,8 +103,8 @@
 #define TIC_PERF_MARKERS 64
 #define TIC_PERF_MARKER_LEN 32
 #define TIC_PERF_SCOPES 1024
-#define TIC_PERF_ROOT_SCOPE ((u32)-1)
-#define TIC_PERF_INVALID_SCOPE ((u32)-2)
+#define TIC_PERF_ROOT_SCOPE 0
+#define TIC_PERF_INVALID_SCOPE ((u32)-1)
 
 #define TIC_CODE_SIZE (0x10000)
 
@@ -467,5 +467,6 @@ typedef struct
 	u32 mem_usage;
 	u32 mem_allocs;
 	u8 idx;
+	u8 enabled;
 } tic_perf;
 

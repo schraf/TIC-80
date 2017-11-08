@@ -47,27 +47,31 @@ static void registerLuaFunction(tic_machine* machine, lua_CFunction func, const 
 
 static void* lua_alloc(void* userdata, void* mem, size_t oldSize, size_t newSize)
 {
-    tic_machine* machine = (tic_machine*)mem;
+	tic_machine* machine = (tic_machine*)userdata;
 
-    if (newSize == 0)
-    {
-	machine->memory.perf.mem_usage -= oldSize;
-	free(mem);
-	return NULL;
-    }
-    else if (oldSize == 0)
-    {
-	machine->memory.perf.mem_usage += newSize;
-	machine->memory.perf.mem_allocs++;
-	return malloc(newSize);
-    }
-    else
-    {
-	machine->memory.perf.mem_usage += newSize;
-	machine->memory.perf.mem_usage -= oldSize;
-	machine->memory.perf.mem_allocs++;
-	return realloc(mem, newSize);
-    }
+	if (newSize == 0)
+	{
+		if (machine->memory.perf.mem_usage < oldSize)
+			machine->memory.perf.mem_usage = 0; // should error?
+		else
+			machine->memory.perf.mem_usage -= oldSize;
+
+		free(mem);
+		return NULL;
+	}
+	else if (oldSize == 0)
+	{
+		machine->memory.perf.mem_usage += newSize;
+		machine->memory.perf.mem_allocs++;
+		return malloc(newSize);
+	}
+	else
+	{
+		machine->memory.perf.mem_usage += newSize;
+		machine->memory.perf.mem_usage -= oldSize;
+		machine->memory.perf.mem_allocs++;
+		return realloc(mem, newSize);
+	}
 }
 
 static tic_machine* getLuaMachine(lua_State* lua)
@@ -777,11 +781,27 @@ static s32 lua_sync(lua_State* lua)
 
 static s32 lua_perfbegin(lua_State* lua)
 {
+	s32 top = lua_gettop(lua);
+
+	if (top == 1 && lua_isstring(lua, 1))
+	{
+		const char* name = lua_tostring(lua, 1);
+
+		tic_mem* memory = (tic_mem*)getLuaMachine(lua);
+
+		memory->api.perfbegin(memory, name);
+	}
+	else luaL_error(lua, "no perf name param, perfbegin(name)\n");
+
 	return 0;
 }
 
 static s32 lua_perfend(lua_State* lua)
 {
+	tic_mem* memory = (tic_mem*)getLuaMachine(lua);
+
+	memory->api.perfend(memory);
+
 	return 0;
 }
 
