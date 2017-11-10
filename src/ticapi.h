@@ -121,6 +121,7 @@ struct tic_mem
 	tic_script_lang 	script;
 	tic_font 		font;
 	tic_api 		api;
+	tic_code		code;
 	tic_perf		perf;
 
 	char saveid[TIC_SAVEID_SIZE];
