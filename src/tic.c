@@ -1181,7 +1181,7 @@ static void api_tick_start(tic_mem* memory, const tic_sound* src)
 		frame->end = 0;
 		frame->scope_count = 1;
 		frame->scope_current = TIC_PERF_ROOT_SCOPE;
-		frame->mem_usage = memory->perf.mem_usage;
+		frame->mem_usage = 0;
 		frame->mem_allocs = memory->perf.mem_allocs;
 
 		tic_perf_scope* scope = &frame->scopes[TIC_PERF_ROOT_SCOPE];
@@ -1247,12 +1247,8 @@ static void api_tick_end(tic_mem* memory)
 	{
 		tic_perf_frame* frame = &memory->perf.frames[memory->perf.idx];
 		frame->end = machine->data->counter();
+		frame->mem_usage = memory->perf.mem_usage;
 		frame->mem_allocs = memory->perf.mem_allocs - frame->mem_allocs;
-
-		if (memory->perf.mem_usage > frame->mem_usage)
-			frame->mem_usage = memory->perf.mem_usage - frame->mem_usage;
-		else
-			frame->mem_usage = 0;
 	}
 }
 
