@@ -25,6 +25,7 @@
 from optparse import OptionParser
 import sys
 import os
+import subprocess
 import ninja_syntax
 
 def get_files(path, ext, excludes=[]):
@@ -46,6 +47,12 @@ def compile(platform, src, deps=[]):
 
 def link(platform, output, obj):
     writer.build(outputs=output, rule='ld', inputs=obj, variables=[('ld', platform.compiler()), ('libs', platform.libs())])
+
+def pkg_cflags(name):
+    return [ s.decode('ascii') for s in subprocess.check_output('pkg-config --cflags %s' % name, shell=True).split() ]
+
+def pkg_libs(name):
+    return [ s.decode('ascii') for s in subprocess.check_output('pkg-config --libs %s' % name, shell=True).split() ]
 
 class Platform:
     EMSCRIPTEN='emscripten'
@@ -147,7 +154,7 @@ writer.rule('bin2txt', command='bin/bin2txt $in $out -z')
 writer.newline()
 
 # general options
-includes = ['-Isrc/ext', '-Iinclude/lua', '-Iinclude/gif', '-Iinclude/zlib', '-Isrc/ext/gif', '-Iinclude/sdl2', '-Iinclude/tic80']
+includes = ['-Isrc/ext', '-Iinclude/lua', '-Iinclude/gif', '-Iinclude/zlib', '-Isrc/ext/gif', '-Iinclude/sdl2', '-Iinclude/tic80', '-Isrc/ext/net']
 cflags = ['-Wall', '-std=c99'] # TODO: fix warnings and add -Werror
 cc = options.use_llvm and 'clang' or 'gcc'
 
@@ -167,13 +174,19 @@ if target.is_win():
     target.add_cflags('-Ibuild/windows/include')
     target.add_libs(['-Llib/mingw64', '-lmingw32', '-lSDL2main', '-lSDL2', '-llua', '-lz', '-lws2_32', '-lcomdlg32', '-mwindows'])
 elif target.is_linux():
+    target.add_cflags('-D_GNU_SOURCE')
     target.add_libs(['-lSDL2', '-llua', '-lz', '-lm', '-lpthread'])
+    target.add_cflags(pkg_cflags('gtk+-3.0'))
+    target.add_libs(pkg_libs('gtk+-3.0'))
 
 if host.is_win():
     host.add_cflags('-Ibuild/windows/include')
     host.add_libs(['-lz'])
 elif host.is_linux():
+    host.add_cflags(pkg_cflags('gtk+-3.0'))
+    host.add_cflags('-D_GNU_SOURCE')
     host.add_libs(['-lz'])
+    host.add_libs(pkg_libs('gtk+-3.0'))
 
 # source files
 tic_headers = get_files('include/tic80', '.h') + get_files('src', '.h')
