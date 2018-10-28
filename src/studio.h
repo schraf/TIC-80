@@ -27,21 +27,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <SDL.h>
-
-#if defined(__EMSCRIPTEN__)
-#include <emscripten.h>
-#endif
-
 #include "tic.h"
 #include "ticapi.h"
 #include "defines.h"
 #include "tools.h"
+#include "ext/file_dialog.h"
+#include "system.h"
 
 #define TIC_LOCAL ".local/"
 #define TIC_CACHE TIC_LOCAL "cache/"
-
-#define TIC_MOD_CTRL (KMOD_GUI|KMOD_CTRL)
 
 #define TOOLBAR_SIZE 7
 #define STUDIO_TEXT_WIDTH (TIC_FONT_WIDTH)
@@ -55,53 +49,18 @@
 #define CONFIG_TIC "config " TIC_VERSION_LABEL ".tic"
 #define CONFIG_TIC_PATH TIC_LOCAL CONFIG_TIC
 
-#define KEYMAP_COUNT (sizeof(tic80_input) * BITS_IN_BYTE)
-#define KEYMAP_SIZE (KEYMAP_COUNT * sizeof(SDL_Scancode))
+#define KEYMAP_COUNT (sizeof(tic80_gamepads) * BITS_IN_BYTE)
+#define KEYMAP_SIZE (KEYMAP_COUNT)
 #define KEYMAP_DAT "keymap.dat"
 #define KEYMAP_DAT_PATH TIC_LOCAL KEYMAP_DAT
 
-typedef struct
-{
-	struct
-	{
-		struct
-		{
-			s32 sprite;
-			bool pixelPerfect;
-		} cursor;
-
-		struct
-		{
-			u8 bg;
-			u8 string;
-			u8 number;
-			u8 keyword;
-			u8 api;
-			u8 comment;
-			u8 sign;
-			u8 var;
-			u8 other;
-			u8 select;
-			u8 cursor;
-		} code;
-
-		struct
-		{
-			struct
-			{
-				u8 alpha;
-			} touch;
-
-		} gamepad;
-
-	} theme;
-
-	s32 gifScale;
-	s32 gifLength;
-	
-	bool checkNewVersion;
-
-} StudioConfig;
+#define CART_EXT ".tic"
+#define PROJECT_LUA_EXT ".lua"
+#define PROJECT_MOON_EXT ".moon"
+#define PROJECT_JS_EXT ".js"
+#define PROJECT_WREN_EXT ".wren"
+#define PROJECT_SQUIRREL_EXT ".nut"
+#define PROJECT_FENNEL_EXT ".fnl"
 
 typedef enum
 {
@@ -114,28 +73,31 @@ typedef enum
 	TIC_WORLD_MODE,
 	TIC_SFX_MODE,
 	TIC_MUSIC_MODE,
-	TIC_KEYMAP_MODE,
 	TIC_DIALOG_MODE,
 	TIC_MENU_MODE,
 	TIC_SURF_MODE,
 	TIC_PROFILE_MODE,
 } EditorMode;
 
-SDL_Event* pollEvent();
-void setCursor(SDL_SystemCursor id);
+typedef struct
+{
+	s32 x, y;
+} tic_point;
+
+typedef struct
+{
+	s32 x, y, w, h;
+} tic_rect;
+
+void setCursor(tic_cursor id);
 
 s32 getMouseX();
 s32 getMouseY();
-bool checkMousePos(const SDL_Rect* rect);
-bool checkMouseClick(const SDL_Rect* rect, s32 button);
-bool checkMouseDown(const SDL_Rect* rect, s32 button);
-
-bool getGesturePos(SDL_Point* pos);
-
-const u8* getKeyboard();
+bool checkMousePos(const tic_rect* rect);
+bool checkMouseClick(const tic_rect* rect, tic_mouse_btn button);
+bool checkMouseDown(const tic_rect* rect, tic_mouse_btn button);
 
 void drawToolbar(tic_mem* tic, u8 color, bool bg);
-void drawExtrabar(tic_mem* tic);
 void drawBitIcon(s32 x, s32 y, const u8* ptr, u8 color);
 
 void studioRomLoaded();
@@ -143,13 +105,14 @@ void studioRomSaved();
 void studioConfigChanged();
 
 void setStudioMode(EditorMode mode);
+void resumeRunMode();
 EditorMode getStudioMode();
 void exitStudio();
 u32 unzip(u8** dest, const u8* source, size_t size);
 
 void str2buf(const char* str, s32 size, void* buf, bool flip);
 void toClipboard(const void* data, s32 size, bool flip);
-bool fromClipboard(void* data, s32 size, bool flip);
+bool fromClipboard(void* data, s32 size, bool flip, bool remove_white_spaces);
 
 typedef enum
 {
@@ -159,7 +122,7 @@ typedef enum
 	TIC_CLIPBOARD_PASTE,
 } ClipboardEvent;
 
-ClipboardEvent getClipboardEvent(SDL_Keycode keycode);
+ClipboardEvent getClipboardEvent();
 
 typedef enum
 {
@@ -173,9 +136,7 @@ typedef enum
 void setStudioEvent(StudioEvent event);
 void showTooltip(const char* text);
 
-SDL_Scancode* getKeymap();
-
-const StudioConfig* getConfig();
+tic_key* getKeymap();
 
 void setSpritePixel(tic_tile* tiles, s32 x, s32 y, u8 color);
 u8 getSpritePixel(tic_tile* tiles, s32 x, s32 y);
@@ -194,4 +155,14 @@ void gotoCode();
 void gotoSurf();
 void exitFromGameMenu();
 void runProject();
-bool processDoFile();
+
+tic_tiles* getBankTiles();
+tic_palette* getBankPalette();
+tic_map* getBankMap();
+
+char getKeyboardText();
+bool keyWasPressed(tic_key key);
+bool anyKeyWasPressed();
+
+const StudioConfig* getConfig();
+System* getSystem();

@@ -31,7 +31,7 @@ struct Code
 {
 	tic_mem* tic;
 
-	char* data;
+	char* src;
 
 	struct
 	{
@@ -39,7 +39,6 @@ struct Code
 		{
 			char* position;
 			char* selection;
-			s32 tick;
 			s32 column;
 		};
 
@@ -47,14 +46,14 @@ struct Code
 		s32 delay;
 	} cursor;
 
-	SDL_Rect rect;
+	tic_rect rect;
 
 	struct
 	{
 		s32 x;
 		s32 y;
 
-		SDL_Point start;
+		tic_point start;
 
 		bool active;
 		bool gesture;
@@ -99,10 +98,12 @@ struct Code
 		s32 index;
 	} outline;
 
+	bool altFont;
+
 	void(*tick)(Code*);
 	void(*escape)(Code*);
 	void(*event)(Code*, StudioEvent);
 	void(*update)(Code*);
 };
 
-void initCode(Code*, tic_mem*);
+void initCode(Code*, tic_mem*, tic_code* src);

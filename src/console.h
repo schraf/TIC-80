@@ -69,6 +69,12 @@ struct Console
 		void(*reload)(Console*, char*);
 	} codeLiveReload;
 
+	struct
+	{
+		bool yes;
+		tic_cartridge* file;
+	} embed;
+
 	char* buffer;
 	u8* colorBuffer;
 
@@ -86,10 +92,20 @@ struct Console
 	HistoryItem* historyHead;
 
 	u32 tickCounter;
-	bool active;
-	bool showGameMenu;
 
-	void(*load)(Console*, const char* name);
+	struct
+	{
+		bool active;
+		bool showGameMenu;
+		bool startSurf;
+		bool skipStart;
+		bool goFullscreen;
+		bool crtMonitor;
+	};
+
+	void(*load)(Console*, const char* path, const char* hash);
+	bool(*loadProject)(Console*, const char* name, const char* data, s32 size, tic_cartridge* dst);
+	void(*updateProject)(Console*);
 	void(*error)(Console*, const char*);
 	void(*trace)(Console*, const char*, u8 color);
 	void(*tick)(Console*);

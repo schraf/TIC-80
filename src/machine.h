@@ -24,10 +24,19 @@
 
 #include "ticapi.h"
 #include "tools.h"
-#include "ext/blip_buf.h"
+#include "blip_buf.h"
 
 #define SFX_DEF_SPEED (1 << SFX_SPEED_BITS)
 
+#define TIC_FN "TIC"
+#define SCN_FN "SCN"
+#define OVR_FN "OVR"
+
+#define API_KEYWORDS {TIC_FN, SCN_FN, OVR_FN, "print", "cls", "pix", "line", "rect", "rectb", \
+	"spr", "btn", "btnp", "sfx", "map", "mget", "mset", "peek", "poke", "peek4", "poke4", \
+	"memcpy", "memset", "trace", "pmem", "time", "exit", "font", "mouse", "circ", "circb", "tri", "textri", \
+	"clip", "music", "sync", "reset", "key", "keyp"}
+	
 typedef struct
 {
 	s32 time;       /* clock time of next delta */
@@ -46,8 +55,6 @@ typedef struct
 	s32 duration;
 } Channel;
 
-typedef void(ScanlineFunc)(tic_mem* memory, s32 row);
-
 typedef struct
 {
 	s32 l;
@@ -61,30 +68,48 @@ typedef struct
 
 	struct
 	{
-		tic80_input previous;
+		tic80_gamepads previous;
 
-		u32 holds[sizeof(tic80_input) * BITS_IN_BYTE];
-	} gamepad;
+		u32 holds[sizeof(tic80_gamepads) * BITS_IN_BYTE];
+	} gamepads;
+
+	struct 
+	{
+		tic80_keyboard previous;
+
+		u32 holds[tic_keys_count];
+	} keyboard;
 
 	Clip clip;
 
-	tic_sound_register_data registers[TIC_SOUND_CHANNELS];
+	struct
+	{
+		tic_sound_register_data left[TIC_SOUND_CHANNELS];
+		tic_sound_register_data right[TIC_SOUND_CHANNELS];
+	} registers;
+
 	Channel channels[TIC_SOUND_CHANNELS];
 	struct
 	{
-		enum
-		{
-			MusicStop = 0,
-			MusicPlayFrame,
-			MusicPlay,
-		} play;
-
 		s32 ticks;
-
 		Channel channels[TIC_SOUND_CHANNELS];
 	} music;
 
-	ScanlineFunc* scanline;
+	tic_tick tick;
+	tic_scanline scanline;
+
+	struct
+	{
+		tic_overline callback;
+		u32 palette[TIC_PALETTE_SIZE];
+	} ovr;
+
+	void (*setpix)(tic_mem* memory, s32 x, s32 y, u8 color);
+	u8 (*getpix)(tic_mem* memory, s32 x, s32 y);
+	void (*drawhline)(tic_mem* memory, s32 xl, s32 xr, s32 y, u8 color);
+
+	u32 synced;
+
 	bool initialized;
 } MachineState;
 
@@ -94,13 +119,37 @@ typedef struct
 
 	struct
 	{
+#if defined(TIC_BUILD_WITH_LUA) || defined(TIC_BUILD_WITH_MOON) || defined(TIC_BUILD_WITH_FENNEL)
+		struct lua_State* lua;
+#endif
+
+#if defined(TIC_BUILD_WITH_JS)
 		struct duk_hthread* js;
-		struct lua_State* lua;	
+#endif
+
+#if defined(TIC_BUILD_WITH_WREN)
+		struct WrenVM* wren;
+#endif	
+
+#if defined(TIC_BUILD_WITH_SQUIRREL)
+		struct SQVM* squirrel;
+#endif
+
 	};
 
-	blip_buffer_t* blip;
+	struct
+	{
+		blip_buffer_t* left;
+		blip_buffer_t* right;
+	} blip;
+	
 	s32 samplerate;
-	const tic_sound* soundSrc;
+
+	struct
+	{
+		const tic_sfx* sfx;
+		const tic_music* music;
+	} sound;
 
 	tic_tick_data* data;
 
@@ -109,27 +158,45 @@ typedef struct
 	struct
 	{
 		MachineState state;	
-		tic_sound_register registers[TIC_SOUND_CHANNELS];
-		tic_music_pos music_pos;
-		tic_vram vram;
+		tic_ram ram;
+
+		struct
+		{
+			u64 start;
+			u64 paused;			
+		} time;
 	} pause;
 
 } tic_machine;
 
-typedef s32(DrawCharFunc)(tic_mem* memory, u8 symbol, s32 x, s32 y, s32 width, s32 height, u8 color, s32 scale);
-s32 drawText(tic_mem* memory, const char* text, s32 x, s32 y, s32 width, s32 height, u8 color, s32 scale, DrawCharFunc* func);
-s32 drawSpriteFont(tic_mem* memory, u8 symbol, s32 x, s32 y, s32 width, s32 height, u8 chromakey, s32 scale);
-s32 drawFixedSpriteFont(tic_mem* memory, u8 index, s32 x, s32 y, s32 width, s32 height, u8 chromakey, s32 scale);
+typedef s32(DrawCharFunc)(tic_mem* memory, u8 symbol, s32 x, s32 y, s32 width, s32 height, u8 color, s32 scale, bool alt);
+s32 drawText(tic_mem* memory, const char* text, s32 x, s32 y, s32 width, s32 height, u8 color, s32 scale, DrawCharFunc* func, bool alt);
+s32 drawSpriteFont(tic_mem* memory, u8 symbol, s32 x, s32 y, s32 width, s32 height, u8 chromakey, s32 scale, bool alt);
+s32 drawFixedSpriteFont(tic_mem* memory, u8 index, s32 x, s32 y, s32 width, s32 height, u8 chromakey, s32 scale, bool alt);
+void parseCode(const tic_script_config* config, const char* start, u8* color, const tic_code_theme* theme);
 
-void closeLua(tic_machine* machine);
-void closeJavascript(tic_machine* machine);
+#if defined(TIC_BUILD_WITH_SQUIRREL)
+const tic_script_config* getSquirrelScriptConfig();
+#endif
 
-bool initMoonscript(tic_machine* machine, const char* code);
-bool initLua(tic_machine* machine, const char* code);
-bool initJavascript(tic_machine* machine, const char* code);
+#if defined(TIC_BUILD_WITH_LUA)
+const tic_script_config* getLuaScriptConfig();
 
-void callLuaTick(tic_machine* machine);
-void callJavascriptTick(tic_machine* machine);
+#	if defined(TIC_BUILD_WITH_MOON)
+const tic_script_config* getMoonScriptConfig();
+#	endif
 
-void callLuaScanline(tic_mem* memory, s32 row);
-void callJavascriptScanline(tic_mem* memory, s32 row);
+#	if defined(TIC_BUILD_WITH_FENNEL)
+const tic_script_config* getFennelConfig();
+#	endif
+
+#endif /* defined(TIC_BUILD_WITH_LUA) */
+
+
+#if defined(TIC_BUILD_WITH_JS)
+const tic_script_config* getJsScriptConfig();
+#endif
+
+#if defined(TIC_BUILD_WITH_WREN)
+const tic_script_config* getWrenScriptConfig();
+#endif

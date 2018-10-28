@@ -29,6 +29,8 @@ typedef struct Map Map;
 struct Map
 {
 	tic_mem* tic;
+
+	tic_map* src;
 	
 	s32 tickCounter;
 
@@ -44,14 +46,14 @@ struct Map
 	{
 		bool grid;
 		bool draw;
-		SDL_Point start;
+		tic_point start;
 	} canvas;
 
 	struct
 	{
 		bool show;
-		SDL_Rect rect;
-		SDL_Point start;
+		tic_rect rect;
+		tic_point start;
 		bool drag;
 	} sheet;
 
@@ -60,7 +62,7 @@ struct Map
 		s32 x;
 		s32 y;
 
-		SDL_Point start;
+		tic_point start;
 
 		bool active;
 		bool gesture;
@@ -69,8 +71,8 @@ struct Map
 
 	struct
 	{
-		SDL_Rect rect;
-		SDL_Point start;
+		tic_rect rect;
+		tic_point start;
 		bool drag;
 	} select;
 
@@ -78,9 +80,10 @@ struct Map
 
 	struct History* history;
 
-	void(*tick)(Map*);
-	void(*event)(Map*, StudioEvent);
-	void(*scanline)(tic_mem* tic, s32 row);
+	void (*tick)(Map*);
+	void (*event)(Map*, StudioEvent);
+	void (*scanline)(tic_mem* tic, s32 row, void* data);
+	void (*overline)(tic_mem* tic, void* data);
 };
 
-void initMap(Map*, tic_mem*);
+void initMap(Map*, tic_mem*, tic_map* src);

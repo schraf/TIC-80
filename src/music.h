@@ -29,6 +29,9 @@ typedef struct Music Music;
 struct Music
 {
 	tic_mem* tic;
+
+	tic_music* src;
+
 	u8 track:MUSIC_TRACKS_BITS;
 
 	struct
@@ -51,8 +54,8 @@ struct Music
 
 		struct
 		{
-			SDL_Point start;
-			SDL_Rect rect;
+			tic_point start;
+			tic_rect rect;
 			bool drag;
 		} select;
 
@@ -72,4 +75,4 @@ struct Music
 	void(*event)(Music*, StudioEvent);
 };
 
-void initMusic(Music*, tic_mem*);
+void initMusic(Music*, tic_mem*, tic_music* src);

@@ -27,9 +27,9 @@
 #include "defines.h"
 
 #define TIC_VERSION_MAJOR 0
-#define TIC_VERSION_MINOR 47
+#define TIC_VERSION_MINOR 80
 #define TIC_VERSION_PATCH 0
-#define TIC_VERSION_STATUS ""
+#define TIC_VERSION_STATUS "-dev"
 
 #if defined(TIC80_PRO)
 #define TIC_VERSION_POST " Pro"
@@ -55,11 +55,11 @@
 #define TIC_RAM_SIZE (80*1024) //80K
 #define TIC_FONT_WIDTH 6
 #define TIC_FONT_HEIGHT 6
+#define TIC_ALTFONT_WIDTH 4
 #define TIC_PALETTE_BPP 4
 #define TIC_PALETTE_SIZE (1 << TIC_PALETTE_BPP)
 #define TIC_FRAMERATE 60
 #define TIC_SPRITESIZE 8
-#define TIC_GAMEPAD_MASK 0xff
 
 #define BITS_IN_BYTE 8
 #define TIC_BANK_SPRITES (1 << BITS_IN_BYTE)
@@ -75,10 +75,11 @@
 #define TIC_MAP_WIDTH (TIC_MAP_SCREEN_WIDTH * TIC_MAP_ROWS)
 #define TIC_MAP_HEIGHT (TIC_MAP_SCREEN_HEIGHT * TIC_MAP_COLS)
 
-#define TIC_PERSISTENT_SIZE ((56-25)/sizeof(s32))
+#define TIC_PERSISTENT_SIZE (1024/sizeof(s32)) // 1K
 #define TIC_SAVEID_SIZE 64
 
 #define TIC_SOUND_CHANNELS 4
+#define TIC_STEREO_CHANNLES 2
 #define SFX_TICKS 30
 #define SFX_COUNT_BITS 6
 #define SFX_COUNT (1 << SFX_COUNT_BITS)
@@ -114,14 +115,15 @@
 
 #define TIC_CODE_SIZE (0x10000)
 
+#define TIC_BANK_BITS 3
+#define TIC_BANKS (1 << TIC_BANK_BITS)
+#define TIC_GAMEPADS (sizeof(tic80_gamepads) / sizeof(tic80_gamepad))
+
 #define SFX_NOTES {"C-", "C#", "D-", "D#", "E-", "F-", "F#", "G-", "G#", "A-", "A#", "B-"}
+#define TIC_FONT_CHARS 256
 
-#define API_KEYWORDS {"TIC", "scanline", "print", "cls", "pix", "line", "rect", "rectb", \
-	"spr", "btn", "btnp", "sfx", "map", "mget", "mset", "peek", "poke", "peek4", "poke4", \
-	"memcpy", "memset", "trace", "pmem", "time", "exit", "font", "mouse", "circ", "circb", "tri", "textri", \
-	"clip", "music", "sync", "perfbegin", "perfend"}
-
-#define TIC_FONT_CHARS 128
+#define KEYBOARD_HOLD 20
+#define KEYBOARD_PERIOD 3
 
 enum
 {
@@ -191,8 +193,9 @@ typedef struct
 		s8 speed:3;
 		u8 reverse:1; // arpeggio reverse
 		u8 note:4;
-		u8 chain:1;
-		u8 temp:3;
+		u8 stereo_left:1;
+		u8 stereo_right:1;
+		u8 temp:2;
 	};
 
 	union
@@ -208,7 +211,7 @@ typedef struct
 		tic_sound_loop loops[4];
 	};
 
-} tic_sound_effect;
+} tic_sample;
 
 typedef struct
 {
@@ -257,8 +260,13 @@ typedef struct
 
 typedef struct
 {
+	tic_sample data[SFX_COUNT];
+} tic_samples;
+
+typedef struct
+{
 	tic_waveforms waveform;
-	tic_sound_effect data[SFX_COUNT];
+	tic_samples samples;
 }tic_sfx;
 
 typedef struct
@@ -267,18 +275,50 @@ typedef struct
 	tic_tracks tracks;
 }tic_music;
 
+typedef enum
+{
+	tic_music_stop,
+	tic_music_play_frame,
+	tic_music_play,
+} tic_music_state;
+
 typedef struct
 {
-	s8 track;
-	s8 frame;
-	s8 row;
+	struct
+	{
+		s8 track;
+		s8 frame;
+		s8 row;
+	} music;
 	
 	struct
 	{
-		bool loop:1;
+		u8 music_loop:1;
+		u8 music_state:2; // enum tic_music_state
+		u8 unknown:5;
 	} flag;
 
-} tic_music_pos;
+} tic_sound_state;
+
+typedef union
+{
+	struct
+	{
+		u8 left1:4;
+		u8 right1:4;
+
+		u8 left2:4;
+		u8 right2:4;
+
+		u8 left3:4;
+		u8 right3:4;
+
+		u8 left4:4;
+		u8 right4:4;
+	};
+
+	u32 data;
+} tic_stereo_volume;
 
 typedef struct
 {
@@ -300,13 +340,6 @@ typedef struct
 {
 	u8 data[TIC_SPRITESIZE * TIC_SPRITESIZE * TIC_PALETTE_BPP / BITS_IN_BYTE];
 } tic_tile;
-
-typedef struct
-{
-	tic_tile tiles[TIC_BANK_SPRITES];
-	tic_tile sprites[TIC_BANK_SPRITES];	
-	tic_map map;
-} tic_gfx;
 
 typedef struct
 {
@@ -335,17 +368,29 @@ typedef union
 
 typedef struct
 {
-	tic_sfx sfx;
-	tic_music music;
-} tic_sound;
+	tic_tile data[TIC_BANK_SPRITES];
+} tic_tiles;
 
 typedef struct
 {
-	tic_gfx gfx;
-	tic_sound sound;
-	tic_code code;
-	tic_cover_image cover;
+	tic_tiles 	tiles;
+	tic_tiles 	sprites;
+	tic_map 	map;
+	tic_sfx 	sfx;
+	tic_music 	music;
 	tic_palette palette;
+} tic_bank;
+
+typedef struct
+{
+	union
+	{
+		tic_bank bank0;
+		tic_bank banks[TIC_BANKS];
+	};
+
+	tic_code 	code;	
+	tic_cover_image cover;
 } tic_cartridge;
 
 typedef struct
@@ -375,7 +420,7 @@ typedef union
 				struct
 				{
 					u8 border:TIC_PALETTE_BPP;
-					u8 bg:TIC_PALETTE_BPP;
+					u8 tmp:TIC_PALETTE_BPP;
 				};
 			};
 
@@ -385,18 +430,15 @@ typedef union
 				s8 y;
 			} offset;
 
-			union
+			struct
 			{
-				u8 cursor;
-				tic80_gamepad mask;
-			};
+				u8 sprite:7;
+				bool system:1;
+			} cursor;
+
 		} vars;
 
-		struct
-		{
-			tic80_input gamepad;
-			u8 reserved[2];
-		} input;
+		u8 reserved[4];
 	};
 	
 	u8 data[TIC_VRAM_SIZE];
@@ -404,7 +446,7 @@ typedef union
 
 typedef struct
 {
-	s32 data[TIC_PERSISTENT_SIZE];
+	u32 data[TIC_PERSISTENT_SIZE];
 } tic_persistent;
 
 typedef union
@@ -412,11 +454,16 @@ typedef union
 	struct
 	{
 		tic_vram vram;
-		tic_gfx gfx;
-		tic_persistent persistent;
+		tic_tiles tiles;
+		tic_tiles sprites;
+		tic_map map;
+		tic80_input input;
+		u8 unknown[12];
+		tic_stereo_volume stereo;
 		tic_sound_register registers[TIC_SOUND_CHANNELS];
-		tic_sound sound;
-		tic_music_pos music_pos;
+		tic_sfx sfx;
+		tic_music music;
+		tic_sound_state sound_state;
 	};
 
 	u8 data[TIC_RAM_SIZE];
@@ -424,16 +471,112 @@ typedef union
 
 typedef enum
 {
-	tic_gamepad_input,
-	tic_mouse_input,
-} tic_input_method;
+	tic_key_unknown,
+
+	tic_key_a,
+	tic_key_b,
+	tic_key_c,
+	tic_key_d,
+	tic_key_e,
+	tic_key_f,
+	tic_key_g,
+	tic_key_h,
+	tic_key_i,
+	tic_key_j,
+	tic_key_k,
+	tic_key_l,
+	tic_key_m,
+	tic_key_n,
+	tic_key_o,
+	tic_key_p,
+	tic_key_q,
+	tic_key_r,
+	tic_key_s,
+	tic_key_t,
+	tic_key_u,
+	tic_key_v,
+	tic_key_w,
+	tic_key_x,
+	tic_key_y,
+	tic_key_z,
+
+	tic_key_0,
+	tic_key_1,
+	tic_key_2,
+	tic_key_3,
+	tic_key_4,
+	tic_key_5,
+	tic_key_6,
+	tic_key_7,
+	tic_key_8,
+	tic_key_9,
+
+	tic_key_minus,
+	tic_key_equals,
+	tic_key_leftbracket,
+	tic_key_rightbracket,
+	tic_key_backslash,
+	tic_key_semicolon,
+	tic_key_apostrophe,
+	tic_key_grave,
+	tic_key_comma,
+	tic_key_period,
+	tic_key_slash,
+	
+	tic_key_space,
+	tic_key_tab,
+
+	tic_key_return,
+	tic_key_backspace,
+	tic_key_delete,
+	tic_key_insert,
+
+	tic_key_pageup,
+	tic_key_pagedown,
+	tic_key_home,
+	tic_key_end,
+	tic_key_up,
+	tic_key_down,
+	tic_key_left,
+	tic_key_right,
+
+	tic_key_capslock,
+	tic_key_ctrl,
+	tic_key_shift,
+	tic_key_alt,
+
+	tic_key_escape,
+	tic_key_f1,
+	tic_key_f2,
+	tic_key_f3,
+	tic_key_f4,
+	tic_key_f5,
+	tic_key_f6,
+	tic_key_f7,
+	tic_key_f8,
+	tic_key_f9,
+	tic_key_f10,
+	tic_key_f11,
+	tic_key_f12,
+
+	////////////////
+
+	tic_keys_count
+} tic_keycode;
 
 typedef enum
 {
-	tic_script_lua,	
-	tic_script_moon,
-	tic_script_js,
-} tic_script_lang;
+	tic_mouse_left,
+	tic_mouse_middle,
+	tic_mouse_right,
+} tic_mouse_btn;
+
+typedef enum
+{
+	tic_cursor_arrow,
+	tic_cursor_hand,
+	tic_cursor_ibeam,
+} tic_cursor;
 
 typedef struct
 {
