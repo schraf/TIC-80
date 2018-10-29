@@ -1274,7 +1274,7 @@ static bool initLua(tic_mem* tic, const char* code)
 
 	closeLua(tic);
 
-	lua_State* lua = machine->lua = luaL_newstate(lua_alloc, machine);
+	lua_State* lua = machine->lua = lua_newstate(lua_alloc, machine);
 	lua_open_builtins(lua);
 
 	initAPI(machine);
@@ -1548,7 +1548,7 @@ static bool initMoonscript(tic_mem* tic, const char* code)
 	tic_machine* machine = (tic_machine*)tic;
 	closeLua(tic);
 
-	lua_State* lua = machine->lua = luaL_newstate();
+	lua_State* lua = machine->lua = lua_newstate(lua_alloc, machine);
 	lua_open_builtins(lua);
 
 	luaopen_lpeg(lua);
@@ -1700,7 +1700,7 @@ static bool initFennel(tic_mem* tic, const char* code)
 	tic_machine* machine = (tic_machine*)tic;
 	closeLua(tic);
 
-	lua_State* lua = machine->lua = luaL_newstate();
+	lua_State* lua = machine->lua = lua_newstate(lua_alloc, machine);
 	lua_open_builtins(lua);
 
 	initAPI(machine);

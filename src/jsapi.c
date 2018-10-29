@@ -844,11 +844,75 @@ s32 duk_timeout_check(void* udata)
 	return ForceExitCounter++ > 1000 ? tick->forceExit && tick->forceExit(tick->data) : false;
 }
 
+typedef struct
+{
+	u32 magic;
+	u32 size;
+} MemoryTag;
+
+static const u32 MemoryMagic = 0x1234ABCD;
+
+static void* duk_alloc_impl(void *udata, duk_size_t size)
+{
+	tic_machine* machine = (tic_machine*)udata;
+
+	machine->memory.perf.mem_usage += size;
+	machine->memory.perf.mem_allocs++;
+
+	MemoryTag* tag = malloc(size + sizeof(MemoryTag));
+	tag->magic = MemoryMagic;
+	tag->size = (u32)size;
+
+	return (u8*)tag + sizeof(MemoryTag);
+}
+
+static void* duk_realloc_impl(void *udata, void *ptr, duk_size_t size)
+{
+	tic_machine* machine = (tic_machine*)udata;
+
+	if (ptr == NULL)
+	{
+		return duk_alloc_impl(udata, size);
+	}
+
+	MemoryTag* tag = (MemoryTag*)((u8*)ptr - sizeof(MemoryTag));
+
+	if (tag->magic == MemoryMagic)
+	{
+		machine->memory.perf.mem_usage += size;
+		machine->memory.perf.mem_usage -= tag->size;
+		machine->memory.perf.mem_allocs++;
+
+		tag->size = size;
+	}
+
+	return realloc(ptr, size);
+}
+
+static void duk_free_impl(void *udata, void *ptr)
+{
+	tic_machine* machine = (tic_machine*)udata;
+
+	MemoryTag* tag = (MemoryTag*)((u8*)ptr - sizeof(MemoryTag));
+
+	if (tag->magic == MemoryMagic)
+	{
+		machine->memory.perf.mem_usage -= tag->size;
+		machine->memory.perf.mem_allocs++;
+
+		tag->size = 0;
+		free(tag);
+		return;
+	}
+
+	free(ptr);
+}
+
 static void initDuktape(tic_machine* machine)
 {
 	closeJavascript((tic_mem*)machine);
 
-	duk_context* duk = machine->js = duk_create_heap(NULL, NULL, NULL, machine, NULL);
+	duk_context* duk = machine->js = duk_create_heap(duk_alloc_impl, duk_realloc_impl, duk_free_impl, machine, NULL);
 
 	{
 		duk_push_global_stash(duk);

@@ -24,10 +24,15 @@
 #include "machine.h"
 #include "zlib.h"
 
+#include <string.h>
+
 #define PADDING 2
 #define FRAME_GRAPH_HEIGHT 30
 #define SCOPE_GRAPH_HEIGHT 60
 #define MEM_GRAPH_HEIGHT 30
+
+#define min(a,b) ((a) < (b) ? (a) : (b))
+#define max(a,b) ((a) > (b) ? (a) : (b))
 
 typedef struct Tooltip Tooltip;
 
@@ -39,7 +44,6 @@ struct Tooltip
 
 static void drawTooltip(tic_mem* tic, const Tooltip* tooltip)
 {
-	/*
 	if (!tooltip->visible)
 		return;
 
@@ -49,7 +53,7 @@ static void drawTooltip(tic_mem* tic, const Tooltip* tooltip)
 	if (mx <= PADDING || mx >= TIC80_WIDTH - PADDING)
 		return;
 
-	const s32 width = tic->api.text(tic, tooltip->buffer, TIC80_WIDTH, 0, (tic_color_gray));
+	const s32 width = tic->api.text(tic, tooltip->buffer, TIC80_WIDTH, 0, (tic_color_gray), false);
 
 	s32 x = mx;
 	s32 y = my - TIC_FONT_HEIGHT;
@@ -57,8 +61,7 @@ static void drawTooltip(tic_mem* tic, const Tooltip* tooltip)
 	if(x + width >= TIC80_WIDTH) x -= (width + 2);
 
 	tic->api.rect(tic, x - 1, y - 1, width + 1, TIC_FONT_HEIGHT + 1, (tic_color_black));
-	tic->api.text(tic, tooltip->buffer, x, y, (tic_color_white));
-	*/
+	tic->api.text(tic, tooltip->buffer, x, y, (tic_color_white), false);
 }
 
 static void drawProfilerToolbar(Profiler* profiler)
@@ -69,7 +72,6 @@ static void drawProfilerToolbar(Profiler* profiler)
 
 static void drawFrameGraph(Profiler* profiler)
 {
-	/*
 	tic_machine* machine = (tic_machine*)profiler->tic;
 	tic_perf* perf = &profiler->tic->perf;
 
@@ -88,8 +90,8 @@ static void drawFrameGraph(Profiler* profiler)
 	{
 		const u32 selected = (perf->idx + TIC_PERF_FRAMES + ((mx - x) / 6) + 1) % TIC_PERF_FRAMES;
 
-		if (selected != profiler->data.selected)
-			profiler->data.selected = selected;
+		if (selected != profiler->src->selected)
+			profiler->src->selected = selected;
 	}
 
 	profiler->tic->api.rect(profiler->tic, x, y, w, h, (tic_color_black));
@@ -105,7 +107,7 @@ static void drawFrameGraph(Profiler* profiler)
 
 		const u64 us = ((frame->end - frame->start) * 1000000) / freq;
 		const u64 ms = us / 1000;
-		const u64 bh = SDL_max(SDL_min(ms, h-2), 3);
+		const u64 bh = max(min(ms, h-2), 3);
 		const u32 bx = x+w-(f*6)-1;
 		const u32 by = y+(h-bh)-1;
 		const u8 c1 = ms <= 16 ? tic_color_light_green : tic_color_red;
@@ -114,21 +116,20 @@ static void drawFrameGraph(Profiler* profiler)
 		profiler->tic->api.rect(profiler->tic, bx, by, 6, bh, c1);
 		profiler->tic->api.rect_border(profiler->tic, bx, by, 6, bh, c2);
 
-		if (my > y && my < y+h && idx == profiler->data.selected)
+		if (my > y && my < y+h && idx == profiler->src->selected)
 		{
 			tooltip.visible = true;
 
 			if (us < 1000)
-				SDL_snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u uS", (u32)us);
+				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u uS", (u32)us);
 			else
-				SDL_snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MS", (u32)ms);
+				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MS", (u32)ms);
 
 			profiler->tic->api.rect_border(profiler->tic, bx, y+1, 6, h-1, tic_color_white);
 		}
 	}
 
 	drawTooltip(profiler->tic, &tooltip);
-	*/
 }
 
 static u32 getScopeDepth(const tic_perf_frame* frame, const tic_perf_scope* scope)
@@ -149,7 +150,6 @@ static u32 getScopeDepth(const tic_perf_frame* frame, const tic_perf_scope* scop
 
 static void drawFrameScopes(Profiler* profiler)
 {
-	/*
 	tic_machine* machine = (tic_machine*)profiler->tic;
 	tic_perf* perf = &profiler->tic->perf;
 
@@ -188,8 +188,8 @@ static void drawFrameScopes(Profiler* profiler)
 			const u32 scopey = y+1+((depth-1)*8);
 			const u32 scopewidth = (u32)(scopetime / time2pixels);
 
-			profiler->tic->api.rect(profiler->tic, scopex, scopey, SDL_max(scopewidth, 1), 8, tic_color_blue);
-			profiler->tic->api.rect_border(profiler->tic, scopex, scopey, SDL_max(scopewidth, 1), 8, tic_color_dark_blue);
+			profiler->tic->api.rect(profiler->tic, scopex, scopey, max(scopewidth, 1), 8, tic_color_blue);
+			profiler->tic->api.rect_border(profiler->tic, scopex, scopey, max(scopewidth, 1), 8, tic_color_dark_blue);
 
 			if (scopewidth > TIC_FONT_WIDTH+2)
 			{
@@ -199,36 +199,34 @@ static void drawFrameScopes(Profiler* profiler)
 
 				if (scope->marker->len > maxlen)
 				{
-					SDL_strlcpy(buffer, name, SDL_min(maxlen+1, 32));
+					strncpy(buffer, name, min(maxlen+1, 32));
 					name = buffer;
 				}
 
-				profiler->tic->api.text(profiler->tic, name, scopex+1, scopey+1, tic_color_white);
+				profiler->tic->api.text(profiler->tic, name, scopex+1, scopey+1, tic_color_white, false);
 			}
 
 			if (mx >= scopex && mx < scopex+scopewidth && my >= scopey && my < scopey+6)
 			{
-				profiler->tic->api.rect_border(profiler->tic, scopex, scopey, SDL_max(scopewidth, 1), 8, tic_color_white);
+				profiler->tic->api.rect_border(profiler->tic, scopex, scopey, max(scopewidth, 1), 8, tic_color_white);
 
 				tooltip.visible = true;
 
 				const u64 dt = ((scope->end - scope->start) * 1000000) / freq;
 
 				if (dt < 1000)
-					SDL_snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u uS", (u32)dt);
+					snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u uS", (u32)dt);
 				else
-					SDL_snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MS", (u32)(dt / 1000));
+					snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MS", (u32)(dt / 1000));
 			}
 		}
 	}
 
 	drawTooltip(profiler->tic, &tooltip);
-	*/
 }
 
 static void drawMemoryUsage(Profiler* profiler)
 {
-	/*
 	tic_perf* perf = &profiler->tic->perf;
 
 	const u32 x = PADDING;
@@ -250,7 +248,7 @@ static void drawMemoryUsage(Profiler* profiler)
 		if (frame->start == 0 || frame->end == 0)
 			continue;
 
-		maxmem = SDL_max(frame->mem_usage, maxmem);
+		maxmem = max(frame->mem_usage, maxmem);
 	}
 
 	const u32 bytesPerPixel = maxmem / (MEM_GRAPH_HEIGHT - 2);
@@ -267,11 +265,11 @@ static void drawMemoryUsage(Profiler* profiler)
 		if (frame->start == 0 || frame->end == 0)
 			continue;
 
-		const u32 bh1 = maxmem == 0 ? 1 : SDL_max(1, frame->mem_usage / bytesPerPixel);
+		const u32 bh1 = maxmem == 0 ? 1 : max(1, frame->mem_usage / bytesPerPixel);
 		const u32 bx1 = x+w-(f*6)-1;
 		const u32 by1 = y+(h-bh1)-1;
 
-		const u32 bh2 = maxmem == 0 ? 1 : SDL_max(1, lastMemUsage / bytesPerPixel);
+		const u32 bh2 = maxmem == 0 ? 1 : max(1, lastMemUsage / bytesPerPixel);
 		const u32 bx2 = x+w-(f*6)-1+6;
 		const u32 by2 = y+(h-bh2)-1;
 
@@ -284,23 +282,21 @@ static void drawMemoryUsage(Profiler* profiler)
 			tooltip.visible = true;
 
 			if (frame->mem_usage < 1024)
-				SDL_snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u B", frame->mem_usage);
+				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u B", frame->mem_usage);
 			else if (frame->mem_usage < 1024*1024)
-				SDL_snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u KB", frame->mem_usage / 1024);
+				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u KB", frame->mem_usage / 1024);
 			else
-				SDL_snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MB", frame->mem_usage / 1024*1024);
+				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MB", frame->mem_usage / 1024*1024);
 		}
 	}
 
 	drawTooltip(profiler->tic, &tooltip);
-	*/
 }
 
 static void tick(Profiler* profiler)
 {
-	/*
-	SDL_Event* event = NULL;
-	while ((event = pollEvent()));
+	// TODO: is this still needed?
+	//getSystem()->poll();
 
 	profiler->tic->api.clear(profiler->tic, (tic_color_gray));
 
@@ -308,7 +304,6 @@ static void tick(Profiler* profiler)
 	drawFrameGraph(profiler);
 	drawFrameScopes(profiler);
 	drawMemoryUsage(profiler);
-	*/
 }
 
 void initProfiler(Profiler* profiler, tic_mem* tic, tic_profiler* src)

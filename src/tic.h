@@ -384,7 +384,6 @@ typedef struct
 	tic_sfx 	sfx;
 	tic_music 	music;
 	tic_palette palette;
-	tic_profiler profiler;
 } tic_bank;
 
 typedef struct
@@ -397,6 +396,7 @@ typedef struct
 
 	tic_code 	code;	
 	tic_cover_image cover;
+	tic_profiler profiler;
 } tic_cartridge;
 
 typedef struct

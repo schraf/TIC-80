@@ -1118,7 +1118,7 @@ static void initModules()
 		initMap(impl.editor[i].map, impl.studio.tic, &tic->cart.banks[i].map);
 		initSfx(impl.editor[i].sfx, impl.studio.tic, &tic->cart.banks[i].sfx);
 		initMusic(impl.editor[i].music, impl.studio.tic, &tic->cart.banks[i].music);
-		initProfiler(impl.editor[i].profiler, impl.studio.tic, &tic->cart.banks[i].profiler);
+		initProfiler(impl.editor[i].profiler, impl.studio.tic, &tic->cart.profiler);
 	}
 
 	initWorldMap();
