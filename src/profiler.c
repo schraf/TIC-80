@@ -39,6 +39,7 @@ struct Tooltip
 
 static void drawTooltip(tic_mem* tic, const Tooltip* tooltip)
 {
+	/*
 	if (!tooltip->visible)
 		return;
 
@@ -57,6 +58,7 @@ static void drawTooltip(tic_mem* tic, const Tooltip* tooltip)
 
 	tic->api.rect(tic, x - 1, y - 1, width + 1, TIC_FONT_HEIGHT + 1, (tic_color_black));
 	tic->api.text(tic, tooltip->buffer, x, y, (tic_color_white));
+	*/
 }
 
 static void drawProfilerToolbar(Profiler* profiler)
@@ -67,6 +69,7 @@ static void drawProfilerToolbar(Profiler* profiler)
 
 static void drawFrameGraph(Profiler* profiler)
 {
+	/*
 	tic_machine* machine = (tic_machine*)profiler->tic;
 	tic_perf* perf = &profiler->tic->perf;
 
@@ -125,6 +128,7 @@ static void drawFrameGraph(Profiler* profiler)
 	}
 
 	drawTooltip(profiler->tic, &tooltip);
+	*/
 }
 
 static u32 getScopeDepth(const tic_perf_frame* frame, const tic_perf_scope* scope)
@@ -145,6 +149,7 @@ static u32 getScopeDepth(const tic_perf_frame* frame, const tic_perf_scope* scop
 
 static void drawFrameScopes(Profiler* profiler)
 {
+	/*
 	tic_machine* machine = (tic_machine*)profiler->tic;
 	tic_perf* perf = &profiler->tic->perf;
 
@@ -159,7 +164,7 @@ static void drawFrameScopes(Profiler* profiler)
 	profiler->tic->api.rect(profiler->tic, x, y, w, h, (tic_color_black));
 	profiler->tic->api.rect_border(profiler->tic, x, y, w, h, (tic_color_white));
 
-	const tic_perf_frame* frame = &perf->frames[profiler->data.selected];
+	const tic_perf_frame* frame = &perf->frames[profiler->src->selected];
 
 	if (frame->start == 0 || frame->end == 0)
 		return;
@@ -218,10 +223,12 @@ static void drawFrameScopes(Profiler* profiler)
 	}
 
 	drawTooltip(profiler->tic, &tooltip);
+	*/
 }
 
 static void drawMemoryUsage(Profiler* profiler)
 {
+	/*
 	tic_perf* perf = &profiler->tic->perf;
 
 	const u32 x = PADDING;
@@ -286,10 +293,12 @@ static void drawMemoryUsage(Profiler* profiler)
 	}
 
 	drawTooltip(profiler->tic, &tooltip);
+	*/
 }
 
 static void tick(Profiler* profiler)
 {
+	/*
 	SDL_Event* event = NULL;
 	while ((event = pollEvent()));
 
@@ -299,18 +308,16 @@ static void tick(Profiler* profiler)
 	drawFrameGraph(profiler);
 	drawFrameScopes(profiler);
 	drawMemoryUsage(profiler);
+	*/
 }
 
-void initProfiler(Profiler* profiler, tic_mem* tic)
+void initProfiler(Profiler* profiler, tic_mem* tic, tic_profiler* src)
 {
 	*profiler = (Profiler)
 	{
 		.tic = tic,
+		.src = src,
 		.tick = tick,
-		.data =
-		{
-			.selected = 0,
-		},
 	};
 }
 

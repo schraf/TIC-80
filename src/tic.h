@@ -373,12 +373,18 @@ typedef struct
 
 typedef struct
 {
+	u32 selected;
+} tic_profiler;
+
+typedef struct
+{
 	tic_tiles 	tiles;
 	tic_tiles 	sprites;
 	tic_map 	map;
 	tic_sfx 	sfx;
 	tic_music 	music;
 	tic_palette palette;
+	tic_profiler profiler;
 } tic_bank;
 
 typedef struct

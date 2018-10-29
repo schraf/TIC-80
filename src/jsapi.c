@@ -828,6 +828,8 @@ static const struct{duk_c_function func; s32 params;} ApiFunc[] =
 	{duk_reset, 0},
 	{duk_key, 1},
 	{duk_keyp, 3},
+	{duk_perfbegin, 1},
+	{duk_perfend, 0},
 };
 
 STATIC_ASSERT(api_func, COUNT_OF(ApiKeywords) == COUNT_OF(ApiFunc));

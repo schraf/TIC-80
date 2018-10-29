@@ -196,7 +196,7 @@ set(TIC80CORE_SRC
 	${TIC80CORE_DIR}/jsapi.c 
 	${TIC80CORE_DIR}/luaapi.c 
 	${TIC80CORE_DIR}/wrenapi.c 
-        ${TIC80CORE_DIR}/squirrelapi.c
+	${TIC80CORE_DIR}/squirrelapi.c
 	${TIC80CORE_DIR}/ext/gif.c
 	3rd-party/blip-buf/blip_buf.c # TODO: link it as lib?
 	3rd-party/duktape-2.2.0/src/duktape.c # TODO: link it as lib?
@@ -417,6 +417,7 @@ set(TIC80LIB_SRC
 	${TIC80LIB_DIR}/dialog.c
 	${TIC80LIB_DIR}/menu.c
 	${TIC80LIB_DIR}/surf.c
+	${TIC80LIB_DIR}/profiler.c
 )
 
 set(TIC80_OUTPUTS tic80 tic80pro)

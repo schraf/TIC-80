@@ -81,6 +81,7 @@ static const EditorMode Modes[] =
 	TIC_MAP_MODE,
 	TIC_SFX_MODE,
 	TIC_MUSIC_MODE,
+	TIC_PROFILE_MODE
 };
 
 static struct
@@ -121,6 +122,7 @@ static struct
 				s8 map;
 				s8 sfx;
 				s8 music;
+				s8 profiler;
 			} index;
 
 			s8 indexes[COUNT_OF(Modes)];
@@ -156,6 +158,7 @@ static struct
 		Map* 	map;
 		Sfx* 	sfx;
 		Music* 	music;
+		Profiler* profiler;
 	} editor[TIC_EDITOR_BANKS];
 
 	struct
@@ -168,7 +171,6 @@ static struct
 		Dialog* dialog;
 		Menu* menu;
 		Surf* surf;
-		Profiler profiler;
 	};
 
 	FileSystem* fs;
@@ -1116,10 +1118,10 @@ static void initModules()
 		initMap(impl.editor[i].map, impl.studio.tic, &tic->cart.banks[i].map);
 		initSfx(impl.editor[i].sfx, impl.studio.tic, &tic->cart.banks[i].sfx);
 		initMusic(impl.editor[i].music, impl.studio.tic, &tic->cart.banks[i].music);
+		initProfiler(impl.editor[i].profiler, impl.studio.tic, &tic->cart.banks[i].profiler);
 	}
 
 	initWorldMap();
-        initProfiler(&studio.profiler, studio.tic);
 }
 
 static void updateHash()
@@ -1634,12 +1636,16 @@ static void renderStudio()
 			music->tick(music);
 		}
 		break;
+	case TIC_PROFILE_MODE:
+		{
+			Profiler* profiler = impl.editor[impl.bank.index.profiler].profiler;
+			profiler->tick(profiler);
+		}
 
 	case TIC_WORLD_MODE:	impl.world->tick(impl.world); break;
 	case TIC_DIALOG_MODE:	impl.dialog->tick(impl.dialog); break;
 	case TIC_MENU_MODE:	impl.menu->tick(impl.menu); break;
 	case TIC_SURF_MODE:	impl.surf->tick(impl.surf); break;
-	case TIC_PROFILE_MODE:	impl.profiler->tick(impl.profiler); break;
 	default: break;
 	}
 
@@ -1855,6 +1861,7 @@ Studio* studioInit(s32 argc, char **argv, s32 samplerate, const char* folder, Sy
 			impl.editor[i].map 		= calloc(1, sizeof(Map));
 			impl.editor[i].sfx 		= calloc(1, sizeof(Sfx));
 			impl.editor[i].music 	= calloc(1, sizeof(Music));
+			impl.editor[i].profiler = calloc(1, sizeof(Profiler));
 		}
 
 		impl.start 		= calloc(1, sizeof(Start));

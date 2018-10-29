@@ -33,6 +33,7 @@
 #include "tools.h"
 #include "machine.h"
 #include "ext/gif.h"
+#include "blip_buf.h"
 
 #define CLOCKRATE (TIC_FRAMERATE*30000)
 #define MIN_PERIOD_VALUE 10
@@ -1737,7 +1738,7 @@ static void api_tick(tic_mem* tic, tic_tick_data* data)
 			if(data->preprocessor)
 				data->preprocessor(data->data, code);
 
-			memory->perf.enabled = true;
+			tic->perf.enabled = true;
 			bool done = false;
 			const tic_script_config* config = NULL;
 

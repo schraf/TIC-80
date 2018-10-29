@@ -29,13 +29,10 @@ typedef struct Profiler Profiler;
 struct Profiler
 {
 	tic_mem* tic;
-
-	struct {
-		u32 selected;
-	} data;
+	tic_profiler* src;
 
 	void(*tick)(Profiler* profiler);
 };
 
-void initProfiler(Profiler* profiler, tic_mem* tic);
+void initProfiler(Profiler* profiler, tic_mem* tic, tic_profiler* src);
 

@@ -885,6 +885,32 @@ static s32 lua_keyp(lua_State* lua)
 	return 1;
 }
 
+static s32 lua_perfbegin(lua_State* lua)
+{
+	s32 top = lua_gettop(lua);
+
+	if (top == 1 && lua_isstring(lua, 1))
+	{
+		const char* name = lua_tostring(lua, 1);
+
+		tic_mem* memory = (tic_mem*)getLuaMachine(lua);
+
+		memory->api.perfbegin(memory, name);
+	}
+	else luaL_error(lua, "no perf name param, perfbegin(name)\n");
+
+	return 0;
+}
+
+static s32 lua_perfend(lua_State* lua)
+{
+	tic_mem* memory = (tic_mem*)getLuaMachine(lua);
+
+	memory->api.perfend(memory);
+
+	return 0;
+}
+
 static s32 lua_memcpy(lua_State* lua)
 {
 	s32 top = lua_gettop(lua);
