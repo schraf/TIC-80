@@ -295,10 +295,7 @@ static void drawMemoryUsage(Profiler* profiler)
 
 static void tick(Profiler* profiler)
 {
-	// TODO: is this still needed?
-	//getSystem()->poll();
-
-	profiler->tic->api.clear(profiler->tic, (tic_color_gray));
+	profiler->tic->api.clear(profiler->tic, TIC_COLOR_BG);
 
 	drawProfilerToolbar(profiler);
 	drawFrameGraph(profiler);

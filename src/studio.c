@@ -735,7 +735,7 @@ void drawToolbar(tic_mem* tic, u8 color, bool bg)
 
 	enum {Size = 7};
 
-	static const char* Tips[] = {"CODE EDITOR [f1]", "SPRITE EDITOR [f2]", "MAP EDITOR [f3]", "SFX EDITOR [f4]", "MUSIC EDITOR [f5]",};
+	static const char* Tips[] = {"CODE EDITOR [f1]", "SPRITE EDITOR [f2]", "MAP EDITOR [f3]", "SFX EDITOR [f4]", "MUSIC EDITOR [f5]", "PROFILER [f6]"};
 
 	s32 mode = -1;
 
@@ -1348,7 +1348,7 @@ static void processShortcuts()
 	bool alt = tic->api.key(tic, tic_key_alt);
 	bool ctrl = tic->api.key(tic, tic_key_ctrl);
 
-	if(keyWasPressedOnce(tic_key_f6)) switchCrtMonitor();
+	if(keyWasPressedOnce(tic_key_f10)) switchCrtMonitor();
 
 	if(isGameMenu())
 	{
@@ -1378,6 +1378,7 @@ static void processShortcuts()
 		else if(keyWasPressedOnce(tic_key_3)) setStudioMode(TIC_MAP_MODE);
 		else if(keyWasPressedOnce(tic_key_4)) setStudioMode(TIC_SFX_MODE);
 		else if(keyWasPressedOnce(tic_key_5)) setStudioMode(TIC_MUSIC_MODE);
+		else if(keyWasPressedOnce(tic_key_6)) setStudioMode(TIC_PROFILE_MODE);
 		else if(keyWasPressedOnce(tic_key_return)) goFullscreen();
 	}
 	else if(ctrl)
@@ -1396,7 +1397,7 @@ static void processShortcuts()
 		else if(keyWasPressedOnce(tic_key_f3)) setStudioMode(TIC_MAP_MODE);
 		else if(keyWasPressedOnce(tic_key_f4)) setStudioMode(TIC_SFX_MODE);
 		else if(keyWasPressedOnce(tic_key_f5)) setStudioMode(TIC_MUSIC_MODE);
-		else if(keyWasPressedOnce(tic_key_f5)) setStudioMode(TIC_PROFILE_MODE);
+		else if(keyWasPressedOnce(tic_key_f6)) setStudioMode(TIC_PROFILE_MODE);
 		else if(keyWasPressedOnce(tic_key_f7)) setCoverImage();
 		else if(keyWasPressedOnce(tic_key_f8)) takeScreenshot();
 #if !defined(__EMSCRIPTEN__)
@@ -1641,6 +1642,7 @@ static void renderStudio()
 			Profiler* profiler = impl.editor[impl.bank.index.profiler].profiler;
 			profiler->tick(profiler);
 		}
+		break;
 
 	case TIC_WORLD_MODE:	impl.world->tick(impl.world); break;
 	case TIC_DIALOG_MODE:	impl.dialog->tick(impl.dialog); break;
