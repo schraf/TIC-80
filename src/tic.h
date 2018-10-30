@@ -374,7 +374,7 @@ typedef struct
 typedef struct
 {
 	u32 selected;
-} tic_profiler;
+} tic_debugger;
 
 typedef struct
 {
@@ -396,7 +396,7 @@ typedef struct
 
 	tic_code 	code;	
 	tic_cover_image cover;
-	tic_profiler profiler;
+	tic_debugger debugger;
 } tic_cartridge;
 
 typedef struct

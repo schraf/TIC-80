@@ -24,15 +24,22 @@
 
 #include "studio.h"
 
-typedef struct Profiler Profiler;
+typedef struct Debugger Debugger;
 
-struct Profiler
+struct Debugger
 {
 	tic_mem* tic;
-	tic_profiler* src;
+	tic_debugger* src;
 
-	void(*tick)(Profiler* profiler);
+	enum
+	{
+		DBG_PROFILER_TAB,
+		DBG_STATS_TAB,
+		DBG_LOG_TAB
+	} tab;
+
+	void(*tick)(Debugger* debugger);
 };
 
-void initProfiler(Profiler* profiler, tic_mem* tic, tic_profiler* src);
+void initDebugger(Debugger* debugger, tic_mem* tic, tic_debugger* src);
 

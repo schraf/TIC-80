@@ -76,7 +76,7 @@ typedef enum
 	TIC_DIALOG_MODE,
 	TIC_MENU_MODE,
 	TIC_SURF_MODE,
-	TIC_PROFILE_MODE,
+	TIC_DEBUG_MODE,
 } EditorMode;
 
 typedef struct

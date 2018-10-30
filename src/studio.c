@@ -36,7 +36,7 @@
 #include "dialog.h"
 #include "menu.h"
 #include "surf.h"
-#include "profiler.h"
+#include "debugger.h"
 
 #include "fs.h"
 
@@ -81,7 +81,7 @@ static const EditorMode Modes[] =
 	TIC_MAP_MODE,
 	TIC_SFX_MODE,
 	TIC_MUSIC_MODE,
-	TIC_PROFILE_MODE
+	TIC_DEBUG_MODE
 };
 
 static struct
@@ -122,7 +122,7 @@ static struct
 				s8 map;
 				s8 sfx;
 				s8 music;
-				s8 profiler;
+				s8 debugger;
 			} index;
 
 			s8 indexes[COUNT_OF(Modes)];
@@ -158,7 +158,7 @@ static struct
 		Map* 	map;
 		Sfx* 	sfx;
 		Music* 	music;
-		Profiler* profiler;
+		Debugger* debugger;
 	} editor[TIC_EDITOR_BANKS];
 
 	struct
@@ -1118,7 +1118,7 @@ static void initModules()
 		initMap(impl.editor[i].map, impl.studio.tic, &tic->cart.banks[i].map);
 		initSfx(impl.editor[i].sfx, impl.studio.tic, &tic->cart.banks[i].sfx);
 		initMusic(impl.editor[i].music, impl.studio.tic, &tic->cart.banks[i].music);
-		initProfiler(impl.editor[i].profiler, impl.studio.tic, &tic->cart.profiler);
+		initDebugger(impl.editor[i].debugger, impl.studio.tic, &tic->cart.debugger);
 	}
 
 	initWorldMap();
@@ -1378,7 +1378,7 @@ static void processShortcuts()
 		else if(keyWasPressedOnce(tic_key_3)) setStudioMode(TIC_MAP_MODE);
 		else if(keyWasPressedOnce(tic_key_4)) setStudioMode(TIC_SFX_MODE);
 		else if(keyWasPressedOnce(tic_key_5)) setStudioMode(TIC_MUSIC_MODE);
-		else if(keyWasPressedOnce(tic_key_6)) setStudioMode(TIC_PROFILE_MODE);
+		else if(keyWasPressedOnce(tic_key_6)) setStudioMode(TIC_DEBUG_MODE);
 		else if(keyWasPressedOnce(tic_key_return)) goFullscreen();
 	}
 	else if(ctrl)
@@ -1397,7 +1397,7 @@ static void processShortcuts()
 		else if(keyWasPressedOnce(tic_key_f3)) setStudioMode(TIC_MAP_MODE);
 		else if(keyWasPressedOnce(tic_key_f4)) setStudioMode(TIC_SFX_MODE);
 		else if(keyWasPressedOnce(tic_key_f5)) setStudioMode(TIC_MUSIC_MODE);
-		else if(keyWasPressedOnce(tic_key_f6)) setStudioMode(TIC_PROFILE_MODE);
+		else if(keyWasPressedOnce(tic_key_f6)) setStudioMode(TIC_DEBUG_MODE);
 		else if(keyWasPressedOnce(tic_key_f7)) setCoverImage();
 		else if(keyWasPressedOnce(tic_key_f8)) takeScreenshot();
 #if !defined(__EMSCRIPTEN__)
@@ -1637,10 +1637,10 @@ static void renderStudio()
 			music->tick(music);
 		}
 		break;
-	case TIC_PROFILE_MODE:
+	case TIC_DEBUG_MODE:
 		{
-			Profiler* profiler = impl.editor[impl.bank.index.profiler].profiler;
-			profiler->tick(profiler);
+			Debugger* debugger = impl.editor[impl.bank.index.debugger].debugger;
+			debugger->tick(debugger);
 		}
 		break;
 
@@ -1863,7 +1863,7 @@ Studio* studioInit(s32 argc, char **argv, s32 samplerate, const char* folder, Sy
 			impl.editor[i].map 		= calloc(1, sizeof(Map));
 			impl.editor[i].sfx 		= calloc(1, sizeof(Sfx));
 			impl.editor[i].music 	= calloc(1, sizeof(Music));
-			impl.editor[i].profiler = calloc(1, sizeof(Profiler));
+			impl.editor[i].debugger = calloc(1, sizeof(Debugger));
 		}
 
 		impl.start 		= calloc(1, sizeof(Start));
