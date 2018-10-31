@@ -724,18 +724,18 @@ void drawToolbar(tic_mem* tic, u8 color, bool bg)
 		0b00000000,
 
 		0b00000000,
-		0b01000000,
-		0b01001000,
-		0b01010100,
-		0b01100000,
-		0b01111100,
+		0b01011010,
+		0b00111100,
+		0b01111110,
+		0b00111100,
+		0b01000010,
 		0b00000000,
 		0b00000000,
 	};
 
 	enum {Size = 7};
 
-	static const char* Tips[] = {"CODE EDITOR [f1]", "SPRITE EDITOR [f2]", "MAP EDITOR [f3]", "SFX EDITOR [f4]", "MUSIC EDITOR [f5]", "PROFILER [f6]"};
+	static const char* Tips[] = {"CODE EDITOR [f1]", "SPRITE EDITOR [f2]", "MAP EDITOR [f3]", "SFX EDITOR [f4]", "MUSIC EDITOR [f5]", "DEBUGGER [f6]"};
 
 	s32 mode = -1;
 
@@ -777,7 +777,7 @@ void drawToolbar(tic_mem* tic, u8 color, bool bg)
 		"MAP EDITOR",
 		"SFX EDITOR",
 		"MUSIC EDITOR",
-		"PROFILER",
+		"DEBUGGER",
 	};
 
 #if defined (TIC80_PRO)

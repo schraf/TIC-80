@@ -417,7 +417,7 @@ set(TIC80LIB_SRC
 	${TIC80LIB_DIR}/dialog.c
 	${TIC80LIB_DIR}/menu.c
 	${TIC80LIB_DIR}/surf.c
-	${TIC80LIB_DIR}/profiler.c
+	${TIC80LIB_DIR}/debugger.c
 )
 
 set(TIC80_OUTPUTS tic80 tic80pro)

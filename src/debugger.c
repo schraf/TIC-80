@@ -70,29 +70,29 @@ static void drawModeTabs(Debugger* debugger)
 	static const u8 Icons[] =
 	{
 		0b00000000,
-		0b00110000,
-		0b01001001,
-		0b01001001,
-		0b01001001,
-		0b00000110,
+		0b01000000,
+		0b01001000,
+		0b01010100,
+		0b01100000,
+		0b01111100,
 		0b00000000,
 		0b00000000,
 
 		0b00000000,
-		0b01000000,
-		0b01000100,
-		0b01010100,
-		0b01010101,
-		0b01010101,
+		0b01011011,
+		0b00000000,
+		0b01011011,
+		0b00000000,
+		0b01011011,
 		0b00000000,
 		0b00000000,
 
 		0b00000000,
-		0b01000000,
-		0b01000100,
-		0b01010100,
-		0b01010101,
-		0b01010101,
+		0b00111100,
+		0b00100110,
+		0b00100010,
+		0b00100010,
+		0b00111110,
 		0b00000000,
 		0b00000000,
 	};
@@ -151,33 +151,33 @@ static void drawProfilerFrameGraph(Debugger* debugger)
 //			debugger->src->selected = selected;
 //	}
 //
-//	debugger->tic->api.rect_border(debugger->tic, rect.x, rect.y, rect.w, rect.h, (tic_color_white));
-//
-//	if (machine->data == NULL)
-//		return;
-//
-//	const u64 freq = machine->data->freq();
-//
-//	// we skip the active frame since it has not finished writing data to it
-//	for (u32 f = 1; f < TIC_PERF_FRAMES; ++f)
-//	{
-//		const u32 idx = (perf->idx + TIC_PERF_FRAMES - f) % TIC_PERF_FRAMES;
-//		tic_perf_frame* frame = &perf->frames[idx];
-//
-//		if (frame->start == 0 || frame->end == 0)
-//			continue;
-//
-//		const u64 us = ((frame->end - frame->start) * 1000000) / freq;
-//		const u64 ms = us / 1000;
-//		const u64 bh = max(min(ms, h-2), 3);
-//		const u32 bx = x+w-(f*6)-1;
-//		const u32 by = y+(h-bh)-1;
-//		const u8 c1 = ms <= 16 ? tic_color_light_green : tic_color_red;
-//		const u8 c2 = ms <= 16 ? tic_color_green : tic_color_dark_red;
-//
-//		debugger->tic->api.rect(debugger->tic, bx, by, 6, bh, c1);
-//		debugger->tic->api.rect_border(debugger->tic, bx, by, 6, bh, c2);
-//
+	debugger->tic->api.rect_border(debugger->tic, rect.x, rect.y, rect.w, rect.h, (tic_color_white));
+
+	if (machine->data == NULL)
+		return;
+
+	const u64 freq = machine->data->freq();
+
+	// we skip the active frame since it has not finished writing data to it
+	for (u32 f = 1; f < TIC_PERF_FRAMES; ++f)
+	{
+		const u32 idx = (perf->idx + TIC_PERF_FRAMES - f) % TIC_PERF_FRAMES;
+		tic_perf_frame* frame = &perf->frames[idx];
+
+		if (frame->start == 0 || frame->end == 0)
+			continue;
+
+		const u64 us = ((frame->end - frame->start) * 1000000) / freq;
+		const u64 ms = us / 1000;
+		const u64 bh = max(min(ms, rect.h-2), 3);
+		const u32 bx = rect.x+rect.w-(f*6)-1;
+		const u32 by = rect.y+(rect.h-bh)-1;
+		const u8 c1 = ms <= 16 ? tic_color_light_green : tic_color_red;
+		const u8 c2 = ms <= 16 ? tic_color_green : tic_color_dark_red;
+
+		debugger->tic->api.rect(debugger->tic, bx, by, 6, bh, c1);
+		debugger->tic->api.rect_border(debugger->tic, bx, by, 6, bh, c2);
+
 //		if (my > y && my < y+h && idx == debugger->src->selected)
 //		{
 //			tooltip.visible = true;
@@ -189,9 +189,9 @@ static void drawProfilerFrameGraph(Debugger* debugger)
 //
 //			debugger->tic->api.rect_border(debugger->tic, bx, y+1, 6, h-1, tic_color_white);
 //		}
-//	}
-//
-//	drawTooltip(debugger->tic, &tooltip);
+	}
+
+	drawTooltip(debugger->tic, &tooltip);
 }
 
 static u32 getProfilerScopeDepth(const tic_perf_frame* frame, const tic_perf_scope* scope)
@@ -354,12 +354,24 @@ static void drawProfilerMemoryUsage(Debugger* debugger)
 
 	drawTooltip(debugger->tic, &tooltip);
 }
+static void processKeyboard(Debugger* debugger)
+{
+	if (keyWasPressed(tic_key_tab))
+	{
+		switch (debugger->tab)
+		{
+		case DBG_PROFILER_TAB: debugger->tab = DBG_STATS_TAB; break;
+		case DBG_STATS_TAB: debugger->tab = DBG_LOG_TAB; break;
+		case DBG_LOG_TAB: debugger->tab = DBG_PROFILER_TAB; break;
+		}
+	}
+}
 
 static void profilerTick(Debugger* debugger)
 {
 	drawProfilerFrameGraph(debugger);
-	drawProfilerFrameScopes(debugger);
-	drawProfilerMemoryUsage(debugger);
+	//drawProfilerFrameScopes(debugger);
+	//drawProfilerMemoryUsage(debugger);
 }
 
 static void statsTick(Debugger* debugger)
@@ -372,6 +384,8 @@ static void logTick(Debugger* debugger)
 
 static void tick(Debugger* debugger)
 {
+	processKeyboard(debugger);
+
 	debugger->tic->api.clear(debugger->tic, TIC_COLOR_BG);
 
 	drawDebuggerToolbar(debugger);
