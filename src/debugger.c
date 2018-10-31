@@ -28,6 +28,7 @@
 
 #define PADDING 2
 
+#define PROFILER_FRAME_WIDTH 6
 #define PROFILER_FRAME_GRAPH_HEIGHT 30
 #define PROFILER_SCOPE_GRAPH_HEIGHT 60
 #define PROFILER_MEM_GRAPH_HEIGHT 30
@@ -35,13 +36,40 @@
 #define min(a,b) ((a) < (b) ? (a) : (b))
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
-typedef struct Tooltip Tooltip;
-
-struct Tooltip
+typedef struct
 {
 	char buffer[64];
 	bool visible;
-};
+} Tooltip;
+
+typedef struct 
+{
+	tic_perf_frame* frame;
+	u64 us;
+	u64 ms;
+	u32 index;
+	u32 x;
+	u32 w;
+	bool valid;
+} FrameInfo;
+
+static FrameInfo* getPerfFrame(tic_machine* machine, u32 offset)
+{
+	static FrameInfo info;
+
+	tic_perf* perf = &machine->memory.perf;
+	const u64 freq = machine->data->freq();
+
+	info.index = (perf->idx + TIC_PERF_FRAMES - offset) % TIC_PERF_FRAMES;
+	info.frame = &perf->frames[info.index];
+	info.x = TIC80_WIDTH - PADDING - (offset * PROFILER_FRAME_WIDTH) - 1;
+	info.w = PROFILER_FRAME_WIDTH;
+	info.valid = info.frame->start != 0 && info.frame->end != 0;
+	info.us = ((info.frame->end - info.frame->start) * 1000000) / freq;
+	info.ms = info.us / 1000;
+
+	return &info;
+}
 
 static void drawTooltip(tic_mem* tic, const Tooltip* tooltip)
 {
@@ -145,7 +173,7 @@ static void drawProfilerFrameGraph(Debugger* debugger)
 
 //	if (checkMousePos(&rect))
 //	{
-//		const u32 selected = (perf->idx + TIC_PERF_FRAMES + ((mx - x) / 6) + 1) % TIC_PERF_FRAMES;
+//		const u32 selected = (perf->idx + TIC_PERF_FRAMES + ((mx - x) / PROFILER_FRAME_WIDTH) + 1) % TIC_PERF_FRAMES;
 //
 //		if (selected != debugger->src->selected)
 //			debugger->src->selected = selected;
@@ -156,27 +184,22 @@ static void drawProfilerFrameGraph(Debugger* debugger)
 	if (machine->data == NULL)
 		return;
 
-	const u64 freq = machine->data->freq();
-
-	// we skip the active frame since it has not finished writing data to it
 	for (u32 f = 1; f < TIC_PERF_FRAMES; ++f)
 	{
-		const u32 idx = (perf->idx + TIC_PERF_FRAMES - f) % TIC_PERF_FRAMES;
-		tic_perf_frame* frame = &perf->frames[idx];
+		FrameInfo* info = getPerfFrame(machine, f);
 
-		if (frame->start == 0 || frame->end == 0)
+		if (!info->valid)
 			continue;
 
-		const u64 us = ((frame->end - frame->start) * 1000000) / freq;
-		const u64 ms = us / 1000;
-		const u64 bh = max(min(ms, rect.h-2), 3);
-		const u32 bx = rect.x+rect.w-(f*6)-1;
-		const u32 by = rect.y+(rect.h-bh)-1;
-		const u8 c1 = ms <= 16 ? tic_color_light_green : tic_color_red;
-		const u8 c2 = ms <= 16 ? tic_color_green : tic_color_dark_red;
+		const u64 h = max(min(info->ms, rect.h-2), 3);
 
-		debugger->tic->api.rect(debugger->tic, bx, by, 6, bh, c1);
-		debugger->tic->api.rect_border(debugger->tic, bx, by, 6, bh, c2);
+		const tic_rect frameRect = { info->x, rect.y+(rect.h-h)-1, info->w, h };
+
+		const u8 c1 = info->ms <= 16 ? tic_color_light_green : tic_color_red;
+		const u8 c2 = info->ms <= 16 ? tic_color_green : tic_color_dark_red;
+
+		debugger->tic->api.rect(debugger->tic, frameRect.x, frameRect.y, frameRect.w, frameRect.h, c1);
+		debugger->tic->api.rect_border(debugger->tic, frameRect.x, frameRect.y, frameRect.w, frameRect.h, c2);
 
 //		if (my > y && my < y+h && idx == debugger->src->selected)
 //		{
@@ -187,7 +210,7 @@ static void drawProfilerFrameGraph(Debugger* debugger)
 //			else
 //				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MS", (u32)ms);
 //
-//			debugger->tic->api.rect_border(debugger->tic, bx, y+1, 6, h-1, tic_color_white);
+//			debugger->tic->api.rect_border(debugger->tic, bx, y+1, PROFILER_FRAME_WIDTH, h-1, tic_color_white);
 //		}
 	}
 
@@ -328,11 +351,11 @@ static void drawProfilerMemoryUsage(Debugger* debugger)
 			continue;
 
 		const u32 bh1 = maxmem == 0 ? 1 : max(1, frame->mem_usage / bytesPerPixel);
-		const u32 bx1 = x+w-(f*6)-1;
+		const u32 bx1 = x+w-(f*PROFILER_FRAME_WIDTH)-1;
 		const u32 by1 = y+(h-bh1)-1;
 
 		const u32 bh2 = maxmem == 0 ? 1 : max(1, lastMemUsage / bytesPerPixel);
-		const u32 bx2 = x+w-(f*6)-1+6;
+		const u32 bx2 = x+w-(f*PROFILER_FRAME_WIDTH)-1+PROFILER_FRAME_WIDTH;
 		const u32 by2 = y+(h-bh2)-1;
 
 		debugger->tic->api.line(debugger->tic, bx1, by1, bx2, by2, tic_color_yellow);
