@@ -33,9 +33,6 @@
 #define PROFILER_SCOPE_GRAPH_HEIGHT 60
 #define PROFILER_MEM_GRAPH_HEIGHT 30
 
-#define min(a,b) ((a) < (b) ? (a) : (b))
-#define max(a,b) ((a) > (b) ? (a) : (b))
-
 typedef struct
 {
 	char buffer[64];
@@ -51,6 +48,7 @@ typedef struct
 	u32 x;
 	u32 w;
 	bool valid;
+	bool selected;
 } FrameInfo;
 
 static FrameInfo* getPerfFrame(tic_machine* machine, u32 offset)
@@ -59,6 +57,7 @@ static FrameInfo* getPerfFrame(tic_machine* machine, u32 offset)
 
 	tic_perf* perf = &machine->memory.perf;
 	const u64 freq = machine->data->freq();
+	const s32 mouseX = getMouseX();
 
 	info.index = (perf->idx + TIC_PERF_FRAMES - offset) % TIC_PERF_FRAMES;
 	info.frame = &perf->frames[info.index];
@@ -67,6 +66,7 @@ static FrameInfo* getPerfFrame(tic_machine* machine, u32 offset)
 	info.valid = info.frame->start != 0 && info.frame->end != 0;
 	info.us = ((info.frame->end - info.frame->start) * 1000000) / freq;
 	info.ms = info.us / 1000;
+	info.selected = mouseX >= info.x && mouseX < info.x + info.w;
 
 	return &info;
 }
@@ -82,7 +82,7 @@ static void drawTooltip(tic_mem* tic, const Tooltip* tooltip)
 	if (mx <= PADDING || mx >= TIC80_WIDTH - PADDING)
 		return;
 
-	const s32 width = tic->api.text(tic, tooltip->buffer, TIC80_WIDTH, 0, (tic_color_gray), false);
+	const s32 width = tic->api.text(tic, tooltip->buffer, TIC80_WIDTH, 0, (tic_color_gray), true);
 
 	s32 x = mx;
 	s32 y = my - TIC_FONT_HEIGHT;
@@ -90,7 +90,7 @@ static void drawTooltip(tic_mem* tic, const Tooltip* tooltip)
 	if(x + width >= TIC80_WIDTH) x -= (width + 2);
 
 	tic->api.rect(tic, x - 1, y - 1, width + 1, TIC_FONT_HEIGHT + 1, (tic_color_black));
-	tic->api.text(tic, tooltip->buffer, x, y, (tic_color_white), false);
+	tic->api.text(tic, tooltip->buffer, x, y, (tic_color_white), true);
 }
 
 static void drawModeTabs(Debugger* debugger)
@@ -99,10 +99,10 @@ static void drawModeTabs(Debugger* debugger)
 	{
 		0b00000000,
 		0b01000000,
-		0b01001000,
+		0b01001010,
 		0b01010100,
 		0b01100000,
-		0b01111100,
+		0b01111110,
 		0b00000000,
 		0b00000000,
 
@@ -167,19 +167,14 @@ static void drawProfilerFrameGraph(Debugger* debugger)
 	tic_perf* perf = &debugger->tic->perf;
 
 	const tic_rect rect = { PADDING, TOOLBAR_SIZE + PADDING, TIC80_WIDTH - (PADDING*2), PROFILER_FRAME_GRAPH_HEIGHT };
+	const bool activeGraph = checkMousePos(&rect);
 
 	Tooltip tooltip;
 	tooltip.visible = false;
-
-//	if (checkMousePos(&rect))
-//	{
-//		const u32 selected = (perf->idx + TIC_PERF_FRAMES + ((mx - x) / PROFILER_FRAME_WIDTH) + 1) % TIC_PERF_FRAMES;
-//
-//		if (selected != debugger->src->selected)
-//			debugger->src->selected = selected;
-//	}
-//
+	
 	debugger->tic->api.rect_border(debugger->tic, rect.x, rect.y, rect.w, rect.h, (tic_color_white));
+	debugger->tic->api.rect(debugger->tic, rect.x+1, rect.y+1, 19, TIC_FONT_HEIGHT+1, (tic_color_black));
+	debugger->tic->api.text(debugger->tic, "CPU", rect.x+2, rect.y+2, (tic_color_white), false);
 
 	if (machine->data == NULL)
 		return;
@@ -201,17 +196,17 @@ static void drawProfilerFrameGraph(Debugger* debugger)
 		debugger->tic->api.rect(debugger->tic, frameRect.x, frameRect.y, frameRect.w, frameRect.h, c1);
 		debugger->tic->api.rect_border(debugger->tic, frameRect.x, frameRect.y, frameRect.w, frameRect.h, c2);
 
-//		if (my > y && my < y+h && idx == debugger->src->selected)
-//		{
-//			tooltip.visible = true;
-//
-//			if (us < 1000)
-//				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u uS", (u32)us);
-//			else
-//				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MS", (u32)ms);
-//
-//			debugger->tic->api.rect_border(debugger->tic, bx, y+1, PROFILER_FRAME_WIDTH, h-1, tic_color_white);
-//		}
+		if (activeGraph && info->selected)
+		{
+			tooltip.visible = true;
+
+			if (info->us < 1000)
+				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u uS", info->us);
+			else
+				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MS", info->ms);
+
+			debugger->tic->api.rect_border(debugger->tic, frameRect.x, frameRect.y, frameRect.w, frameRect.h, tic_color_white);
+		}
 	}
 
 	drawTooltip(debugger->tic, &tooltip);
@@ -312,66 +307,76 @@ static void drawProfilerFrameScopes(Debugger* debugger)
 
 static void drawProfilerMemoryUsage(Debugger* debugger)
 {
+	tic_machine* machine = (tic_machine*)debugger->tic;
 	tic_perf* perf = &debugger->tic->perf;
 
-	const u32 x = PADDING;
-	const u32 y = TOOLBAR_SIZE + PADDING + PROFILER_FRAME_GRAPH_HEIGHT + PADDING + PROFILER_SCOPE_GRAPH_HEIGHT + PADDING;
-	const u32 w = TIC80_WIDTH - (2 * PADDING);
-	const u32 h = PROFILER_MEM_GRAPH_HEIGHT;
-	const s32 mx = getMouseX();
-	const s32 my = getMouseY();
-	u32 maxmem = 0;
-
-	debugger->tic->api.rect(debugger->tic, x, y, w, h, (tic_color_black));
-	debugger->tic->api.rect_border(debugger->tic, x, y, w, h, (tic_color_white));
-
-	for (u32 f = 1; f < TIC_PERF_FRAMES; ++f)
-	{
-		const u32 idx = (perf->idx + TIC_PERF_FRAMES - f) % TIC_PERF_FRAMES;
-		tic_perf_frame* frame = &perf->frames[idx];
-
-		if (frame->start == 0 || frame->end == 0)
-			continue;
-
-		maxmem = max(frame->mem_usage, maxmem);
-	}
-
-	const u32 bytesPerPixel = maxmem / (PROFILER_MEM_GRAPH_HEIGHT - 2);
-	u32 lastMemUsage = perf->frames[perf->idx].mem_usage;
+	const tic_rect rect = { PADDING, TOOLBAR_SIZE + PADDING + PROFILER_FRAME_GRAPH_HEIGHT + PADDING, TIC80_WIDTH - (PADDING * 2), PROFILER_FRAME_GRAPH_HEIGHT };
+	const bool activeGraph = checkMousePos(&rect);
 
 	Tooltip tooltip;
 	tooltip.visible = false;
 
+	debugger->tic->api.rect_border(debugger->tic, rect.x, rect.y, rect.w, rect.h, (tic_color_white));
+	debugger->tic->api.rect(debugger->tic, rect.x + 1, rect.y + 1, 19, TIC_FONT_HEIGHT + 1, (tic_color_black));
+	debugger->tic->api.text(debugger->tic, "MEM", rect.x + 2, rect.y + 2, (tic_color_white), false);
+
+	if (machine->data == NULL)
+		return;
+
+	u32 maxmem = 0;
+	u32 maxallocs = 0;
+
 	for (u32 f = 1; f < TIC_PERF_FRAMES; ++f)
 	{
-		const u32 idx = (perf->idx + TIC_PERF_FRAMES - f) % TIC_PERF_FRAMES;
-		tic_perf_frame* frame = &perf->frames[idx];
+		FrameInfo* info = getPerfFrame(machine, f);
 
-		if (frame->start == 0 || frame->end == 0)
+		if (!info->valid)
 			continue;
 
-		const u32 bh1 = maxmem == 0 ? 1 : max(1, frame->mem_usage / bytesPerPixel);
-		const u32 bx1 = x+w-(f*PROFILER_FRAME_WIDTH)-1;
-		const u32 by1 = y+(h-bh1)-1;
+		maxmem = max(info->frame->mem_usage, maxmem);
+		maxallocs = max(info->frame->mem_allocs, maxallocs);
+	}
 
-		const u32 bh2 = maxmem == 0 ? 1 : max(1, lastMemUsage / bytesPerPixel);
-		const u32 bx2 = x+w-(f*PROFILER_FRAME_WIDTH)-1+PROFILER_FRAME_WIDTH;
-		const u32 by2 = y+(h-bh2)-1;
+	const u32 bytesPerPixel = max(1, maxmem / (PROFILER_MEM_GRAPH_HEIGHT - 2));
+	const u32 allocsPerPixel = max(1, maxallocs / (PROFILER_MEM_GRAPH_HEIGHT - 2));
+	u32 lastMemUsage = perf->frames[perf->idx].mem_usage;
+	u32 lastAllocs = perf->frames[perf->idx].mem_allocs;
 
-		debugger->tic->api.line(debugger->tic, bx1, by1, bx2, by2, tic_color_yellow);
+	for (u32 f = 1; f < TIC_PERF_FRAMES; ++f)
+	{
+		FrameInfo* info = getPerfFrame(machine, f);
 
-		lastMemUsage = frame->mem_usage;
+		if (!info->valid)
+			continue;
 
-		if (mx >= bx1 && mx < bx2 && my > y && my < y+h)
+		const u32 memHeight = maxmem == 0 ? 1 : max(1, info->frame->mem_usage / bytesPerPixel);
+		const u32 lastMemHeight = maxmem == 0 ? 1 : max(1, lastMemUsage / bytesPerPixel);
+
+		const tic_point memStart = { info->x, rect.y + (rect.h - memHeight) - 1 };	
+		const tic_point memEnd = { info->x + info->w, rect.y + (rect.h - lastMemHeight) - 1 };
+
+		const u32 allocsHeight = maxallocs == 0 ? 1 : max(1, info->frame->mem_allocs / allocsPerPixel);
+		const u32 lastAllocsHeight = maxallocs == 0 ? 1 : max(1, lastAllocs / allocsPerPixel);
+
+		const tic_point allocsStart = { info->x, rect.y + (rect.h - allocsHeight) - 1 };
+		const tic_point allocsEnd = { info->x + info->w, rect.y + (rect.h - lastAllocsHeight) - 1 };
+
+		debugger->tic->api.line(debugger->tic, memStart.x, memStart.y, memEnd.x, memEnd.y, tic_color_yellow);
+		debugger->tic->api.line(debugger->tic, allocsStart.x, allocsStart.y, allocsEnd.x, allocsEnd.y, tic_color_light_blue);
+
+		lastMemUsage = info->frame->mem_usage;
+		lastAllocs = info->frame->mem_allocs;
+
+		if (activeGraph && info->selected)
 		{
 			tooltip.visible = true;
 
-			if (frame->mem_usage < 1024)
-				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u B", frame->mem_usage);
-			else if (frame->mem_usage < 1024*1024)
-				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u KB", frame->mem_usage / 1024);
+			if (info->frame->mem_usage < 1024)
+				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u B", info->frame->mem_usage);
+			else if (info->frame->mem_usage < 1024*1024)
+				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u KB", info->frame->mem_usage / 1024);
 			else
-				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MB", frame->mem_usage / 1024*1024);
+				snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MB", info->frame->mem_usage / 1024*1024);
 		}
 	}
 
@@ -394,7 +399,7 @@ static void profilerTick(Debugger* debugger)
 {
 	drawProfilerFrameGraph(debugger);
 	//drawProfilerFrameScopes(debugger);
-	//drawProfilerMemoryUsage(debugger);
+	drawProfilerMemoryUsage(debugger);
 }
 
 static void statsTick(Debugger* debugger)
