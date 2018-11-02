@@ -1,0 +1,15 @@
+﻿  debugger.c
+c:\users\marc\workspace\tic-80\src\debugger.c(69): warning C4018: '>=': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\src\debugger.c(69): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\src\debugger.c(204): warning C4477: 'snprintf' : format string '%u' requires an argument of type 'unsigned int', but variadic argument 1 has type 'u64'
+  c:\users\marc\workspace\tic-80\src\debugger.c(204): note: consider using '%llu' in the format string
+  c:\users\marc\workspace\tic-80\src\debugger.c(204): note: consider using '%Iu' in the format string
+  c:\users\marc\workspace\tic-80\src\debugger.c(204): note: consider using '%I64u' in the format string
+c:\users\marc\workspace\tic-80\src\debugger.c(206): warning C4477: 'snprintf' : format string '%u' requires an argument of type 'unsigned int', but variadic argument 1 has type 'u64'
+  c:\users\marc\workspace\tic-80\src\debugger.c(206): note: consider using '%llu' in the format string
+  c:\users\marc\workspace\tic-80\src\debugger.c(206): note: consider using '%Iu' in the format string
+  c:\users\marc\workspace\tic-80\src\debugger.c(206): note: consider using '%I64u' in the format string
+c:\users\marc\workspace\tic-80\src\debugger.c(191): warning C4244: 'initializing': conversion from 'const u64' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\debugger.c(279): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: see declaration of 'strncpy'
+  tic80lib.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\lib\tic80lib.lib

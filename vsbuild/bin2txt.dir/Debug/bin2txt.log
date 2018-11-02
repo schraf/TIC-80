@@ -1,0 +1,8 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/CMakeFiles/generate.stamp is up-to-date.
+  bin2txt.c
+c:\users\marc\workspace\tic-80\tools\bin2txt\bin2txt.c(17): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: see declaration of 'fopen'
+c:\users\marc\workspace\tic-80\tools\bin2txt\bin2txt.c(54): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: see declaration of 'fopen'
+  bin2txt.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\bin\bin2txt.exe

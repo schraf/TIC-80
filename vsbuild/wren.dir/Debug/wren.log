@@ -1,0 +1,24 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/CMakeFiles/generate.stamp is up-to-date.
+  wren_opt_meta.c
+  wren_opt_random.c
+  wren_compiler.c
+c:\users\marc\workspace\tic-80\3rd-party\wren-0.1.0\src\vm\wren_compiler.c(402): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
+c:\users\marc\workspace\tic-80\3rd-party\wren-0.1.0\src\vm\wren_compiler.c(403): warning C4996: 'vsprintf': This function or variable may be unsafe. Consider using vsprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1469): note: see declaration of 'vsprintf'
+c:\users\marc\workspace\tic-80\3rd-party\wren-0.1.0\src\vm\wren_compiler.c(452): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
+c:\users\marc\workspace\tic-80\3rd-party\wren-0.1.0\src\vm\wren_compiler.c(456): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
+c:\users\marc\workspace\tic-80\3rd-party\wren-0.1.0\src\vm\wren_compiler.c(715): warning C4244: 'function': conversion from '__int64' to 'double', possible loss of data
+  wren_core.c
+  wren_debug.c
+  wren_primitive.c
+  wren_utils.c
+  wren_value.c
+c:\users\marc\workspace\tic-80\3rd-party\wren-0.1.0\src\vm\wren_value.c(783): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
+  wren_vm.c
+  Generating Code...
+  wren.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\lib\wren.lib

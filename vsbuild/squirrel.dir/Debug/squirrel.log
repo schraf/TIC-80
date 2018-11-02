@@ -1,0 +1,54 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/CMakeFiles/generate.stamp is up-to-date.
+  sqapi.cpp
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\squirrel\sqapi.cpp(38): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+  sqbaselib.cpp
+  sqclass.cpp
+  sqcompiler.cpp
+  sqdebug.cpp
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\squirrel\sqdebug.cpp(79): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\squirrel\sqdebug.cpp(83): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+  sqfuncstate.cpp
+  sqlexer.cpp
+  sqmem.cpp
+  sqobject.cpp
+  sqstate.cpp
+  sqtable.cpp
+  sqvm.cpp
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\squirrel\sqvm.cpp(291): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\squirrel\sqvm.cpp(294): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\squirrel\sqvm.cpp(297): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\squirrel\sqvm.cpp(316): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+  sqstdaux.cpp
+  sqstdblob.cpp
+  sqstdio.cpp
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\sqstdlib\sqstdio.cpp(13): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: see declaration of 'fopen'
+  sqstdmath.cpp
+  sqstdrex.cpp
+  sqstdstream.cpp
+  sqstdstring.cpp
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\sqstdlib\sqstdstring.cpp(143): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\sqstdlib\sqstdstring.cpp(144): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\sqstdlib\sqstdstring.cpp(145): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\sqstdlib\sqstdstring.cpp(321): warning C4996: '_snprintf': This function or variable may be unsafe. Consider using _snprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1961): note: see declaration of '_snprintf'
+  sqstdsystem.cpp
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\sqstdlib\sqstdsystem.cpp(27): warning C4996: 'getenv': This function or variable may be unsafe. Consider using _dupenv_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdlib.h(1191): note: see declaration of 'getenv'
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\sqstdlib\sqstdsystem.cpp(101): warning C4996: 'gmtime': This function or variable may be unsafe. Consider using gmtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\time.h(496): note: see declaration of 'gmtime'
+c:\users\marc\workspace\tic-80\3rd-party\squirrel\sqstdlib\sqstdsystem.cpp(103): warning C4996: 'localtime': This function or variable may be unsafe. Consider using localtime_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\time.h(506): note: see declaration of 'localtime'
+  Generating Code...
+  squirrel.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\lib\squirrel.lib

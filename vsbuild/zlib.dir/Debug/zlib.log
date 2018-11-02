@@ -1,0 +1,15 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/CMakeFiles/generate.stamp is up-to-date.
+  adler32.c
+  compress.c
+  crc32.c
+  deflate.c
+  inflate.c
+  infback.c
+  inftrees.c
+  inffast.c
+  trees.c
+  uncompr.c
+  zutil.c
+  Generating Code...
+  zlib.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\lib\zlib.lib

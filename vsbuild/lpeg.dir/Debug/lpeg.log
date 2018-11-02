@@ -1,0 +1,25 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/CMakeFiles/generate.stamp is up-to-date.
+  lpcap.c
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lpcap.c(302): warning C4244: 'return': conversion from '__int64' to 'int', possible loss of data
+  lpcode.c
+  lpprint.c
+  lptree.c
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lptree.c(58): warning C4244: '=': conversion from 'lua_Number' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lptree.c(65): warning C4244: '=': conversion from '__int64' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lptree.c(165): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lptree.c(184): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lptree.c(341): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lptree.c(450): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lptree.c(451): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lptree.c(456): warning C4244: 'initializing': conversion from 'lua_Integer' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lptree.c(756): warning C4244: 'initializing': conversion from 'lua_Integer' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lptree.c(1071): warning C4267: 'initializing': conversion from 'size_t' to 'int', possible loss of data
+  lpvm.c
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lpvm.c(72): warning C4244: '=': conversion from 'lua_Integer' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lpvm.c(69): warning C4244: 'initializing': conversion from '__int64' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lpvm.c(107): warning C4244: 'return': conversion from 'lua_Integer' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lpvm.c(304): warning C4244: 'function': conversion from '__int64' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\lpeg-1.0.1\lpvm.c(329): warning C4244: '=': conversion from '__int64' to 'byte', possible loss of data
+  Generating Code...
+  lpeg.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\lib\lpeg.lib

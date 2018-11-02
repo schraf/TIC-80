@@ -1,0 +1,42 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/CMakeFiles/generate.stamp is up-to-date.
+  lapi.c
+  lcode.c
+  lctype.c
+  ldebug.c
+  ldo.c
+  ldump.c
+  lfunc.c
+  lgc.c
+  llex.c
+  lmem.c
+  lobject.c
+  lopcodes.c
+  lparser.c
+  lstate.c
+  lstring.c
+  ltable.c
+  ltm.c
+  lundump.c
+  lvm.c
+c:\users\marc\workspace\tic-80\3rd-party\lua-5.3.1\src\lvm.c(1128): warning C4244: 'function': conversion from '__int64' to 'int', possible loss of data
+  lzio.c
+  Generating Code...
+  Compiling...
+  lauxlib.c
+  lbaselib.c
+  lbitlib.c
+c:\users\marc\workspace\tic-80\3rd-party\lua-5.3.1\src\lbitlib.c(191): warning C4244: 'initializing': conversion from 'unsigned __int64' to 'int', possible loss of data
+  lcorolib.c
+  ldblib.c
+  liolib.c
+  lmathlib.c
+  loslib.c
+  lstrlib.c
+c:\users\marc\workspace\tic-80\3rd-party\lua-5.3.1\src\lstrlib.c(839): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+  ltablib.c
+  lutf8lib.c
+  loadlib.c
+  linit.c
+  Generating Code...
+  lua.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\lib\lua.lib

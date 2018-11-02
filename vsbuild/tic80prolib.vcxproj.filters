@@ -1,0 +1,142 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\studio.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\console.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\run.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\ext\md5.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\ext\gif.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\fs.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\tools.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\start.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\sprite.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\map.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\sfx.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\music.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\history.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\world.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\config.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\code.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\dialog.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\menu.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\surf.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\src\debugger.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\benchmark.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\fenneldemo.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\fire.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\font.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\jsdemo.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\luademo.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\moondemo.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\music.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\p3d.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\palette.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\quest.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\sfx.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\squirreldemo.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\tetris.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\wrendemo.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\vsbuild\CMakeFiles\0cba54e4d40b91c5c298596b599eb8e8\config.tic.dat.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\benchmark.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\fenneldemo.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\fire.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\font.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\jsdemo.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\luademo.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\moondemo.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\music.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\p3d.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\palette.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\quest.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\sfx.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\squirreldemo.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\tetris.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\wrendemo.tic.dat" />
+    <None Include="C:\Users\marc\workspace\TIC-80\bin\assets\config.tic.dat" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{1DE0BBD1-F7E3-35D7-A607-3763AE9799AF}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0112ABD4-F4F1-3F41-9B72-2C3C69B44F6F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

@@ -1,0 +1,441 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/CMakeFiles/generate.stamp is up-to-date.
+  renderer_GLES_1.c
+  renderer_GLES_2.c
+  renderer_GLES_3.c
+  renderer_OpenGL_1.c
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(291): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(291): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(311): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(311): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(303): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(332): warning C4244: 'function': conversion from 'float' to 'size_t', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(341): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(322): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(323): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(366): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(818): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(820): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(823): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(823): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(826): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(826): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1048): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1049): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1050): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1051): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1125): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1125): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1366): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(2263): note: see declaration of 'sscanf'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1413): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(2263): note: see declaration of 'sscanf'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1593): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1694): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1694): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(2210): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3306): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3357): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3491): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3492): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3640): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3641): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3658): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3660): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3683): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3684): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3716): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4044): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4050): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4558): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4559): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4707): warning C4312: 'type cast': conversion from 'long' to 'void *' of greater size
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5106): warning C4312: 'type cast': conversion from 'long' to 'void *' of greater size
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5113): warning C4312: 'type cast': conversion from 'long' to 'void *' of greater size
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5117): warning C4312: 'type cast': conversion from 'long' to 'void *' of greater size
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5782): warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5791): warning C4267: '=': conversion from 'size_t' to 'unsigned long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5800): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5805): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5862): warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5872): warning C4267: '=': conversion from 'size_t' to 'unsigned long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5882): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5887): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(196): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(203): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(204): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(207): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(208): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(209): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(222): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(223): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(224): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(273): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(280): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(281): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(284): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(285): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(286): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(308): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(309): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(310): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(331): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(334): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(335): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(363): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(367): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(368): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(405): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(406): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(412): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(415): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(416): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(456): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(457): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(459): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(462): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(463): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(542): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(543): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(544): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(545): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(553): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(554): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(555): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(556): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(604): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(616): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(617): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(620): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(621): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(624): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(625): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(635): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(636): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(640): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(641): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(652): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(653): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(657): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(658): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(668): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(669): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(673): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(674): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(832): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(825): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(841): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(842): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(941): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(943): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(950): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(956): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(961): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(967): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(972): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(978): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(983): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(926): warning C4305: 'initializing': truncation from 'double' to 'float'
+  renderer_OpenGL_1_BASE.c
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(291): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(291): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(311): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(311): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(303): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(332): warning C4244: 'function': conversion from 'float' to 'size_t', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(341): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(322): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(323): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(366): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(818): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(820): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(823): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(823): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(826): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(826): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1048): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1049): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1050): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1051): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1125): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1125): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1366): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(2263): note: see declaration of 'sscanf'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1593): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1694): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1694): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(2210): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3306): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3357): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3491): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3492): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3640): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3641): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3658): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3660): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3683): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3684): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3716): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4044): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4050): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4558): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4559): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5782): warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5791): warning C4267: '=': conversion from 'size_t' to 'unsigned long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5800): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5805): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5862): warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5872): warning C4267: '=': conversion from 'size_t' to 'unsigned long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5882): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5887): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(196): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(203): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(204): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(207): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(208): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(209): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(222): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(223): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(224): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(273): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(280): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(281): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(284): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(285): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(286): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(308): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(309): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(310): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(331): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(334): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(335): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(363): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(367): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(368): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(405): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(406): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(412): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(415): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(416): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(456): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(457): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(459): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(462): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(463): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(542): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(543): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(544): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(545): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(553): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(554): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(555): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(556): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(604): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(616): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(617): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(620): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(621): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(624): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(625): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(635): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(636): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(640): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(641): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(652): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(653): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(657): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(658): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(668): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(669): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(673): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(674): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(832): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(825): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(841): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(842): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(941): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(943): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(950): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(956): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(961): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(967): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(972): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(978): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(983): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(926): warning C4305: 'initializing': truncation from 'double' to 'float'
+  renderer_OpenGL_2.c
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(291): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(291): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(311): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(311): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(303): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(332): warning C4244: 'function': conversion from 'float' to 'size_t', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(341): warning C4244: 'function': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(322): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(323): warning C4244: 'initializing': conversion from 'float' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(366): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(818): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(820): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(823): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(823): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(826): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(826): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1048): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1049): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1050): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1051): warning C4244: '=': conversion from 'float' to 'Uint8', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1125): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1125): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1366): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(2263): note: see declaration of 'sscanf'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1413): warning C4996: 'sscanf': This function or variable may be unsafe. Consider using sscanf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(2263): note: see declaration of 'sscanf'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1593): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1694): warning C4244: 'function': conversion from 'float' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(1694): warning C4244: 'function': conversion from 'float' to 'GLsizei', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(2210): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3306): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3357): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3491): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3492): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3640): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3641): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3658): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3660): warning C4244: '=': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3683): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3684): warning C4244: '=': conversion from 'float' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(3716): warning C4244: 'function': conversion from 'int' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4044): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4050): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4558): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4559): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(4707): warning C4312: 'type cast': conversion from 'long' to 'void *' of greater size
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5106): warning C4312: 'type cast': conversion from 'long' to 'void *' of greater size
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5113): warning C4312: 'type cast': conversion from 'long' to 'void *' of greater size
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5117): warning C4312: 'type cast': conversion from 'long' to 'void *' of greater size
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5782): warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5791): warning C4267: '=': conversion from 'size_t' to 'unsigned long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5800): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5805): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5862): warning C4267: '=': conversion from 'size_t' to 'long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5872): warning C4267: '=': conversion from 'size_t' to 'unsigned long', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5882): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_gl_common.inl(5887): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(196): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(203): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(204): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(207): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(208): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(209): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(222): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(223): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(224): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(273): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(280): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(281): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(284): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(285): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(286): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(308): warning C4305: '*=': truncation from 'double' to 'float'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(309): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(310): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(331): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(334): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(335): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(363): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(367): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(368): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(405): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(406): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(412): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(415): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(416): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(456): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(457): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(459): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(462): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(463): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(542): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(543): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(544): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(545): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(553): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(554): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(555): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(556): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(604): warning C4244: '=': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(616): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(617): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(620): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(621): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(624): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(625): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(635): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(636): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(640): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(641): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(652): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(653): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(657): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(658): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(668): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(669): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(673): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(674): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(832): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(825): warning C4244: 'initializing': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(841): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(842): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(941): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(943): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(950): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(956): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(961): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(967): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(972): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(978): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(983): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\renderer_shapes_gl_common.inl(926): warning C4305: 'initializing': truncation from 'double' to 'float'
+  renderer_OpenGL_3.c
+  renderer_OpenGL_4.c
+  SDL_gpu.c
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\sdl_gpu.c(747): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: see declaration of 'strncpy'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\sdl_gpu.c(775): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\sdl_gpu.c(777): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\sdl_gpu.c(786): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\sdl_gpu.c(788): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+  SDL_gpu_matrix.c
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\sdl_gpu_matrix.c(223): warning C4244: 'function': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\sdl_gpu_matrix.c(322): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\sdl_gpu_matrix.c(483): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\sdl_gpu_matrix.c(488): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\sdl_gpu_matrix.c(493): warning C4018: '<': signed/unsigned mismatch
+  SDL_gpu_renderer.c
+  SDL_gpu_shapes.c
+  glew.c
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\externals\glew\glew.c(10361): warning C4267: '+=': conversion from 'size_t' to 'GLint', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\externals\glew\glew.c(10370): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(90): note: see declaration of 'strcat'
+c:\users\marc\workspace\tic-80\3rd-party\sdl-gpu\src\externals\glew\glew.c(10371): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(90): note: see declaration of 'strcat'
+  stb_image.c
+  stb_image_write.c
+  Generating Code...
+  sdlgpu.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\lib\sdlgpu.lib

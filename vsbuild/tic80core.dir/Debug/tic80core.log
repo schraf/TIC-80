@@ -1,0 +1,65 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/CMakeFiles/generate.stamp is up-to-date.
+  tic80.c
+  tic.c
+c:\users\marc\workspace\tic-80\src\tic.c(45): warning C4005: 'min': macro redefinition
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdlib.h(1290): note: see previous definition of 'min'
+c:\users\marc\workspace\tic-80\src\tic.c(46): warning C4005: 'max': macro redefinition
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdlib.h(1289): note: see previous definition of 'max'
+c:\users\marc\workspace\tic-80\src\tic.c(101): warning C4244: 'return': conversion from 'double' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\tic.c(109): warning C4244: 'initializing': conversion from 'double' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\tic.c(913): warning C4244: '=': conversion from 'float' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\tic.c(914): warning C4244: '=': conversion from 'float' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\tic.c(1063): warning C4244: 'function': conversion from 'float' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\tic.c(1057): warning C4244: 'initializing': conversion from 'float' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\tic.c(1091): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\src\tic.c(1092): warning C4244: '=': conversion from 'double' to 'float', possible loss of data
+c:\users\marc\workspace\tic-80\src\tic.c(1094): warning C4244: 'initializing': conversion from 'float' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\tic.c(1095): warning C4244: 'initializing': conversion from 'float' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\tic.c(1618): warning C4996: 'sprintf': This function or variable may be unsafe. Consider using sprintf_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(1774): note: see declaration of 'sprintf'
+c:\users\marc\workspace\tic-80\src\tic.c(1717): warning C4996: 'strncpy': This function or variable may be unsafe. Consider using strncpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(338): note: see declaration of 'strncpy'
+c:\users\marc\workspace\tic-80\src\tic.c(1736): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\marc\workspace\tic-80\src\tic.c(1825): warning C4018: '>=': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\src\tic.c(1845): warning C4018: '>=': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\src\tic.c(2290): warning C4244: 'initializing': conversion from '__int64' to 's32', possible loss of data
+  tools.c
+  jsapi.c
+c:\users\marc\workspace\tic-80\src\jsapi.c(859): warning C4267: '+=': conversion from 'size_t' to 'u32', possible loss of data
+c:\users\marc\workspace\tic-80\src\jsapi.c(882): warning C4267: '+=': conversion from 'size_t' to 'u32', possible loss of data
+c:\users\marc\workspace\tic-80\src\jsapi.c(886): warning C4267: '=': conversion from 'size_t' to 'u32', possible loss of data
+c:\users\marc\workspace\tic-80\src\jsapi.c(1071): warning C4244: '=': conversion from '__int64' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\jsapi.c(1072): warning C4244: '=': conversion from '__int64' to 's32', possible loss of data
+  luaapi.c
+c:\users\marc\workspace\tic-80\src\luaapi.c(61): warning C4267: '-=': conversion from 'size_t' to 'u32', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(68): warning C4267: '+=': conversion from 'size_t' to 'u32', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(74): warning C4267: '+=': conversion from 'size_t' to 'u32', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(75): warning C4267: '-=': conversion from 'size_t' to 'u32', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(1139): warning C4244: '=': conversion from 'lua_Integer' to 'u32', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(1257): warning C4244: 'function': conversion from 'double' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(1460): warning C4244: '=': conversion from '__int64' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(1461): warning C4244: '=': conversion from '__int64' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(1643): warning C4244: '=': conversion from '__int64' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(1644): warning C4244: '=': conversion from '__int64' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(1794): warning C4244: '=': conversion from '__int64' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\luaapi.c(1795): warning C4244: '=': conversion from '__int64' to 's32', possible loss of data
+  wrenapi.c
+c:\users\marc\workspace\tic-80\src\wrenapi.c(1216): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(90): note: see declaration of 'strcat'
+c:\users\marc\workspace\tic-80\src\wrenapi.c(1219): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(90): note: see declaration of 'strcat'
+c:\users\marc\workspace\tic-80\src\wrenapi.c(1220): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(90): note: see declaration of 'strcat'
+c:\users\marc\workspace\tic-80\src\wrenapi.c(1221): warning C4996: 'strcat': This function or variable may be unsafe. Consider using strcat_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(90): note: see declaration of 'strcat'
+c:\users\marc\workspace\tic-80\src\wrenapi.c(1416): warning C4244: '=': conversion from '__int64' to 's32', possible loss of data
+c:\users\marc\workspace\tic-80\src\wrenapi.c(1417): warning C4244: '=': conversion from '__int64' to 's32', possible loss of data
+  squirrelapi.c
+  gif.c
+  blip_buf.c
+c:\users\marc\workspace\tic-80\3rd-party\blip-buf\blip_buf.c(180): warning C4244: 'return': conversion from 'fixed_t' to 'int', possible loss of data
+  duktape.c
+  Generating Code...
+  tic80core.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\lib\tic80core.lib

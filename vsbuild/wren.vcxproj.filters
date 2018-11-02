@@ -1,0 +1,40 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\wren-0.1.0\src\optional\wren_opt_meta.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\wren-0.1.0\src\optional\wren_opt_random.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\wren-0.1.0\src\vm\wren_compiler.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\wren-0.1.0\src\vm\wren_core.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\wren-0.1.0\src\vm\wren_debug.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\wren-0.1.0\src\vm\wren_primitive.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\wren-0.1.0\src\vm\wren_utils.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\wren-0.1.0\src\vm\wren_value.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\wren-0.1.0\src\vm\wren_vm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0112ABD4-F4F1-3F41-9B72-2C3C69B44F6F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

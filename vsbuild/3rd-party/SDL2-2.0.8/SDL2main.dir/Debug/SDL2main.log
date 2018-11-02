@@ -1,0 +1,4 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/3rd-party/SDL2-2.0.8/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/3rd-party/SDL2-2.0.8/CMakeFiles/generate.stamp is up-to-date.
+  SDL_windows_main.c
+  SDL2main.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\lib\SDL2maind.lib

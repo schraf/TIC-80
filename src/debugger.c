@@ -168,9 +168,6 @@ static void drawProfilerFrameGraph(Debugger* debugger)
 
 	const tic_rect rect = { PADDING, TOOLBAR_SIZE + PADDING, TIC80_WIDTH - (PADDING*2), PROFILER_FRAME_GRAPH_HEIGHT };
 	const bool activeGraph = checkMousePos(&rect);
-
-	Tooltip tooltip;
-	tooltip.visible = false;
 	
 	debugger->tic->api.rect_border(debugger->tic, rect.x, rect.y, rect.w, rect.h, (tic_color_white));
 	debugger->tic->api.rect(debugger->tic, rect.x+1, rect.y+1, 19, TIC_FONT_HEIGHT+1, (tic_color_black));
@@ -178,6 +175,9 @@ static void drawProfilerFrameGraph(Debugger* debugger)
 
 	if (machine->data == NULL)
 		return;
+
+	Tooltip tooltip;
+	tooltip.visible = false;
 
 	for (u32 f = 1; f < TIC_PERF_FRAMES; ++f)
 	{
@@ -233,39 +233,36 @@ static void drawProfilerFrameScopes(Debugger* debugger)
 	tic_machine* machine = (tic_machine*)debugger->tic;
 	tic_perf* perf = &debugger->tic->perf;
 
-	const u32 x = PADDING;
-	const u32 y = TOOLBAR_SIZE + PADDING + PROFILER_FRAME_GRAPH_HEIGHT + PADDING;
-	const u32 w = TIC80_WIDTH - (2 * PADDING);
-	const u32 h = PROFILER_SCOPE_GRAPH_HEIGHT;
-	const s32 mx = getMouseX();
-	const s32 my = getMouseY();
-	const u64 freq = machine->data->freq();
+	const tic_rect rect = { PADDING, TOOLBAR_SIZE + PADDING + 2*(PROFILER_FRAME_GRAPH_HEIGHT + PADDING), TIC80_WIDTH - (PADDING * 2), PROFILER_SCOPE_GRAPH_HEIGHT };
+	const bool activeGraph = checkMousePos(&rect);
 
-	debugger->tic->api.rect(debugger->tic, x, y, w, h, (tic_color_black));
-	debugger->tic->api.rect_border(debugger->tic, x, y, w, h, (tic_color_white));
+	debugger->tic->api.rect_border(debugger->tic, rect.x, rect.y, rect.w, rect.h, (tic_color_white));
 
-	const tic_perf_frame* frame = &perf->frames[debugger->src->selected];
-
-	if (frame->start == 0 || frame->end == 0)
+	if (machine->data == NULL)
 		return;
 
-	const u64 frametime = frame->end - frame->start;
-	const double time2pixels = (double)frametime / (w - 2);
-	const u32 maxdepth = (h-2) / 8;
+	FrameInfo* info = getPerfFrame(machine, 1);
+
+	if (!info->valid)
+		return;
 
 	Tooltip tooltip;
 	tooltip.visible = false;
 
-	for (u32 i = 0; i < frame->scope_count; ++i)
+	const u64 frametime = info->frame->end - info->frame->start;
+	const double time2pixels = (double)frametime / (rect.w - 2);
+	const u32 maxdepth = (rect.h-2) / 8;
+
+	for (u32 i = 0; i < info->frame->scope_count; ++i)
 	{
-		const tic_perf_scope* scope = &frame->scopes[i];
-		const u32 depth = getProfilerScopeDepth(frame, scope);
+		const tic_perf_scope* scope = &info->frame->scopes[i];
+		const u32 depth = getProfilerScopeDepth(info->frame, scope);
 
 		if (depth > 0 && depth < maxdepth && scope->start != 0 && scope->end != 0)
 		{
 			const u64 scopetime = scope->end - scope->start;
-			const u32 scopex = (u32)((scope->start - frame->start) / time2pixels) + x + 1;
-			const u32 scopey = y+1+((depth-1)*8);
+			const u32 scopex = (u32)((scope->start - info->frame->start) / time2pixels) + rect.x + 1;
+			const u32 scopey = rect.y+1+((depth-1)*8);
 			const u32 scopewidth = (u32)(scopetime / time2pixels);
 
 			debugger->tic->api.rect(debugger->tic, scopex, scopey, max(scopewidth, 1), 8, tic_color_blue);
@@ -283,9 +280,10 @@ static void drawProfilerFrameScopes(Debugger* debugger)
 					name = buffer;
 				}
 
-				debugger->tic->api.text(debugger->tic, name, scopex+1, scopey+1, tic_color_white, false);
+				debugger->tic->api.text(debugger->tic, name, scopex+1, scopey+1, tic_color_white, true);
 			}
 
+			/*
 			if (mx >= scopex && mx < scopex+scopewidth && my >= scopey && my < scopey+6)
 			{
 				debugger->tic->api.rect_border(debugger->tic, scopex, scopey, max(scopewidth, 1), 8, tic_color_white);
@@ -299,6 +297,7 @@ static void drawProfilerFrameScopes(Debugger* debugger)
 				else
 					snprintf(tooltip.buffer, sizeof(tooltip.buffer), "%u MS", (u32)(dt / 1000));
 			}
+			*/
 		}
 	}
 
@@ -313,15 +312,15 @@ static void drawProfilerMemoryUsage(Debugger* debugger)
 	const tic_rect rect = { PADDING, TOOLBAR_SIZE + PADDING + PROFILER_FRAME_GRAPH_HEIGHT + PADDING, TIC80_WIDTH - (PADDING * 2), PROFILER_FRAME_GRAPH_HEIGHT };
 	const bool activeGraph = checkMousePos(&rect);
 
-	Tooltip tooltip;
-	tooltip.visible = false;
-
 	debugger->tic->api.rect_border(debugger->tic, rect.x, rect.y, rect.w, rect.h, (tic_color_white));
 	debugger->tic->api.rect(debugger->tic, rect.x + 1, rect.y + 1, 19, TIC_FONT_HEIGHT + 1, (tic_color_black));
 	debugger->tic->api.text(debugger->tic, "MEM", rect.x + 2, rect.y + 2, (tic_color_white), false);
 
 	if (machine->data == NULL)
 		return;
+
+	Tooltip tooltip;
+	tooltip.visible = false;
 
 	u32 maxmem = 0;
 	u32 maxallocs = 0;
@@ -398,8 +397,8 @@ static void processKeyboard(Debugger* debugger)
 static void profilerTick(Debugger* debugger)
 {
 	drawProfilerFrameGraph(debugger);
-	//drawProfilerFrameScopes(debugger);
 	drawProfilerMemoryUsage(debugger);
+	drawProfilerFrameScopes(debugger);
 }
 
 static void statsTick(Debugger* debugger)

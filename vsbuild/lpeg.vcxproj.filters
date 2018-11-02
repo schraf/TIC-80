@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\lpeg-1.0.1\lpcap.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\lpeg-1.0.1\lpcode.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\lpeg-1.0.1\lpprint.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\lpeg-1.0.1\lptree.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\marc\workspace\TIC-80\3rd-party\lpeg-1.0.1\lpvm.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\marc\workspace\TIC-80\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{0112ABD4-F4F1-3F41-9B72-2C3C69B44F6F}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

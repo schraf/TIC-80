@@ -1,0 +1,27 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/CMakeFiles/generate.stamp is up-to-date.
+  dgif_lib.c
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\dgif_lib.c(389): warning C4018: '<': signed/unsigned mismatch
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\dgif_lib.c(1144): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
+  egif_lib.c
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\egif_lib.c(258): warning C4267: 'function': conversion from 'size_t' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\egif_lib.c(260): warning C4267: 'return': conversion from 'size_t' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\egif_lib.c(482): warning C4028: formal parameter 2 different from declaration
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\egif_lib.c(513): warning C4267: '=': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\egif_lib.c(694): warning C4267: 'function': conversion from 'size_t' to 'unsigned int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\egif_lib.c(887): warning C4028: formal parameter 3 different from declaration
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\egif_lib.c(975): warning C4028: formal parameter 2 different from declaration
+  gif_err.c
+  gif_font.c
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\gif_font.c(245): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\gif_font.c(239): warning C4996: 'strcpy': This function or variable may be unsafe. Consider using strcpy_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(133): note: see declaration of 'strcpy'
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\gif_font.c(240): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+c:\users\marc\workspace\tic-80\3rd-party\giflib-5.1.4\lib\gif_font.c(249): warning C4996: 'strtok': This function or variable may be unsafe. Consider using strtok_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\string.h(440): note: see declaration of 'strtok'
+  gif_hash.c
+  gifalloc.c
+  openbsd-reallocarray.c
+  Generating Code...
+  giflib.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\lib\giflib.lib

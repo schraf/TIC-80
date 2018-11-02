@@ -1,0 +1,10 @@
+﻿  Building Custom Rule C:/Users/marc/workspace/TIC-80/CMakeLists.txt
+  CMake does not need to re-run because C:/Users/marc/workspace/TIC-80/vsbuild/CMakeFiles/generate.stamp is up-to-date.
+  sdl-renderer.c
+c:\users\marc\workspace\tic-80\include\tic80_config.h(47): warning C4005: 'HAVE_WINAPIFAMILY_H': macro redefinition
+  c:\users\marc\workspace\tic-80\3rd-party\sdl2-2.0.8\include\sdl_platform.h(125): note: see previous definition of 'HAVE_WINAPIFAMILY_H'
+c:\users\marc\workspace\tic-80\examples\sdl-renderer.c(45): warning C4996: 'fopen': This function or variable may be unsafe. Consider using fopen_s instead. To disable deprecation, use _CRT_SECURE_NO_WARNINGS. See online help for details.
+  c:\program files (x86)\windows kits\10\include\10.0.17134.0\ucrt\stdio.h(208): note: see declaration of 'fopen'
+     Creating library C:/Users/marc/workspace/TIC-80/vsbuild/lib/sdl-renderer.lib and object C:/Users/marc/workspace/TIC-80/vsbuild/lib/sdl-renderer.exp
+LINK : warning LNK4098: defaultlib 'LIBCMTD' conflicts with use of other libs; use /NODEFAULTLIB:library
+  sdl-renderer.vcxproj -> C:\Users\marc\workspace\TIC-80\vsbuild\bin\sdl-renderer.exe
