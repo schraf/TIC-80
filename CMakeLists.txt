@@ -48,6 +48,7 @@ else()
 endif()
 
 option(BUILD_SDL "SDL Enabled" ON)
+option(BUILD_ENET "Enet Enabled" ON)
 option(BUILD_SOKOL "Sokol Enabled" ${BUILD_SOKOL_DEFAULT})
 option(BUILD_LIBRETRO "libretro Enabled" ${BUILD_LIBRETRO_DEFAULT})
 option(BUILD_DEMO_CARTS "Demo Carts Enabled" ${BUILD_DEMO_CARTS_DEFAULT})
@@ -323,6 +324,13 @@ target_link_libraries(tic80core lua lpeg wren squirrel giflib)
 
 if(LINUX)
 	target_link_libraries(tic80core m)
+endif()
+
+################################
+# ENET
+################################
+if(BUILD_ENET AND NOT EMSCRIPTEN)
+	add_subdirectory(${THIRDPARTY_DIR}/enet)
 endif()
 
 ################################
