@@ -328,7 +328,11 @@ target_include_directories(tic80core
 	PUBLIC 
 		${CMAKE_CURRENT_BINARY_DIR})
 
-target_link_libraries(tic80core lua lpeg wren squirrel giflib enet ws2_32 winmm)
+target_link_libraries(tic80core lua lpeg wren squirrel giflib enet)
+
+if(WIN32)
+	target_link_libraries(ws2_32 winmm)
+endif()
 
 if(LINUX)
 	target_link_libraries(tic80core m)
@@ -390,7 +394,11 @@ if(BUILD_SERVER)
 		target_link_libraries(server mingw32)
 	endif()
 
-	target_link_libraries(server tic80core enet ws2_32 winmm)
+	if(WIN32)
+		target_link_libraries(ws2_32 winmm)
+	endif()
+
+	target_link_libraries(server tic80core enet)
 endif()
 
 ################################
