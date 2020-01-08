@@ -50,11 +50,10 @@ else()
 endif()
 
 option(BUILD_SDL "SDL Enabled" ON)
-option(BUILD_ENET "Enet Enabled" ON)
 option(BUILD_SOKOL "Sokol Enabled" ${BUILD_SOKOL_DEFAULT})
 option(BUILD_LIBRETRO "libretro Enabled" ${BUILD_LIBRETRO_DEFAULT})
 option(BUILD_DEMO_CARTS "Demo Carts Enabled" ${BUILD_DEMO_CARTS_DEFAULT})
-option(BUILD_PRO "Build PRO version" FALSE)
+option(BUILD_PRO "Build PRO version" TRUE)
 option(BUILD_PLAYER "Build standalone players" ${BUILD_PLAYER_DEFAULT})
 option(BUILD_SERVER "Build server" ${BUILD_SERVER_DEFAULT})
 
@@ -292,6 +291,11 @@ target_include_directories(giflib
 	INTERFACE ${THIRDPARTY_DIR}/giflib)
 
 ################################
+# ENET
+################################
+add_subdirectory(${THIRDPARTY_DIR}/enet)
+
+################################
 # TIC-80 core
 ################################
 
@@ -320,20 +324,14 @@ target_include_directories(tic80core
 		${THIRDPARTY_DIR}/squirrel/include
 		${THIRDPARTY_DIR}/moonscript
 		${THIRDPARTY_DIR}/fennel
+		${THIRDPARTY_DIR}/enet/include
 	PUBLIC 
 		${CMAKE_CURRENT_BINARY_DIR})
 
-target_link_libraries(tic80core lua lpeg wren squirrel giflib)
+target_link_libraries(tic80core lua lpeg wren squirrel giflib enet ws2_32 winmm)
 
 if(LINUX)
 	target_link_libraries(tic80core m)
-endif()
-
-################################
-# ENET
-################################
-if(BUILD_ENET AND NOT EMSCRIPTEN)
-	add_subdirectory(${THIRDPARTY_DIR}/enet)
 endif()
 
 ################################

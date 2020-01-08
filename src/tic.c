@@ -26,6 +26,7 @@
 #include <stdio.h>
 #include <ctype.h>
 #include <stddef.h>
+#include <enet/enet.h>
 
 #include "ticapi.h"
 #include "tools.h"
@@ -1954,6 +1955,30 @@ static bool api_keyp(tic_mem* tic, tic_key key, s32 hold, s32 period)
 	return false;
 }
 
+static void api_connect(tic_mem* tic, const char* host, u16 port)
+{
+	tic_machine* machine = (tic_machine*)tic;
+	
+	if (tic->net.data == NULL)
+	{
+		if (enet_initialize() != 0)
+    	{
+			machine->data->error(machine->data->data, "failed to initialize network");
+        	return;
+    	}
+	}
+}
+
+static bool api_send(tic_mem* tic, const u8* data, u16 size)
+{
+	return false;
+}
+
+static u16 api_recv(tic_mem* tic, u8* buffer, u16 size)
+{
+	return 0;
+}
+
 static void api_load(tic_cartridge* cart, const u8* buffer, s32 size)
 {
 	const u8* end = buffer + size;
@@ -2217,6 +2242,9 @@ static void initApi(tic_api* api)
 	INIT_API(btnp);
 	INIT_API(key);
 	INIT_API(keyp);
+	INIT_API(connect);
+	INIT_API(send);
+	INIT_API(recv);
 	INIT_API(load);
 	INIT_API(save);
 	INIT_API(tick_start);

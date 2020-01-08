@@ -296,6 +296,65 @@ static s32 duk_keyp(duk_context* duk)
 	return 1;
 }
 
+static s32 duk_connect(duk_context* duk)
+{
+	tic_mem* memory = (tic_mem*)getDukMachine(duk);
+
+	if (duk_is_null_or_undefined(duk, 0))
+	{
+		return duk_error(duk, DUK_ERR_ERROR, "missing hostname\n");
+	}
+
+	if (duk_is_null_or_undefined(duk, 1))
+	{
+		return duk_error(duk, DUK_ERR_ERROR, "missing port number\n");
+	}
+
+	const char* hostname = duk_to_string(duk, 0);
+	u16 port = duk_to_int(duk, 1);
+
+	memory->api.connect(memory, hostname, port);
+
+	return 0;
+}
+
+static s32 duk_send(duk_context* duk)
+{
+	tic_mem* memory = (tic_mem*)getDukMachine(duk);
+
+	if (duk_is_null_or_undefined(duk, 0))
+	{
+		return duk_error(duk, DUK_ERR_ERROR, "missing data\n");
+	}
+
+	const char* data = duk_to_string(duk, 0);
+	u16 size = strlen(data);
+
+	duk_push_boolean(duk, memory->api.send(memory, (const u8*)data, size));
+
+	return 1;
+}
+
+static s32 duk_recv(duk_context* duk)
+{
+	static buffer[UINT16_MAX];
+	
+	tic_mem* memory = (tic_mem*)getDukMachine(duk);
+
+	if (duk_is_null_or_undefined(duk, 0))
+	{
+		return duk_error(duk, DUK_ERR_ERROR, "missing data\n");
+	}
+
+	u16 size = duk_is_null_or_undefined(duk, 0) ? sizeof(buffer) : duk_to_int(duk, 0);
+	size = memory->api.recv(memory, buffer, size);
+
+	duk_push_heapptr(duk, buffer);
+	duk_push_int(duk, size);
+	
+	return 2;
+}
+
 static duk_ret_t duk_sfx(duk_context* duk)
 {
 	tic_mem* memory = (tic_mem*)getDukMachine(duk);
@@ -818,6 +877,9 @@ static const struct{duk_c_function func; s32 params;} ApiFunc[] =
 	{duk_reset, 0},
 	{duk_key, 1},
 	{duk_keyp, 3},
+	{duk_connect, 2},
+	{duk_send, 1},
+	{duk_recv, 1}
 };
 
 STATIC_ASSERT(api_func, COUNT_OF(ApiKeywords) == COUNT_OF(ApiFunc));

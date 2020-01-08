@@ -416,6 +416,11 @@ typedef struct
 	u8 data[TIC_FONT_CHARS * BITS_IN_BYTE];
 } tic_font;
 
+typedef struct 
+{
+	void* data;
+} tic_net;
+
 typedef struct
 {
 	u8 data[TIC80_WIDTH * TIC80_HEIGHT * TIC_PALETTE_BPP / BITS_IN_BYTE];

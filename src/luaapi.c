@@ -852,6 +852,73 @@ static s32 lua_keyp(lua_State* lua)
 	return 1;
 }
 
+static s32 lua_connect(lua_State* lua)
+{
+	tic_machine* machine = getLuaMachine(lua);
+	tic_mem* tic = &machine->memory;
+
+	s32 top = lua_gettop(lua);
+
+	if (top == 2)
+	{
+		const char* hostname = lua_tostring(lua, 1);
+		u16 port = (u16)lua_tointeger(lua, 2);
+
+		tic->api.connect(tic, hostname, port);
+	}
+	else
+	{
+		luaL_error(lua, "invalid params, hostname port\n");
+		return 0;
+	} 
+
+	return 0;
+}
+
+static s32 lua_send(lua_State* lua)
+{
+	static buffer[UINT16_MAX];
+
+	tic_machine* machine = getLuaMachine(lua);
+	tic_mem* tic = &machine->memory;
+
+	s32 top = lua_gettop(lua);
+
+	for (s32 i = 0; i < top; ++i)
+	{
+		buffer[i] = (u8)lua_tointeger(lua, i+1);
+	}
+
+	lua_pushboolean(lua, tic->api.send(tic, buffer, top));
+
+	return 1;
+}
+
+static s32 lua_recv(lua_State* lua)
+{
+	static buffer[UINT16_MAX];
+
+	tic_machine* machine = getLuaMachine(lua);
+	tic_mem* tic = &machine->memory;
+
+	s32 top = lua_gettop(lua);
+	u16 size = UINT16_MAX;
+
+	if (top == 1)
+	{
+		size = (u16)lua_tointeger(lua, 1);
+	}
+	
+	size = tic->api.recv(tic, buffer, size);
+
+	for (u32 i = 0; i < size; ++i)
+	{
+		lua_pushinteger(lua, buffer[i]);
+	}
+
+	return size;
+}
+
 static s32 lua_memcpy(lua_State* lua)
 {
 	s32 top = lua_gettop(lua);
@@ -1168,7 +1235,7 @@ static const lua_CFunction ApiFunc[] =
 	lua_mset, lua_peek, lua_poke, lua_peek4, lua_poke4, lua_memcpy, 
 	lua_memset, lua_trace, lua_pmem, lua_time, lua_exit, lua_font, lua_mouse, 
 	lua_circ, lua_circb, lua_tri, lua_textri, lua_clip, lua_music, lua_sync, lua_reset,
-	lua_key, lua_keyp
+	lua_key, lua_keyp, lua_connect, lua_send, lua_recv
 };
 
 STATIC_ASSERT(api_func, COUNT_OF(ApiKeywords) == COUNT_OF(ApiFunc));

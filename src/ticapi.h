@@ -162,6 +162,9 @@ typedef struct
 	u32 (*btnp)					(tic_mem* memory, s32 id, s32 hold, s32 period);
 	bool (*key)					(tic_mem* memory, tic_key key);
 	bool (*keyp)				(tic_mem* memory, tic_key key, s32 hold, s32 period);
+	void (*connect)				(tic_mem* memory, const char* host, u16 port);
+	bool (*send)				(tic_mem* memory, const u8* data, u16 size);
+	u16 (*recv)					(tic_mem* memory, u8* buffer, u16 size);
 
 	void (*load)				(tic_cartridge* rom, const u8* buffer, s32 size);
 	s32  (*save)				(const tic_cartridge* rom, u8* buffer);
@@ -179,6 +182,7 @@ struct tic_mem
 	tic_cartridge 		cart;
 	tic_font 			font;
 	tic_api 			api;
+	tic_net				net;
 
 	char saveid[TIC_SAVEID_SIZE];
 
