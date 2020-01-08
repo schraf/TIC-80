@@ -40,11 +40,13 @@ if(ANDROID OR EMSCRIPTEN)
 	set(BUILD_LIBRETRO_DEFAULT OFF)
 	set(BUILD_DEMO_CARTS_DEFAULT OFF)
 	set(BUILD_PLAYER_DEFAULT OFF)
+	set(BUILD_SERVER_DEFAULT OFF)
 else()
 	set(BUILD_SOKOL_DEFAULT ON)
 	set(BUILD_LIBRETRO_DEFAULT ON)
 	set(BUILD_DEMO_CARTS_DEFAULT ON)
 	set(BUILD_PLAYER_DEFAULT ON)
+	set(BUILD_SERVER_DEFAULT ON)
 endif()
 
 option(BUILD_SDL "SDL Enabled" ON)
@@ -54,6 +56,7 @@ option(BUILD_LIBRETRO "libretro Enabled" ${BUILD_LIBRETRO_DEFAULT})
 option(BUILD_DEMO_CARTS "Demo Carts Enabled" ${BUILD_DEMO_CARTS_DEFAULT})
 option(BUILD_PRO "Build PRO version" FALSE)
 option(BUILD_PLAYER "Build standalone players" ${BUILD_PLAYER_DEFAULT})
+option(BUILD_SERVER "Build server" ${BUILD_SERVER_DEFAULT})
 
 if (BAREMETALPI)
 
@@ -370,6 +373,26 @@ if(BUILD_PLAYER)
 	endif()
 
 	target_link_libraries(player-sdl tic80core SDL2-static SDL2main)
+endif()
+
+################################
+# Server
+################################
+
+if(BUILD_SERVER)
+
+	add_executable(server ${CMAKE_SOURCE_DIR}/src/server/server.c)
+
+	target_include_directories(server PRIVATE 
+		${THIRDPARTY_DIR}/enet/include 
+		${CMAKE_SOURCE_DIR}/include 
+		${CMAKE_SOURCE_DIR}/src)
+
+	if(MINGW)
+		target_link_libraries(server mingw32)
+	endif()
+
+	target_link_libraries(server tic80core enet ws2_32 winmm)
 endif()
 
 ################################

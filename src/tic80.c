@@ -65,6 +65,11 @@ static u64 getCounter()
 	return TickCounter;
 }
 
+char* tic80_version()
+{
+	return TIC_TITLE;
+}
+
 tic80* tic80_create(s32 samplerate)
 {
 	tic80_local* tic80 = malloc(sizeof(tic80_local));
