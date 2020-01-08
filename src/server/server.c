@@ -35,19 +35,25 @@ void service(ENetHost* host)
         switch (event.type)
         {
         case ENET_EVENT_TYPE_CONNECT:
-            printf("Connection from %x:%u.\n", event.peer->address.host, event.peer->address.port);
-            event.peer -> data = "Client information";
+            {
+                printf("Connection from %x:%u.\n", event.peer->address.host, event.peer->address.port);
+                event.peer -> data = "Client information";
+            } 
             break;
 
         case ENET_EVENT_TYPE_RECEIVE:
-            ENetPacket* packet = enet_packet_create(event.packet->data, event.packet->dataLength, event.packet->flags); 
-            enet_host_broadcast(host, 0, packet);
-            enet_packet_destroy (event.packet);            
+            {
+                ENetPacket* packet = enet_packet_create(event.packet->data, event.packet->dataLength, event.packet->flags); 
+                enet_host_broadcast(host, 0, packet);
+                enet_packet_destroy (event.packet);            
+            }
             break;
         
         case ENET_EVENT_TYPE_DISCONNECT:
-            printf ("Disconnection from %x:%u.\n", event.peer->address.host, event.peer->address.port);
-            event.peer -> data = NULL;
+            {
+                printf ("Disconnection from %x:%u.\n", event.peer->address.host, event.peer->address.port);
+                event.peer -> data = NULL;
+            }
             break;
         }
     }
