@@ -1,5 +1,4 @@
-[![Build Status](https://travis-ci.org/nesbox/TIC-80.svg?branch=master)](https://travis-ci.org/nesbox/TIC-80)
-[![Build status](https://ci.appveyor.com/api/projects/status/1pflw77cjd8mqggb/branch/master?svg=true)](https://ci.appveyor.com/project/nesbox/tic-80)
+[![Build Status](https://travis-ci.org/schraf/TIC-80.svg?branch=networking)](https://travis-ci.org/schraf/TIC-80)
 
 ![TIC-80](https://tic.computer/img/logo64.png)
 **TIC-80 TINY COMPUTER** - [https://tic.computer/](https://tic.computer/)
