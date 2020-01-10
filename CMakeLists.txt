@@ -331,7 +331,7 @@ target_include_directories(tic80core
 target_link_libraries(tic80core lua lpeg wren squirrel giflib enet)
 
 if(WIN32)
-	target_link_libraries(ws2_32 winmm)
+	target_link_libraries(tic80core ws2_32 winmm)
 endif()
 
 if(LINUX)
@@ -395,7 +395,7 @@ if(BUILD_SERVER)
 	endif()
 
 	if(WIN32)
-		target_link_libraries(ws2_32 winmm)
+		target_link_libraries(server ws2_32 winmm)
 	endif()
 
 	target_link_libraries(server tic80core enet)

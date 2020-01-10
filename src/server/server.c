@@ -25,80 +25,105 @@
 #include <enet/enet.h>
 
 #define TIC_SERVER_MAX_CONNECTIONS 64
+static int verbosity = 0;
 
 void service(ENetHost* host)
 {
-    ENetEvent event;
+	ENetEvent event;
 
-    while (enet_host_service(host, &event, 1000) > 0)
-    {
-        switch (event.type)
-        {
-        case ENET_EVENT_TYPE_CONNECT:
-            {
-                printf("Connection from %x:%u.\n", event.peer->address.host, event.peer->address.port);
-                event.peer -> data = "Client information";
-            } 
-            break;
+	while (enet_host_service(host, &event, 1000) > 0)
+	{
+		switch (event.type)
+		{
+			case ENET_EVENT_TYPE_CONNECT:
+			{
+				if (verbosity > 1)
+				{
+					printf("Connection from %x:%u.\n", event.peer->address.host, event.peer->address.port);
+				}
+			} 
+			break;
 
-        case ENET_EVENT_TYPE_RECEIVE:
-            {
-                ENetPacket* packet = enet_packet_create(event.packet->data, event.packet->dataLength, event.packet->flags); 
-                enet_host_broadcast(host, 0, packet);
-                enet_packet_destroy (event.packet);            
-            }
-            break;
-        
-        case ENET_EVENT_TYPE_DISCONNECT:
-            {
-                printf ("Disconnection from %x:%u.\n", event.peer->address.host, event.peer->address.port);
-                event.peer -> data = NULL;
-            }
-            break;
-        }
-    }
+			case ENET_EVENT_TYPE_RECEIVE:
+			{
+				if (verbosity > 2)
+				{
+					printf ("Received %d bytes from %x:%u.\n", event.packet->dataLength, event.peer->address.host, event.peer->address.port);
+				}
+
+				ENetPacket* packet = enet_packet_create(event.packet->data, event.packet->dataLength, event.packet->flags); 
+				enet_host_broadcast(host, 0, packet);
+				enet_packet_destroy (event.packet);            
+			}
+			break;
+		
+			case ENET_EVENT_TYPE_DISCONNECT:
+			{
+				if (verbosity > 1)
+				{
+					printf ("Disconnection from %x:%u.\n", event.peer->address.host, event.peer->address.port);
+				}
+			}
+			break;
+		}
+	}
 }
 
 int main(int argc, char **argv)
 {
-    printf("%s\n", tic80_version());
+	printf("%s\n", tic80_version());
 
-    if (argc != 2)
-    {
-        printf("USAGE: %s port\n", argv[0]);
-        fprintf(stderr, "ERROR: missing arguments.\n");
-        return EXIT_FAILURE;
-    }
+	if (argc < 2)
+	{
+		printf("USAGE: %s port\n", argv[0]);
+		fprintf(stderr, "ERROR: missing arguments.\n");
+		return EXIT_FAILURE;
+	}
 
-    if (enet_initialize() != 0)
-    {
-        fprintf(stderr, "ERROR: failed to initialize network.\n");
-        return EXIT_FAILURE;
-    }
-    
-    atexit(enet_deinitialize);
+	for (int i = 2; i < argc; ++i)
+	{
+		if (strcmp(argv[i], "-v") == 0)
+		{
+			verbosity++;
+		}
+	}
 
-    ENetAddress address;
-    address.host = ENET_HOST_ANY;
-    address.port = atoi(argv[1]);
+	if (enet_initialize() != 0)
+	{
+		fprintf(stderr, "ERROR: failed to initialize network.\n");
+		return EXIT_FAILURE;
+	}
+	
+	atexit(enet_deinitialize);
 
-    ENetHost* server = enet_host_create(&address, TIC_SERVER_MAX_CONNECTIONS, 1, 0, 0);
+	ENetAddress address;
+	address.host = ENET_HOST_ANY;
+	address.port = atoi(argv[1]);
 
-    if (server == NULL)
-    {
-        fprintf (stderr, "ERROR: failed to create network host.\n");
-        exit (EXIT_FAILURE);
-    }
+	ENetHost* server = enet_host_create(&address, TIC_SERVER_MAX_CONNECTIONS, 1, 0, 0);
 
-    printf("Listening on port %d.\n", address.port);
+	if (server == NULL)
+	{
+		fprintf (stderr, "ERROR: failed to create network host.\n");
+		exit (EXIT_FAILURE);
+	}
 
-    while (true)
-    {
-        service(server);
-    }
+	if (verbosity > 0)
+	{
+		printf("Listening on port %d.\n", address.port);
+	}
 
-    printf("Shutting down server.");
-    enet_host_destroy(server);
+	while (true)
+	{
+		service(server);
+	}
+
+	if (verbosity > 0)
+	{
+		printf("Shutting down server.");
+	}
+	
+	enet_host_destroy(server);
 
 	return 0;
 }

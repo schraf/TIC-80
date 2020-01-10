@@ -613,6 +613,21 @@ void tic_close(tic_mem* memory)
 	blip_delete(machine->blip.left);
 	blip_delete(machine->blip.right);
 
+	if (memory->net.host != NULL)
+	{
+		if (memory->net.peer != NULL)
+		{
+			enet_peer_disconnect_now((ENetPeer*)memory->net.peer, 0);
+			enet_peer_reset((ENetPeer*)memory->net.peer);
+		}
+
+		enet_host_destroy((ENetHost*)memory->net.host);
+		enet_deinitialize();
+		
+		memory->net.host = NULL;
+		memory->net.peer = NULL;
+	}
+
 	free(memory->samples.buffer);
 	free(machine);
 }
@@ -1576,6 +1591,11 @@ static void api_tick_end(tic_mem* memory)
 	machine->state.setpix = setPixelOvr;
 	machine->state.getpix = getPixelOvr;
 	machine->state.drawhline = drawHLineOvr;
+
+	if (memory->net.host != NULL)
+	{
+		enet_host_flush((ENetHost*)memory->net.host);
+	}
 }
 
 
@@ -1955,27 +1975,103 @@ static bool api_keyp(tic_mem* tic, tic_key key, s32 hold, s32 period)
 	return false;
 }
 
-static void api_connect(tic_mem* tic, const char* host, u16 port)
+static void api_connect(tic_mem* tic, const char* hostname, u16 port)
 {
 	tic_machine* machine = (tic_machine*)tic;
 	
-	if (tic->net.data == NULL)
+	if (tic->net.host == NULL)
 	{
 		if (enet_initialize() != 0)
     	{
 			machine->data->error(machine->data->data, "failed to initialize network");
         	return;
     	}
+
+		tic->net.host = enet_host_create(NULL, 1, 1, 0, 0);
+
+		if (tic->net.host == NULL)
+		{
+			machine->data->error(machine->data->data, "failed to create network host");
+			enet_deinitialize();
+			return;
+		}
+	}
+	else if (tic->net.peer != NULL)
+	{
+		enet_peer_disconnect_now((ENetPeer*)tic->net.peer, 0);
+		enet_peer_reset((ENetPeer*)tic->net.peer);
+		tic->net.peer = NULL;
+	}
+
+	ENetAddress address;
+	enet_address_set_host(&address, hostname);
+	address.port = port;
+
+	ENetPeer* peer = enet_host_connect((ENetHost*)tic->net.host, &address, 0, 0);    
+
+	if (peer == NULL)
+	{
+		machine->data->error(machine->data->data, "failed to connect to host");
+		return;
+	}
+
+	ENetEvent event;
+
+	if (enet_host_service((ENetHost*)tic->net.host, &event, 5000) > 0 && event.type == ENET_EVENT_TYPE_CONNECT)
+	{
+		tic->net.peer = peer;
+	}
+	else
+	{
+		enet_peer_reset(peer);
+		machine->data->error(machine->data->data, "connection timeout");
 	}
 }
 
 static bool api_send(tic_mem* tic, const u8* data, u16 size)
 {
-	return false;
+	bool result = false;
+
+	if (tic->net.peer != NULL)
+	{
+		ENetPacket * packet = enet_packet_create(data, size, ENET_PACKET_FLAG_RELIABLE);
+		result = enet_peer_send((ENetPeer*)tic->net.peer, 0, packet) == 0;
+	}
+
+	return result;
 }
 
 static u16 api_recv(tic_mem* tic, u8* buffer, u16 size)
 {
+	if (tic->net.peer != NULL)
+	{
+		ENetEvent event;
+
+		if (enet_host_service((ENetHost*)tic->net.host, &event, 10) > 0)
+		{
+			tic_machine* machine = (tic_machine*)tic;
+
+			switch (event.type)
+			{				
+				case ENET_EVENT_TYPE_RECEIVE:
+				{
+					size = MIN(event.packet->dataLength, size);
+					memcpy(buffer, event.packet->data, size);
+					enet_packet_destroy(event.packet);
+					return size;
+				}
+				break;
+				
+				case ENET_EVENT_TYPE_DISCONNECT:
+				{
+					enet_peer_reset((ENetPeer*)tic->net.peer);
+					tic->net.peer = NULL;
+				}
+				break;
+			}
+		}	
+	}
+
 	return 0;
 }
 

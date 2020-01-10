@@ -63,6 +63,8 @@
 
 #define TIC_SPRITESHEET_SIZE 128
 
+#define TIC_NET_BUFFER_SIZE 1024
+
 #define TIC_MAP_ROWS (TIC_SPRITESIZE)
 #define TIC_MAP_COLS (TIC_SPRITESIZE)
 #define TIC_MAP_SCREEN_WIDTH (TIC80_WIDTH / TIC_SPRITESIZE)
@@ -418,7 +420,8 @@ typedef struct
 
 typedef struct 
 {
-	void* data;
+	void* host;
+	void* peer;
 } tic_net;
 
 typedef struct
