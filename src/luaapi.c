@@ -878,7 +878,7 @@ static s32 lua_connect(lua_State* lua)
 
 static s32 lua_send(lua_State* lua)
 {
-	static buffer[UINT16_MAX];
+	static u8 buffer[UINT16_MAX];
 
 	tic_machine* machine = getLuaMachine(lua);
 	tic_mem* tic = &machine->memory;
@@ -897,7 +897,7 @@ static s32 lua_send(lua_State* lua)
 
 static s32 lua_recv(lua_State* lua)
 {
-	static buffer[UINT16_MAX];
+	static u8 buffer[UINT16_MAX];
 
 	tic_machine* machine = getLuaMachine(lua);
 	tic_mem* tic = &machine->memory;
