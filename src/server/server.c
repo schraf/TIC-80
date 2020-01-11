@@ -48,7 +48,21 @@ void service(ENetHost* host)
 			{
 				if (verbosity > 2)
 				{
-					printf ("Received %d bytes from %x:%u.\n", event.packet->dataLength, event.peer->address.host, event.peer->address.port);
+					printf("Received %d bytes from %x:%u.\n", event.packet->dataLength, event.peer->address.host, event.peer->address.port);
+				}
+
+				if (verbosity > 3)
+				{
+					char buffer[1024];
+					int pos = 0;
+
+					for (int i = 0; i < event.packet->dataLength; ++i)
+					{
+						sprintf(buffer + pos, "%02X ", event.packet->data[i]);
+						pos += 3;
+					}
+
+					printf("%x:%u <- [ %s].\n", event.peer->address.host, event.peer->address.port, buffer);
 				}
 
 				ENetPacket* packet = enet_packet_create(event.packet->data, event.packet->dataLength, event.packet->flags); 
