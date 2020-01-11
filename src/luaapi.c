@@ -856,6 +856,7 @@ static s32 lua_connect(lua_State* lua)
 {
 	tic_machine* machine = getLuaMachine(lua);
 	tic_mem* tic = &machine->memory;
+	bool connected = false;
 
 	s32 top = lua_gettop(lua);
 
@@ -864,15 +865,15 @@ static s32 lua_connect(lua_State* lua)
 		const char* hostname = lua_tostring(lua, 1);
 		u16 port = (u16)lua_tointeger(lua, 2);
 
-		tic->api.connect(tic, hostname, port);
+		connected = tic->api.connect(tic, hostname, port);
 	}
 	else
 	{
 		luaL_error(lua, "invalid params, hostname port\n");
-		return 0;
 	} 
 
-	return 0;
+	lua_pushboolean(lua, connected);
+	return 1;
 }
 
 static s32 lua_send(lua_State* lua)

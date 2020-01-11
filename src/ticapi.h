@@ -162,7 +162,7 @@ typedef struct
 	u32 (*btnp)					(tic_mem* memory, s32 id, s32 hold, s32 period);
 	bool (*key)					(tic_mem* memory, tic_key key);
 	bool (*keyp)				(tic_mem* memory, tic_key key, s32 hold, s32 period);
-	void (*connect)				(tic_mem* memory, const char* hostname, u16 port);
+	bool (*connect)				(tic_mem* memory, const char* hostname, u16 port);
 	bool (*send)				(tic_mem* memory, const u8* data, u16 size);
 	u16 (*recv)					(tic_mem* memory, u8* buffer, u16 size);
 

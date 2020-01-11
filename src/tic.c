@@ -1975,7 +1975,7 @@ static bool api_keyp(tic_mem* tic, tic_key key, s32 hold, s32 period)
 	return false;
 }
 
-static void api_connect(tic_mem* tic, const char* hostname, u16 port)
+static bool api_connect(tic_mem* tic, const char* hostname, u16 port)
 {
 	tic_machine* machine = (tic_machine*)tic;
 	
@@ -1984,7 +1984,7 @@ static void api_connect(tic_mem* tic, const char* hostname, u16 port)
 		if (enet_initialize() != 0)
     	{
 			machine->data->error(machine->data->data, "failed to initialize network");
-        	return;
+        	return false;
     	}
 
 		tic->net.host = enet_host_create(NULL, 1, 1, 0, 0);
@@ -1993,7 +1993,7 @@ static void api_connect(tic_mem* tic, const char* hostname, u16 port)
 		{
 			machine->data->error(machine->data->data, "failed to create network host");
 			enet_deinitialize();
-			return;
+			return false;
 		}
 	}
 	else if (tic->net.peer != NULL)
@@ -2012,7 +2012,7 @@ static void api_connect(tic_mem* tic, const char* hostname, u16 port)
 	if (peer == NULL)
 	{
 		machine->data->error(machine->data->data, "failed to connect to host");
-		return;
+		return false;
 	}
 
 	ENetEvent event;
@@ -2025,7 +2025,10 @@ static void api_connect(tic_mem* tic, const char* hostname, u16 port)
 	{
 		enet_peer_reset(peer);
 		machine->data->error(machine->data->data, "connection timeout");
+		return false;
 	}
+
+	return true;
 }
 
 static bool api_send(tic_mem* tic, const u8* data, u16 size)
