@@ -1996,7 +1996,8 @@ static bool api_connect(tic_mem* tic, const char* hostname, u16 port)
 			return false;
 		}
 	}
-	else if (tic->net.peer != NULL)
+
+	if (tic->net.peer != NULL)
 	{
 		enet_peer_disconnect_now((ENetPeer*)tic->net.peer, 0);
 		enet_peer_reset((ENetPeer*)tic->net.peer);
