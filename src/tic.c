@@ -552,6 +552,21 @@ static void api_reset(tic_mem* memory)
 	machine->state.drawhline = drawHLineDma;
 
 	updateSaveid(memory);
+
+	if (memory->net.host != NULL)
+	{
+		if (memory->net.peer != NULL)
+		{
+			enet_peer_disconnect_now((ENetPeer*)memory->net.peer, 0);
+			enet_peer_reset((ENetPeer*)memory->net.peer);
+		}
+
+		enet_host_destroy((ENetHost*)memory->net.host);
+		enet_deinitialize();
+		
+		memory->net.host = NULL;
+		memory->net.peer = NULL;
+	}
 }
 
 static void api_pause(tic_mem* memory)
