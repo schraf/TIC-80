@@ -50,35 +50,6 @@
 #define CONSOLE_BUFFER_SCREENS 64
 #define CONSOLE_BUFFER_SIZE (CONSOLE_BUFFER_WIDTH * CONSOLE_BUFFER_HEIGHT * CONSOLE_BUFFER_SCREENS)
 
-typedef enum
-{
-#if defined(TIC_BUILD_WITH_LUA)
-	LuaScript,	
-
-#	if defined(TIC_BUILD_WITH_MOON)
-	MoonScript,	
-#	endif
-
-#	if defined(TIC_BUILD_WITH_FENNEL)
-	Fennel,
-#	endif
-
-#endif /* defined(TIC_BUILD_WITH_LUA) */
-
-#if defined(TIC_BUILD_WITH_JS)
-	JavaScript,	
-#endif
-
-#if defined(TIC_BUILD_WITH_WREN)
-	WrenScript,	
-#endif
-
-#if defined(TIC_BUILD_WITH_SQUIRREL)
-	SquirrelScript,
-#endif
-
-} ScriptLang;
-
 #if defined(__TIC_WINDOWS__) || defined(__TIC_LINUX__) || defined(__TIC_MACOSX__)
 #define CAN_EXPORT 1
 #define CAN_OPEN_URL 1
@@ -102,30 +73,7 @@ typedef struct
 static const char* ExeExt = ".exe";
 #endif
 
-#if defined(TIC_BUILD_WITH_LUA)
 static const char DefaultLuaTicPath[] = TIC_LOCAL_VERSION "default.tic";
-
-#	if defined(TIC_BUILD_WITH_MOON)
-static const char DefaultMoonTicPath[] = TIC_LOCAL_VERSION "default_moon.tic";
-#	endif
-
-#	if defined(TIC_BUILD_WITH_FENNEL)
-static const char DefaultFennelTicPath[] = TIC_LOCAL_VERSION "default_fennel.tic";
-#	endif
-
-#endif /* defined(TIC_BUILD_WITH_LUA) */
-
-#if defined(TIC_BUILD_WITH_JS)
-static const char DefaultJSTicPath[] = TIC_LOCAL_VERSION "default_js.tic";
-#endif
-
-#if defined(TIC_BUILD_WITH_WREN)
-static const char DefaultWrenTicPath[] = TIC_LOCAL_VERSION "default_wren.tic";
-#endif
-
-#if defined(TIC_BUILD_WITH_SQUIRREL)
-static const char DefaultSquirrelTicPath[] = TIC_LOCAL_VERSION "default_squirrel.tic";
-#endif	
 
 static const char* getName(const char* name, const char* ext)
 {
@@ -458,39 +406,12 @@ static bool onConsoleLoadSectionCommand(Console* console, const char* param)
 	return result;
 }
 
-static void* getDemoCart(Console* console, ScriptLang script, s32* size)
+static void* getDemoCart(Console* console, s32* size)
 {
 	char path[FILENAME_MAX] = {0};
+	strcpy(path, DefaultLuaTicPath);
 
 	{
-		switch(script)
-		{
-#if defined(TIC_BUILD_WITH_LUA)
-		case LuaScript: strcpy(path, DefaultLuaTicPath); break;
-
-#	if defined(TIC_BUILD_WITH_MOON)
-		case MoonScript: strcpy(path, DefaultMoonTicPath); break;
-#	endif
-
-#	if defined(TIC_BUILD_WITH_FENNEL)
-		case Fennel: strcpy(path, DefaultFennelTicPath); break;
-#	endif
-
-#endif /* defined(TIC_BUILD_WITH_LUA) */
-
-#if defined(TIC_BUILD_WITH_JS)
-		case JavaScript: strcpy(path, DefaultJSTicPath); break;
-#endif
-
-#if defined(TIC_BUILD_WITH_WREN)
-		case WrenScript: strcpy(path, DefaultWrenTicPath); break;
-#endif
-
-#if defined(TIC_BUILD_WITH_SQUIRREL)
-		case SquirrelScript: strcpy(path, DefaultSquirrelTicPath); break;
-#endif			
-		}
-
 		void* data = fsLoadRootFile(console->fs, path, size);
 
 		if(data && *size)
@@ -500,94 +421,13 @@ static void* getDemoCart(Console* console, ScriptLang script, s32* size)
 	const u8* demo = NULL;
 	s32 romSize = 0;
 
-	switch(script)
+	static const u8 LuaDemoRom[] =
 	{
-#if defined(TIC_BUILD_WITH_LUA)
-	case LuaScript:
-		{
-			static const u8 LuaDemoRom[] =
-			{
-				#include "../build/assets/luademo.tic.dat"
-			};
+		#include "../build/assets/luademo.tic.dat"
+	};
 
-			demo = LuaDemoRom;
-			romSize = sizeof LuaDemoRom;			
-		}
-		break;
-
-#	if defined(TIC_BUILD_WITH_MOON)
-	case MoonScript:
-		{
-			static const u8 MoonDemoRom[] =
-			{
-				#include "../build/assets/moondemo.tic.dat"
-			};
-
-			demo = MoonDemoRom;
-			romSize = sizeof MoonDemoRom;			
-		}
-		break;
-#	endif
-
-#	if defined(TIC_BUILD_WITH_FENNEL)
-	case Fennel:
-		{
-			static const u8 FennelDemoRom[] =
-			{
-				#include "../build/assets/fenneldemo.tic.dat"
-			};
-
-			demo = FennelDemoRom;
-			romSize = sizeof FennelDemoRom;
-		}
-		break;
-#	endif
-
-#endif /* defined(TIC_BUILD_WITH_LUA) */
-
-
-#if defined(TIC_BUILD_WITH_JS)
-	case JavaScript:
-		{
-			static const u8 JsDemoRom[] =
-			{
-				#include "../build/assets/jsdemo.tic.dat"
-			};
-
-			demo = JsDemoRom;
-			romSize = sizeof JsDemoRom;
-		}
-		break;
-#endif /* defined(TIC_BUILD_WITH_JS) */
-
-#if defined(TIC_BUILD_WITH_WREN)
-	case WrenScript:
-		{
-			static const u8 WrenDemoRom[] =
-			{
-				#include "../build/assets/wrendemo.tic.dat"
-			};
-
-			demo = WrenDemoRom;
-			romSize = sizeof WrenDemoRom;			
-		}
-		break;
-#endif /* defined(TIC_BUILD_WITH_WREN) */
-
-#if defined(TIC_BUILD_WITH_SQUIRREL)
-	case SquirrelScript:
-		{
-			static const u8 SquirrelDemoRom[] =
-			{
-				#include "../build/assets/squirreldemo.tic.dat"
-			};
-
-			demo = SquirrelDemoRom;
-			romSize = sizeof SquirrelDemoRom;			
-		}
-		break;
-#endif /* defined(TIC_BUILD_WITH_SQUIRREL) */
-	}
+	demo = LuaDemoRom;
+	romSize = sizeof LuaDemoRom;			
 
 	u8* data = NULL;
 	*size = unzip(&data, demo, romSize);
@@ -613,36 +453,8 @@ static void onConsoleLoadDemoCommandConfirmed(Console* console, const char* para
 
 	console->showGameMenu = false;
 
-#if defined(TIC_BUILD_WITH_LUA)
 	if(strcmp(param, DefaultLuaTicPath) == 0)
-		data = getDemoCart(console, LuaScript, &size);
-
-#	if defined(TIC_BUILD_WITH_MOON)
-	if(strcmp(param, DefaultMoonTicPath) == 0)
-		data = getDemoCart(console, MoonScript, &size);
-#	endif
-
-#	if defined(TIC_BUILD_WITH_FENNEL)
-	if(strcmp(param, DefaultFennelTicPath) == 0)
-		data = getDemoCart(console, Fennel, &size);
-#	endif
-
-#endif /* defined(TIC_BUILD_WITH_LUA) */
-
-#if defined(TIC_BUILD_WITH_JS)
-	if(strcmp(param, DefaultJSTicPath) == 0)
-		data = getDemoCart(console, JavaScript, &size);
-#endif
-
-#if defined(TIC_BUILD_WITH_WREN)
-	if(strcmp(param, DefaultWrenTicPath) == 0)
-		data = getDemoCart(console, WrenScript, &size);
-#endif
-
-#if defined(TIC_BUILD_WITH_SQUIRREL)
-	if(strcmp(param, DefaultSquirrelTicPath) == 0)
-		data = getDemoCart(console, SquirrelScript, &size);
-#endif
+		data = getDemoCart(console, size);
 
 	const char* name = getCartName(param);
 
@@ -673,22 +485,9 @@ static void onCartLoaded(Console* console, const char* name)
 
 }
 
-#if defined(TIC80_PRO)
-
 static const char* projectComment(const char* name)
 {
-	char* comment;
-
-	if(tic_tool_has_ext(name, PROJECT_JS_EXT) 
-		|| tic_tool_has_ext(name, PROJECT_WREN_EXT)
-		|| tic_tool_has_ext(name, PROJECT_SQUIRREL_EXT))
-		comment = "//";
-	else if(tic_tool_has_ext(name, PROJECT_FENNEL_EXT))
-		comment = ";;";
-	else
-		comment = "--";
-
-	return comment;
+	return "--";
 }
 
 static void buf2str(const void* data, s32 size, char* ptr, bool flip)
@@ -1026,8 +825,6 @@ static void updateProject(Console* console)
 	}
 }
 
-#endif
-
 static void onConsoleLoadCommandConfirmed(Console* console, const char* param)
 {
 	if(onConsoleLoadSectionCommand(console, param)) return;
@@ -1196,10 +993,10 @@ static void onConsoleLoadCommand(Console* console, const char* param)
 	}
 }
 
-static void loadDemo(Console* console, ScriptLang script)
+static void loadDemo(Console* console)
 {
 	s32 size = 0;
-	u8* data = getDemoCart(console, script, &size);
+	u8* data = getDemoCart(console, &size);
 
 	if(data)
 	{
@@ -1218,54 +1015,11 @@ static void onConsoleNewCommandConfirmed(Console* console, const char* param)
 
 	if(param && strlen(param))
 	{
-#if defined(TIC_BUILD_WITH_LUA)
 		if(strcmp(param, "lua") == 0)
 		{
-			loadDemo(console, LuaScript);
+			loadDemo(console);
 			done = true;
 		}
-
-#	if defined(TIC_BUILD_WITH_MOON)
-		if(strcmp(param, "moon") == 0 || strcmp(param, "moonscript") == 0)
-		{
-			loadDemo(console, MoonScript);
-			done = true;
-		}
-#	endif
-
-#	if defined(TIC_BUILD_WITH_FENNEL)
-		if(strcmp(param, "fennel") == 0)
-		{
-			loadDemo(console, Fennel);
-			done = true;
-		}
-#	endif
-
-#endif /* defined(TIC_BUILD_WITH_LUA) */
-
-#if defined(TIC_BUILD_WITH_JS)
-		if(strcmp(param, "js") == 0 || strcmp(param, "javascript") == 0)
-		{
-			loadDemo(console, JavaScript);
-			done = true;
-		}
-#endif
-
-#if defined(TIC_BUILD_WITH_WREN)
-		if(strcmp(param, "wren") == 0)
-		{
-			loadDemo(console, WrenScript);
-			done = true;
-		}
-#endif			
-
-#if defined(TIC_BUILD_WITH_SQUIRREL)
-		if(strcmp(param, "squirrel") == 0)
-		{
-			loadDemo(console, SquirrelScript);
-			done = true;
-		}
-#endif			
 
 		if(!done)
 		{
@@ -1275,14 +1029,11 @@ static void onConsoleNewCommandConfirmed(Console* console, const char* param)
 			return;
 		}
 	}
-
-#if defined(TIC_BUILD_WITH_LUA)
 	else
 	{
-		loadDemo(console, LuaScript);
+		loadDemo(console);
 		done = true;
 	}
-#endif
 
 	if(done) printBack(console, "\nnew cart is created");
 	else printError(console, "\ncart not created");
@@ -1528,50 +1279,10 @@ static void onConsoleConfigCommand(Console* console, const char* param)
 		console->config->reset(console->config);
 		printBack(console, "\nconfiguration reset :)");
 	}
-
-#if defined(TIC_BUILD_WITH_LUA)
 	else if(strcmp(param, "default") == 0 || strcmp(param, "default lua") == 0)
 	{
 		onConsoleLoadDemoCommand(console, DefaultLuaTicPath);
-	}
-
-#	if defined(TIC_BUILD_WITH_MOON)
-	else if(strcmp(param, "default moon") == 0 || strcmp(param, "default moonscript") == 0)
-	{
-		onConsoleLoadDemoCommand(console, DefaultMoonTicPath);
-	}
-#	endif
-
-#	if defined(TIC_BUILD_WITH_FENNEL)
-	else if(strcmp(param, "default fennel") == 0)
-	{
-		onConsoleLoadDemoCommand(console, DefaultFennelTicPath);
-	}
-#	endif
-
-#endif /* defined(TIC_BUILD_WITH_LUA) */
-
-#if defined(TIC_BUILD_WITH_JS)
-	else if(strcmp(param, "default js") == 0)
-	{
-		onConsoleLoadDemoCommand(console, DefaultJSTicPath);
-	}
-#endif
-
-#if defined(TIC_BUILD_WITH_WREN)
-	else if(strcmp(param, "default wren") == 0)
-	{
-		onConsoleLoadDemoCommand(console, DefaultWrenTicPath);
-	}
-#endif
-
-#if defined(TIC_BUILD_WITH_SQUIRREL)
-	else if(strcmp(param, "default squirrel") == 0)
-	{
-		onConsoleLoadDemoCommand(console, DefaultSquirrelTicPath);
-	}
-#endif
-	
+	}	
 	else
 	{
 		printError(console, "\nunknown parameter: ");
@@ -2813,15 +2524,7 @@ static void tick(Console* console)
 	{
 		if(!console->embed.yes)
 		{
-#if defined(TIC_BUILD_WITH_LUA)
-			loadDemo(console, LuaScript);
-#elif defined(TIC_BUILD_WITH_JS)
-			loadDemo(console, JavaScript);
-#elif defined(TIC_BUILD_WITH_WREN)
-			loadDemo(console, WrenScript);
-#elif defined(TIC_BUILD_WITH_SQUIRREL)
-			loadDemo(console, SquirrelScript);
-#endif			
+			loadDemo(console);
 
 			printBack(console, "\n hello! type ");
 			printFront(console, "help");
